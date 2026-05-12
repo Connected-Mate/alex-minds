@@ -737,6 +737,9 @@
     if (!e.target.closest('[data-bloc]')) clearActive();
   });
   canvas.addEventListener('click', e => {
+    // Guard : si le click vient d'un contrôle interactif interne (toggle device,
+    // boutons du panier, etc.), ne pas déclencher l'onBlocClick (focus zoom).
+    if (e.target.closest('.wf-device-toggle, .wf-device-btn, button, [data-stop-bloc-click]')) return;
     const bloc = e.target.closest('[data-bloc]');
     if (bloc) onBlocClick(bloc, e);
   });
@@ -1133,37 +1136,42 @@
 
   function initWfDeviceToggle() {
     const body = document.querySelector('.wf-body-tree');
-    const btns = document.querySelectorAll('.wf-device-toggle .wf-device-btn');
     const toggle = document.querySelector('.wf-device-toggle');
-    if (!body || !btns.length) return;
-    if (toggle) {
-      // Bloque le pan/zoom du canvas qui capture le pointer au stage level
-      toggle.addEventListener('pointerdown', e => e.stopPropagation());
-      toggle.addEventListener('mousedown', e => e.stopPropagation());
-      toggle.addEventListener('click', e => e.stopPropagation());
-    }
-    btns.forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        e.preventDefault();
-        const dev = btn.dataset.device;
-        if (!dev || body.dataset.device === dev) return;
-        body.dataset.device = dev;
-        btns.forEach(b => {
-          const active = b === btn;
-          b.classList.toggle('is-active', active);
-          b.setAttribute('aria-checked', active ? 'true' : 'false');
-        });
-        // Marque le toggle comme utilisé → estompe le hint hand-written
-        if (toggle) toggle.classList.add('is-used');
-        // Pulse les vignettes : retire la classe pour pouvoir la rejouer
-        body.classList.remove('is-switching');
-        // force reflow pour relancer l'animation CSS
-        void body.offsetWidth;
-        body.classList.add('is-switching');
-        window.setTimeout(() => body.classList.remove('is-switching'), 700);
+    if (!body || !toggle) return;
+
+    function switchDevice(dev) {
+      if (!dev || body.dataset.device === dev) return;
+      body.dataset.device = dev;
+      toggle.querySelectorAll('.wf-device-btn').forEach(b => {
+        const active = b.dataset.device === dev;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-checked', active ? 'true' : 'false');
       });
-    });
+      toggle.classList.add('is-used');
+      body.classList.remove('is-switching');
+      void body.offsetWidth;
+      body.classList.add('is-switching');
+      window.setTimeout(() => body.classList.remove('is-switching'), 700);
+    }
+
+    // Délégation document en CAPTURE-phase : s'exécute AVANT les listeners
+    // canvas/stage qui captureraient le pointer.
+    document.addEventListener('pointerdown', e => {
+      const btn = e.target.closest('.wf-device-btn');
+      if (btn) { e.stopPropagation(); }
+    }, true);
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.wf-device-btn');
+      if (!btn) return;
+      e.stopPropagation();
+      e.preventDefault();
+      switchDevice(btn.dataset.device);
+    }, true);
+
+    // Belt + suspenders : listeners directs sur le toggle.
+    toggle.addEventListener('pointerdown', e => e.stopPropagation());
+    toggle.addEventListener('mousedown', e => e.stopPropagation());
+    toggle.addEventListener('click', e => e.stopPropagation());
   }
 
   if (document.fonts && document.fonts.ready) {
