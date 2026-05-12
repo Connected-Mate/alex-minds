@@ -613,25 +613,27 @@
         <span class="ai-agent-chip">Composants</span>
       </div>
 
-      <!-- 2 flèches griffonnées : Design (↘) et Dev (↗) fusionnent au centre, 1 grosse pointe vers Convergence -->
-      <svg class="split-exit-arrows" viewBox="0 0 100 180" aria-hidden="true">
-        <!-- Pink (Design) : depuis right edge Design row (y=62) vers fusion (y=42) -->
-        <path d="M2 62 C 30 62, 55 45, 74 42" fill="none"
+      <!-- Pink (Design) + Blue (Dev) fusionnent puis flèche unique converge au
+           MILIEU VERTICAL du bloc 1.7 (canvas y=410). viewBox 100×200 mappé sur
+           dimensions CSS 100px × 200px (top:20px, right:-100px de f-split). -->
+      <svg class="split-exit-arrows" viewBox="0 0 100 200" aria-hidden="true">
+        <!-- Pink (Design) : depuis right edge Design row → fusion au milieu (40, 150) -->
+        <path d="M2 60 C 22 60, 32 110, 40 148" fill="none"
               stroke="var(--pink-deep)" stroke-width="2.6" stroke-linecap="round"/>
-        <!-- Blue (Dev) : depuis right edge Dev row (y=164) vers fusion (y=42), climbing -->
-        <path d="M2 164 C 32 164, 56 50, 74 42" fill="none"
+        <!-- Blue (Dev) : depuis right edge Dev row → fusion au milieu (40, 150) -->
+        <path d="M2 186 C 22 186, 32 175, 40 152" fill="none"
               stroke="var(--blue-deep)" stroke-width="2.6" stroke-linecap="round"/>
-        <!-- Point de fusion (cercle blanc bordé noir) -->
-        <circle cx="74" cy="42" r="4.5" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.6"/>
-        <!-- Trait de fusion noir + pointe vers Convergence -->
-        <path d="M78 42 L 92 42" fill="none"
+        <!-- Point de fusion (cercle blanc bordé) -->
+        <circle cx="40" cy="150" r="5" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.6"/>
+        <!-- Trait noir + pointe → milieu vertical de Convergence (y=410 canvas) -->
+        <path d="M46 150 L 64 150" fill="none"
               stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
-        <path d="M84 36 L 92 42 L 84 48" fill="none"
+        <path d="M56 144 L 64 150 L 56 156" fill="none"
               stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Label manuscrit au-dessus -->
+        <!-- Label manuscrit en haut -->
         <text x="40" y="22" text-anchor="middle" font-size="12"
               fill="var(--ink-soft)" font-style="italic">tout devient</text>
-        <text x="40" y="36" text-anchor="middle" font-size="13"
+        <text x="40" y="38" text-anchor="middle" font-size="13"
               fill="var(--pink-deep)" font-style="italic" font-weight="700">le FRONT →</text>
       </svg>
     </article>
@@ -741,16 +743,9 @@
       <span class="phase-arrow-label hand">↗ part en prod</span>
       <svg viewBox="0 0 90 30"><path d="M5 15 C 25 5 60 5 80 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M72 7 L 82 15 L 72 23" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
-    <!-- T06 — Flèche FRONT : entre dans Convergence par le MILIEU-GAUCHE (sortie de f-split à droite) -->
-    <div class="phase-arrow phase-arrow-labeled phase-arrow-front" style="--x:3870px; --y:405px;" aria-hidden="true">
-      <span class="phase-arrow-label hand">→ FRONT entre</span>
-      <svg viewBox="0 0 90 30"><path d="M5 15 C 25 5 60 5 80 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M72 7 L 82 15 L 72 23" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <!-- T06 — Flèche BACK : entre dans Convergence par le MILIEU-DROITE (depuis Backend à droite) — Wave 1 region C : 4290 → 4350 suit le décalage Backend (4380 → 4440) -->
-    <div class="phase-arrow phase-arrow-labeled phase-arrow-back-in" style="--x:4350px; --y:405px;" aria-hidden="true">
-      <span class="phase-arrow-label hand">← BACK entre</span>
-      <svg viewBox="0 0 90 30"><path d="M85 15 C 65 5 30 5 10 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M18 7 L 8 15 L 18 23" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
+    <!-- (Flèches latérales "FRONT entre" / "BACK entre" supprimées — la convergence
+         pink+blue du split-exit-arrows arrive maintenant directement au milieu vertical
+         du bloc 1.7 Convergence) -->
 
     <!-- Flèche verticale de f-spec (1.2) → bloc specs détaillé en dessous -->
     <!-- y=690 (était 610) : démarre sous f-spec bottom (~680 après shift y=260). svg height réduit à 65px inline pour terminer juste avant f-spec-detail top (760). -->

@@ -835,9 +835,8 @@
 
     // PARTIE 1 — chaîne principale gérée par les petites flèches manuscrites HTML
     // (zone canvas .phase-arrow). Seuls les liens cross subsistent ici.
-    // Exception : 1.3 Specs détaillées → 1.5 Pré-dev (flux logique : le pré-dev
-    // se base sur les specs détaillées, pas sur la spec courte 1.2).
-    ['f-spec-detail', 'f-predev', '', false],
+    // Flux forward : 1.3 Specs détaillées → 1.6 Le Split (arrowhead côté 1.6).
+    ['f-spec-detail', 'f-split', '', false],
     ['f-live', 'prod-tool', 'partie 2 →', true],
 
     // (Les agents IA ne sont plus des nodes séparés — ils figurent en footer

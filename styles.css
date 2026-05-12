@@ -1970,7 +1970,7 @@ strong { font-weight: 700; }
   right: -100px;
   top: 20px;
   width: 100px;
-  height: 180px;
+  height: 200px;
   pointer-events: none;
   /* FX4 : SOUS les nodes (5). Le gap split→convergence est libre, donc pas de conflit, mais on respecte la règle. */
   z-index: 1;
@@ -8932,6 +8932,20 @@ strong { font-weight: 700; }
 }
 
 /* ── 1.4 — Hint hand-written sur le toggle ── */
+/* Safety : le toggle et ses 2 boutons doivent rester visibles + cliquables
+   dans tous les états (is-used, is-switching, data-device='mobile'/'ordi'). */
+.wf-device-toggle,
+.wf-device-toggle .wf-device-btn {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  display: inline-flex;
+}
+.wf-body-tree.is-switching .wf-device-toggle,
+.wf-body-tree.is-switching .wf-device-btn {
+  animation: none !important;
+  transform: none !important;
+}
 .wf-device-toggle { position: relative; }
 .wf-device-hint {
   position: absolute;
