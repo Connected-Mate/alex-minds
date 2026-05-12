@@ -1,59 +1,89 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f5efe1" />
-  <title>Vision 02 · Alexandre Cormeraie</title>
-  <meta name="description" content="Brouillon — nouvelle vision en cours d'écriture." />
+  <title>You don't deploy AI. You become AI-native. — Alexandre Cormeraie</title>
+  <meta name="description" content="A note for the Danske Bank ELT. Case Storm, Station F, 18 May 2026. From Alexandre Cormeraie." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=Architects+Daughter&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=Architects+Daughter&display=swap" />
   <link rel="stylesheet" href="home.css" />
 
   <style>
     /* ──────────────────────────────────────────────────────────────────
-       Page-locale uniquement : layout d'une vision "longform"
-       Reprend les tokens et la typo de home.css
+       VISION 02 — Note for the Danske Bank ELT
+       Editorial layout · paper-crème · ink · sparing handwritten accents
+       Anti-patterns avoided : no gradients, no Inter, no cards-in-cards,
+       no gray-on-color, no faux 3D. Premium calm.
        ────────────────────────────────────────────────────────────────── */
+
+    :root {
+      --measure: 64ch;
+      --container: 760px;
+      --container-wide: 920px;
+      --space-block: clamp(72px, 12vw, 144px);
+      --space-paragraph: clamp(18px, 2vw, 24px);
+
+      /* Local accents (extend home.css tokens) */
+      --accent: var(--pink-deep);
+      --rule: oklch(0.78 0.012 60);
+      --whisper: oklch(0.50 0.012 60);
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
+      margin: 0;
       background: var(--paper);
       color: var(--ink);
       font-family: var(--body);
-      min-height: 100vh;
-      margin: 0;
+      font-size: 18px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
-    .vision-page {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: var(--s-6) var(--space-page) var(--s-9);
+    /* Paper grain — extremely subtle, taken from the rest of the site language */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-image:
+        radial-gradient(ellipse at top, oklch(0 0 0 / 0.02) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom, oklch(0 0 0 / 0.03) 0%, transparent 60%);
+      mix-blend-mode: multiply;
     }
 
-    /* Top bar : retour atelier + toggle lang */
-    .vision-topbar {
+    /* ── Top bar ─────────────────────────────────────────────────── */
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: var(--s-4);
-      padding: var(--s-4) var(--space-page);
-      max-width: 1200px;
+      padding: var(--s-4) clamp(20px, 4vw, 40px);
+      max-width: 1240px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
     }
-
-    .back-link {
+    .topbar a.back {
       display: inline-flex;
       align-items: center;
-      gap: var(--s-2);
+      gap: 10px;
       text-decoration: none;
       color: var(--ink);
       font-family: var(--hand);
-      font-size: 1.25rem;
-      transition: transform .25s var(--ease-out-q);
+      font-size: 1.18rem;
+      transition: transform .35s var(--ease-out-q);
     }
-    .back-link:hover { transform: translateX(-3px); }
-    .back-link svg { width: 18px; height: 18px; }
+    .topbar a.back:hover { transform: translateX(-3px); }
+    .topbar a.back svg { width: 16px; height: 16px; }
 
     .lang-toggle {
       display: inline-flex;
@@ -63,216 +93,741 @@
       border-radius: 999px;
     }
     .lang-btn {
-      border: 0;
-      background: transparent;
+      border: 0; background: transparent;
       font-family: var(--body);
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
       padding: 6px 14px;
       border-radius: 999px;
       color: var(--ink-soft);
       cursor: pointer;
     }
-    .lang-btn.is-active {
-      background: var(--ink);
-      color: var(--paper);
+    .lang-btn.is-active { background: var(--ink); color: var(--paper); }
+
+    /* ── Container ───────────────────────────────────────────────── */
+    main {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 40px) var(--space-block);
+      position: relative;
+      z-index: 2;
+    }
+    main.wide { max-width: var(--container-wide); }
+
+    /* ── Section rhythm ──────────────────────────────────────────── */
+    section {
+      padding-top: var(--space-block);
+    }
+    section + section {
+      border-top: 1px solid var(--rule);
     }
 
-    /* Hero placeholder */
-    .draft-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s-2);
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: var(--yellow);
+    /* ── Eyebrow ─────────────────────────────────────────────────── */
+    .eyebrow {
       font-family: var(--body);
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      box-shadow: 0 2px 0 var(--paper-shadow);
+      color: var(--whisper);
+      margin: 0 0 var(--space-paragraph);
     }
-    .draft-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--carmillon);
-      animation: pulse 1.8s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: 0.35; }
+    .eyebrow .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin: 0 8px 2px;
+      vertical-align: middle;
     }
 
-    .vision-eyebrow {
-      margin: var(--s-5) 0 0;
+    /* ── Hero ────────────────────────────────────────────────────── */
+    .hero {
+      padding-top: clamp(64px, 10vh, 120px);
+      padding-bottom: 0;
+      border-top: 0;
+    }
+    .hero .addressed {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: clamp(40px, 8vw, 72px);
+    }
+    .hero .addressed span {
       font-family: var(--hand);
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       color: var(--ink-soft);
     }
+    .hero .addressed strong {
+      font-family: var(--display);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--ink);
+    }
+    .hero .meta {
+      font-family: var(--body);
+      font-size: 0.78rem;
+      color: var(--whisper);
+      letter-spacing: 0.04em;
+      margin-left: auto;
+    }
 
-    .vision-title {
+    .hero h1 {
       font-family: var(--display);
       font-weight: 800;
-      font-size: clamp(2.4rem, 6vw, 4.4rem);
-      line-height: 1.02;
-      letter-spacing: -0.02em;
-      margin: var(--s-3) 0 var(--s-5);
+      font-size: clamp(2.8rem, 7vw, 5.6rem);
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+      margin: 0 0 clamp(28px, 4vw, 48px);
+      max-width: 14ch;
     }
-    .vision-title em {
+    .hero h1 em {
       font-style: italic;
-      color: var(--pink-deep);
-    }
-
-    .vision-lede {
-      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-      line-height: 1.6;
-      color: var(--ink-soft);
-      max-width: 62ch;
-    }
-
-    /* Ligne griffonnée séparatrice */
-    .scribble {
-      display: block;
-      margin: var(--s-7) 0;
-      width: 220px;
-      color: var(--ink-line);
-    }
-    .scribble svg { width: 100%; height: auto; filter: url(#ink); }
-
-    /* Bloc "à écrire" */
-    .writing-block {
-      background: var(--paper-shade);
-      border: 1px dashed var(--ink-line);
-      border-radius: 18px;
-      padding: var(--s-6) var(--s-5);
-      margin-top: var(--s-6);
-    }
-    .writing-block h2 {
-      font-family: var(--display);
+      color: var(--accent);
       font-weight: 700;
-      font-size: 1.3rem;
-      margin: 0 0 var(--s-3);
     }
-    .writing-block p {
-      margin: 0;
+
+    .hero .subq {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(1.15rem, 2vw, 1.5rem);
+      line-height: 1.4;
       color: var(--ink-soft);
-      line-height: 1.55;
+      max-width: 50ch;
+      margin: 0 0 clamp(48px, 8vw, 96px);
+      font-style: italic;
     }
-    .writing-block .hand {
+
+    .hero .sign {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
       font-family: var(--hand);
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      color: var(--ink-soft);
+    }
+    .hero .sign strong {
+      font-weight: 700;
       color: var(--ink);
     }
 
-    .vision-footer {
-      margin-top: var(--s-9);
-      padding-top: var(--s-5);
-      border-top: 1px solid var(--ink-line);
+    /* Scribbled underline under the title */
+    .hero .underline-scribble {
+      display: block;
+      width: 220px;
+      margin-top: -28px;
+      margin-bottom: clamp(28px, 4vw, 48px);
+      color: var(--accent);
+      opacity: 0.85;
+    }
+    .hero .underline-scribble svg {
+      width: 100%; height: auto;
+      filter: url(#ink);
+    }
+
+    /* ── Shift ───────────────────────────────────────────────────── */
+    .shift h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 0 0 var(--space-paragraph);
+      max-width: 22ch;
+    }
+    .shift h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .shift .lede {
+      font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: var(--measure);
+      margin: 0 0 calc(var(--space-paragraph) * 2);
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(20px, 3vw, 48px);
+      max-width: var(--container);
+    }
+    .compare > div {
+      padding-top: 18px;
+      border-top: 2px solid var(--ink);
+    }
+    .compare > div.right {
+      border-top-color: var(--accent);
+    }
+    .compare h3 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+    .compare h3.right { color: var(--accent); }
+    .compare p {
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0 0 10px;
+    }
+    .compare .tag {
+      display: inline-block;
+      font-family: var(--body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--whisper);
+      margin-top: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .compare { grid-template-columns: 1fr; }
+    }
+
+    /* ── Questions ───────────────────────────────────────────────── */
+    .questions .intro {
+      font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: var(--measure);
+      margin: 0 0 clamp(60px, 8vw, 96px);
+    }
+
+    .qa {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: clamp(24px, 4vw, 48px);
+      align-items: start;
+      margin-bottom: clamp(80px, 10vw, 128px);
+    }
+    .qa:last-child { margin-bottom: 0; }
+
+    .qa-num {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      opacity: 0.92;
+    }
+
+    .qa-body h3 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      line-height: 1.12;
+      letter-spacing: -0.018em;
+      margin: 0 0 calc(var(--space-paragraph) * 0.9);
+      max-width: 28ch;
+    }
+    .qa-body h3 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .qa-body .frame {
+      font-size: 1.02rem;
+      line-height: 1.62;
+      color: var(--ink);
+      margin: 0 0 var(--space-paragraph);
+      max-width: var(--measure);
+    }
+
+    .qa-body .pivot {
+      position: relative;
+      font-size: 0.96rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      padding: 16px 0 16px 18px;
+      border-left: 2px solid var(--accent);
+      margin: 0 0 var(--space-paragraph);
+      max-width: var(--measure);
+    }
+    .qa-body .pivot strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .qa-body .pivot-label {
+      display: block;
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--whisper);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .qa-body .footnote {
+      font-family: var(--body);
+      font-size: 0.86rem;
+      color: var(--whisper);
+      line-height: 1.5;
+      margin: 0;
+      max-width: var(--measure);
+      font-style: italic;
+    }
+
+    @media (max-width: 720px) {
+      .qa { grid-template-columns: 1fr; gap: 16px; }
+      .qa-num { font-size: 2.4rem; }
+    }
+
+    /* ── Closing ─────────────────────────────────────────────────── */
+    .closing h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 0 var(--space-paragraph);
+      max-width: 26ch;
+    }
+    .closing h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .closing p {
+      font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: var(--measure);
+      margin: 0 0 var(--space-paragraph);
+    }
+    .closing .tak {
+      display: inline-block;
+      font-family: var(--hand);
+      font-size: 2.2rem;
+      color: var(--ink);
+      margin-top: clamp(40px, 6vw, 64px);
+      transform: rotate(-2deg);
+    }
+
+    /* ── Beyond — three concrete moves ───────────────────────────── */
+    .beyond .lede {
+      font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: var(--measure);
+      margin: 0 0 calc(var(--space-paragraph) * 2);
+    }
+
+    .moves {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(32px, 4vw, 48px);
+    }
+    .move {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: clamp(20px, 3vw, 36px);
+      align-items: start;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+    }
+    .move:first-child { border-top: 2px solid var(--ink); }
+    .move-num {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      color: var(--whisper);
+      padding-top: 4px;
+    }
+    .move h4 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(1.15rem, 2vw, 1.4rem);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin: 0 0 10px;
+    }
+    .move p {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin: 0 0 10px;
+      max-width: var(--measure);
+    }
+    .move .receipt {
+      font-family: var(--body);
+      font-size: 0.82rem;
+      color: var(--whisper);
+      margin: 6px 0 0;
+      font-style: italic;
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
+    footer {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: var(--s-7) clamp(20px, 4vw, 40px) var(--s-7);
+      border-top: 1px solid var(--rule);
+      color: var(--whisper);
+      font-size: 0.86rem;
+      position: relative;
+      z-index: 2;
+    }
+    footer .row {
+      display: flex;
+      gap: 24px;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    footer a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--ink-faint);
+      transition: color .25s var(--ease-out-q);
+    }
+    footer a:hover { color: var(--accent); }
+    footer .name {
       font-family: var(--hand);
       font-size: 1.1rem;
       color: var(--ink-soft);
+    }
+
+    /* ── Light entrance, calm easing (Emil-style) ────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity .9s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform .9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.is-in {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- SVG filter ink (réutilisé pour les traits griffonnés) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="ink">
-    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="5" />
+    <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="7" />
     <feDisplacementMap in="SourceGraphic" scale="1.4" />
   </filter>
 </svg>
 
-<header class="vision-topbar">
-  <a class="back-link" href="index.html" aria-label="Retour à l'atelier">
+<header class="topbar">
+  <a class="back" href="index.html" aria-label="Back to the workshop">
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
-    <span data-fr="retour à l'atelier" data-en="back to the workshop">retour à l'atelier</span>
+    <span data-en="back to the workshop" data-fr="retour à l'atelier">back to the workshop</span>
   </a>
 
-  <div class="lang-toggle" role="tablist" aria-label="Langue / Language">
-    <button type="button" class="lang-btn is-active" data-lang="fr" aria-pressed="true">FR</button>
-    <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+  <div class="lang-toggle" role="tablist" aria-label="Language">
+    <button type="button" class="lang-btn is-active" data-lang="en" aria-pressed="true">EN</button>
+    <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
   </div>
 </header>
 
-<main class="vision-page">
+<main>
 
-  <span class="draft-badge">
-    <span class="draft-dot" aria-hidden="true"></span>
-    <span data-fr="brouillon" data-en="draft">brouillon</span>
-  </span>
-
-  <p class="vision-eyebrow"
-     data-fr="Vision · 02 · à renommer"
-     data-en="Vision · 02 · to be renamed">Vision · 02 · à renommer</p>
-
-  <h1 class="vision-title"
-      data-fr="Titre <em>à poser</em>."
-      data-en="Title <em>to drop</em>."><span data-static>Titre <em>à poser</em>.</span></h1>
-
-  <p class="vision-lede"
-     data-fr="Page neuve. Je vais penser à voix haute, l'IA va écrire, on va challenger ensemble — puis structurer. Pour l'instant : un cadre vide qui attend la vision."
-     data-en="Fresh page. I'll think out loud, AI will write it down, we'll challenge it — then structure it. For now: an empty frame waiting for the vision.">
-    Page neuve. Je vais penser à voix haute, l'IA va écrire, on va challenger ensemble — puis structurer. Pour l'instant : un cadre vide qui attend la vision.
-  </p>
-
-  <span class="scribble" aria-hidden="true">
-    <svg viewBox="0 0 240 24">
-      <path d="M4 14 Q 60 4 120 14 T 236 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
-    </svg>
-  </span>
-
-  <section class="writing-block">
-    <h2 data-fr="Prochaine étape" data-en="Next step">Prochaine étape</h2>
-    <p data-fr="Challenger la vision ensemble, poser les blocs, choisir le format (canvas, manifesto, deck, longform)."
-       data-en="Challenge the vision together, lay down the blocks, pick the format (canvas, manifesto, deck, longform).">
-      Challenger la vision ensemble, poser les blocs, choisir le format (canvas, manifesto, deck, longform).
+  <!-- ─────────────────────────────────────────────────────────────
+       HERO — the question
+       ───────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <p class="eyebrow reveal">
+      <span data-en="A note for" data-fr="Une note pour">A note for</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span data-en="the Danske Bank ELT" data-fr="l'ELT de la Danske Bank">the Danske Bank ELT</span>
     </p>
-    <p class="hand" style="margin-top: var(--s-4);"
-       data-fr="— l'atelier reprend ici."
-       data-en="— the workshop picks up here.">— l'atelier reprend ici.</p>
+
+    <div class="addressed reveal">
+      <span data-en="Case Storm · Station F · Paris" data-fr="Case Storm · Station F · Paris">Case Storm · Station F · Paris</span>
+      <span class="meta">18&nbsp;·&nbsp;05&nbsp;·&nbsp;2026</span>
+    </div>
+
+    <h1 class="reveal"
+        data-en="Who in your ELT is <em>under 30</em>?"
+        data-fr="Qui dans votre ELT a <em>moins de 30 ans</em> ?"
+      >Who in your ELT is <em>under 30</em>?</h1>
+
+    <span class="underline-scribble reveal" aria-hidden="true">
+      <svg viewBox="0 0 220 16"><path d="M4 9 Q 60 2 120 9 T 216 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></svg>
+    </span>
+
+    <p class="subq reveal"
+       data-en="And who has been a Danske customer as a digital native — not as a wealth client, not as a corporate, not as an inheritance?"
+       data-fr="Et qui a été client de Danske en tant que digital native — pas en tant que client fortuné, pas en corporate, pas en héritage ?">
+      And who has been a Danske customer as a digital native — not as a wealth client, not as a corporate, not as an inheritance?
+    </p>
+
+    <div class="sign reveal">
+      <strong data-en="— Alexandre" data-fr="— Alexandre">— Alexandre</strong>
+      <span data-en="before the room"
+            data-fr="avant la salle">before the room</span>
+    </div>
   </section>
 
-  <footer class="vision-footer">
-    <span data-fr="Alexandre Cormeraie · Connected Mate · 2026"
-          data-en="Alexandre Cormeraie · Connected Mate · 2026">Alexandre Cormeraie · Connected Mate · 2026</span>
-  </footer>
+  <!-- ─────────────────────────────────────────────────────────────
+       SHIFT
+       ───────────────────────────────────────────────────────────── -->
+  <section class="shift">
+    <p class="eyebrow reveal"
+       data-en="The shift"
+       data-fr="Le déplacement">The shift</p>
+
+    <h2 class="reveal"
+        data-en="You don't deploy AI. You <em>become</em> AI-native. Those are not the same project."
+        data-fr="On ne déploie pas l'IA. On <em>devient</em> AI-native. Ce ne sont pas le même projet."
+      >You don't deploy AI. You <em>become</em> AI-native. Those are not the same project.</h2>
+
+    <p class="lede reveal"
+       data-en="Today four rooms will tell you how to deploy. Tools, governance, copilots, agents. Mistral and BCG will sell it to you next door. I came to put a different question on the table. Becoming AI-native isn't a procurement problem. It's an identity problem. And only this room can solve it."
+       data-fr="Aujourd'hui, quatre salles vont vous dire comment déployer. Outils, gouvernance, copilots, agents. Mistral et BCG vous vendront tout ça à côté. Je viens poser une autre question. Devenir AI-native n'est pas un problème d'achat. C'est un problème d'identité. Et cette salle est la seule à pouvoir le résoudre.">
+      Today four rooms will tell you how to deploy. Tools, governance, copilots, agents. Mistral and BCG will sell it to you next door. I came to put a different question on the table. Becoming AI-native isn't a procurement problem. It's an identity problem. And only this room can solve it.
+    </p>
+
+    <div class="compare reveal">
+      <div>
+        <span class="tag" data-en="What's easy" data-fr="Ce qui est facile">What's easy</span>
+        <h3 data-en="Deploying AI" data-fr="Déployer l'IA">Deploying AI</h3>
+        <p data-en="Procurement. Roadmaps. Vendor selection. Pilots. Change management programs. Adoption metrics."
+           data-fr="Achats. Roadmaps. Sélection de fournisseurs. Pilotes. Programmes de conduite du changement. Indicateurs d'adoption.">
+          Procurement. Roadmaps. Vendor selection. Pilots. Change management programs. Adoption metrics.
+        </p>
+        <p data-en="A consultant can do this for you."
+           data-fr="Un consultant peut le faire à votre place.">A consultant can do this for you.</p>
+      </div>
+      <div class="right">
+        <span class="tag" data-en="What's actually yours" data-fr="Ce qui est vraiment à vous">What's actually yours</span>
+        <h3 class="right" data-en="Becoming AI-native"
+            data-fr="Devenir AI-native">Becoming AI-native</h3>
+        <p data-en="Redesigning who is in the room when a decision is made. Engineering senior–junior duos. Letting digital natives shape strategy, not just execute it."
+           data-fr="Redéfinir qui est dans la salle quand on décide. Construire des binômes senior–junior. Laisser les digital natives façonner la stratégie, pas seulement l'exécuter.">
+          Redesigning who is in the room when a decision is made. Engineering senior–junior duos. Letting digital natives shape strategy, not just execute it.
+        </p>
+        <p data-en="No one outside this room can do this for you."
+           data-fr="Personne d'autre que cette salle ne peut le faire à votre place.">No one outside this room can do this for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       THREE QUESTIONS
+       ───────────────────────────────────────────────────────────── -->
+  <section class="questions">
+    <p class="eyebrow reveal"
+       data-en="Three questions"
+       data-fr="Trois questions">Three questions</p>
+
+    <p class="intro reveal"
+       data-en="Not mine to answer. Yours. Here they are — in the order I would put them on Wednesday's whiteboard."
+       data-fr="Pas à moi de répondre. À vous. Les voici — dans l'ordre où je les poserais sur le tableau de mercredi.">
+      Not mine to answer. Yours. Here they are — in the order I would put them on Wednesday's whiteboard.
+    </p>
+
+    <article class="qa reveal">
+      <div class="qa-num">01</div>
+      <div class="qa-body">
+        <h3 data-en="Who's already living in <em>2030</em> inside Danske?"
+            data-fr="Qui vit déjà en <em>2030</em> à l'intérieur de Danske ?">Who's already living in <em>2030</em> inside Danske?</h3>
+        <p class="frame"
+           data-en="Not who's working on AI. Who, in your organization, is already using AI every day — to do their job, to learn, to decide. Name one. Under 30 if you can."
+           data-fr="Pas qui travaille sur l'IA. Qui, dans votre organisation, utilise déjà l'IA chaque jour — pour faire son travail, apprendre, décider. Nommez une personne. Moins de 30 ans si possible.">
+          Not who's working on AI. Who, in your organization, is already using AI every day — to do their job, to learn, to decide. Name one. Under 30 if you can.
+        </p>
+        <div class="pivot">
+          <span class="pivot-label" data-en="The pivot" data-fr="Le pivot">The pivot</span>
+          <span data-en="If you found one — <strong>is that person in this room?</strong> In the room where decisions are made? If not, it isn't a hiring problem. It's a representation problem."
+                data-fr="Si vous en trouvez une — <strong>cette personne est-elle dans cette salle ?</strong> Dans la salle où l'on décide ? Si non, ce n'est pas un problème de recrutement. C'est un problème de représentation.">
+            If you found one — <strong>is that person in this room?</strong> In the room where decisions are made? If not, it isn't a hiring problem. It's a representation problem.
+          </span>
+        </div>
+        <p class="footnote"
+           data-en="For context: 76% of people under 30 use generative AI at work. For people 45+, 32%. Different worlds. Same office."
+           data-fr="Pour information : 76% des moins de 30 ans utilisent l'IA générative au travail. Chez les 45 ans et plus, 32%. Deux mondes. Le même bureau.">
+          For context: 76% of people under 30 use generative AI at work. For people 45+, 32%. Different worlds. Same office.
+        </p>
+      </div>
+    </article>
+
+    <article class="qa reveal">
+      <div class="qa-num">02</div>
+      <div class="qa-body">
+        <h3 data-en="What <em>duo</em> would you trust on your hardest AI decision?"
+            data-fr="Quel <em>binôme</em> confieriez-vous à votre décision IA la plus difficile ?">What <em>duo</em> would you trust on your hardest AI decision?</h3>
+        <p class="frame"
+           data-en="If you had to bet Danske's biggest AI decision of 2027 on one senior–junior duo inside your company — name them. Indivisible. Co-accountable. Two names on the project charter, not one."
+           data-fr="Si vous deviez miser la plus grosse décision IA de Danske en 2027 sur un seul binôme senior–junior interne — nommez-le. Indivisible. Co-responsable. Deux noms sur la charte projet, pas un.">
+          If you had to bet Danske's biggest AI decision of 2027 on one senior–junior duo inside your company — name them. Indivisible. Co-accountable. Two names on the project charter, not one.
+        </p>
+        <div class="pivot">
+          <span class="pivot-label" data-en="The pivot" data-fr="Le pivot">The pivot</span>
+          <span data-en="If you can name one — what stops you from naming five more by year-end? If you can't name any — <strong>that's the work.</strong> The work is engineering the duos before you need them."
+                data-fr="Si vous pouvez en nommer un — qu'est-ce qui vous empêche d'en nommer cinq de plus d'ici la fin de l'année ? Si vous n'en avez aucun — <strong>voilà le travail.</strong> Construire les binômes avant d'en avoir besoin.">
+            If you can name one — what stops you from naming five more by year-end? If you can't name any — <strong>that's the work.</strong> The work is engineering the duos before you need them.
+          </span>
+        </div>
+      </div>
+    </article>
+
+    <article class="qa reveal">
+      <div class="qa-num">03</div>
+      <div class="qa-body">
+        <h3 data-en="What decision could you take <em>by Wednesday lunchtime</em>?"
+            data-fr="Quelle décision pourriez-vous prendre <em>avant mercredi midi</em> ?">What decision could you take <em>by Wednesday lunchtime</em>?</h3>
+        <p class="frame"
+           data-en="Your offsite ends Wednesday at 12:45 with three to five priorities. Could one of them be: within twelve months, every ELT member has a coach under 30, and every transformation project has a named senior–junior duo at the top. One sentence. One commitment."
+           data-fr="Votre offsite se termine mercredi à 12h45 avec trois à cinq priorités. Pourriez-vous y inscrire celle-ci : d'ici douze mois, chaque membre de l'ELT a un coach de moins de 30 ans, et chaque projet de transformation a un binôme senior–junior nommé en tête. Une phrase. Un engagement.">
+          Your offsite ends Wednesday at 12:45 with three to five priorities. Could one of them be: within twelve months, every ELT member has a coach under 30, and every transformation project has a named senior–junior duo at the top. One sentence. One commitment.
+        </p>
+        <div class="pivot">
+          <span class="pivot-label" data-en="The pivot" data-fr="Le pivot">The pivot</span>
+          <span data-en="If yes — I've done my job. The rest is execution. If you hesitate — <strong>notice the hesitation isn't about AI.</strong> It's about changing who's in the room."
+                data-fr="Si oui — j'ai fait mon boulot. Le reste, c'est de l'exécution. Si vous hésitez — <strong>notez que l'hésitation ne porte pas sur l'IA.</strong> Elle porte sur le fait de changer qui est dans la salle.">
+            If yes — I've done my job. The rest is execution. If you hesitate — <strong>notice the hesitation isn't about AI.</strong> It's about changing who's in the room.
+          </span>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       CLOSING
+       ───────────────────────────────────────────────────────────── -->
+  <section class="closing">
+    <p class="eyebrow reveal" data-en="Closing" data-fr="Pour finir">Closing</p>
+
+    <h2 class="reveal"
+        data-en="The four other rooms will tell you what to <em>deploy</em>. I came to tell you who to put <em>next to you</em>."
+        data-fr="Les quatre autres salles vous diront quoi <em>déployer</em>. Moi je suis venu vous dire qui mettre <em>à côté de vous</em>.">
+      The four other rooms will tell you what to <em>deploy</em>. I came to tell you who to put <em>next to you</em>.
+    </h2>
+
+    <p class="reveal"
+       data-en="The first is buyable. The second is the only thing that's actually yours to decide."
+       data-fr="Le premier s'achète. Le second est la seule chose qui vous appartient vraiment.">
+      The first is buyable. The second is the only thing that's actually yours to decide.
+    </p>
+
+    <span class="tak reveal" aria-label="Tak — thank you in Danish">Tak.</span>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       BEYOND — three concrete moves
+       ───────────────────────────────────────────────────────────── -->
+  <section class="beyond">
+    <p class="eyebrow reveal" data-en="If you want to take this further"
+       data-fr="Pour aller plus loin">If you want to take this further</p>
+
+    <p class="lede reveal"
+       data-en="Three moves, designed for an institution that just left ten years of defence and is asking what to do next. None of them require a new strategy. They require a decision."
+       data-fr="Trois mouvements, conçus pour une institution qui sort de dix ans de défensive et se demande quoi faire ensuite. Aucun ne demande une nouvelle stratégie. Tous demandent une décision.">
+      Three moves, designed for an institution that just left ten years of defence and is asking what to do next. None of them require a new strategy. They require a decision.
+    </p>
+
+    <div class="moves">
+      <article class="move reveal">
+        <div class="move-num">01</div>
+        <div>
+          <h4 data-en="Reverse mentoring at the top"
+              data-fr="Reverse mentoring au sommet">Reverse mentoring at the top</h4>
+          <p data-en="Every ELT member gets a coach under 30. Two hours a month minimum. Not training — conversation. Six months in, you'll be discussing different things at this table."
+             data-fr="Chaque membre de l'ELT a un coach de moins de 30 ans. Deux heures par mois minimum. Pas de la formation — de la conversation. Six mois plus tard, vous parlerez d'autre chose à cette table.">
+            Every ELT member gets a coach under 30. Two hours a month minimum. Not training — conversation. Six months in, you'll be discussing different things at this table.
+          </p>
+          <p class="receipt"
+             data-en="Already proven: Orange did it. 500 active duos. 5.8× ROI over 24 months. AI adoption among executives improved by 85%."
+             data-fr="Déjà éprouvé : Orange l'a fait. 500 binômes actifs. ROI 5,8× sur 24 mois. Adoption IA des dirigeants en hausse de 85%.">
+            Already proven: Orange did it. 500 active duos. 5.8× ROI over 24 months. AI adoption among executives improved by 85%.
+          </p>
+        </div>
+      </article>
+
+      <article class="move reveal">
+        <div class="move-num">02</div>
+        <div>
+          <h4 data-en="A shadow board of digital natives"
+              data-fr="Un shadow board de digital natives">A shadow board of digital natives</h4>
+          <p data-en="Fifteen to twenty employees under 30 — yours, not consultants — with one job: challenge the ELT on a real project each quarter. Not advise. Challenge."
+             data-fr="Quinze à vingt collaborateurs de moins de 30 ans — les vôtres, pas des consultants — avec une seule mission : challenger l'ELT sur un projet réel chaque trimestre. Pas conseiller. Challenger.">
+            Fifteen to twenty employees under 30 — yours, not consultants — with one job: challenge the ELT on a real project each quarter. Not advise. Challenge.
+          </p>
+          <p class="receipt"
+             data-en="Already proven: Havas built a 'COMEX of Digital Natives' — thirty-five young people whose official mandate is to push back."
+             data-fr="Déjà éprouvé : Havas a monté un « COMEX des digital natives » — trente-cinq jeunes dont la mission officielle est de challenger.">
+            Already proven: Havas built a "COMEX of Digital Natives" — thirty-five young people whose official mandate is to push back.
+          </p>
+        </div>
+      </article>
+
+      <article class="move reveal">
+        <div class="move-num">03</div>
+        <div>
+          <h4 data-en="Indivisible duos on every transformation"
+              data-fr="Des binômes indivisibles sur chaque transformation">Indivisible duos on every transformation</h4>
+          <p data-en="From now on, any project labelled 'AI', 'transformation' or 'innovation' carries two names at the top. One senior, one digital native. Same recognition, same accountability. If you cannot find the digital native — that itself is a signal worth listening to."
+             data-fr="Désormais, tout projet labellisé « IA », « transformation » ou « innovation » porte deux noms en tête. Un senior, un digital native. Même reconnaissance, même responsabilité. Si vous ne trouvez pas le digital native — c'est un signal en soi qui mérite d'être écouté.">
+            From now on, any project labelled "AI", "transformation" or "innovation" carries two names at the top. One senior, one digital native. Same recognition, same accountability. If you cannot find the digital native — that itself is a signal worth listening to.
+          </p>
+          <p class="receipt"
+             data-en="The measurable upside (McKinsey): +27% likelihood of higher profitability, +19 points of innovation revenue for generationally diversified leadership."
+             data-fr="L'effet mesurable (McKinsey) : +27% de probabilité d'être plus rentable, +19 points de revenus d'innovation pour un leadership diversifié en générations.">
+            The measurable upside (McKinsey): +27% likelihood of higher profitability, +19 points of innovation revenue for generationally diversified leadership.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
 
 </main>
 
+<footer>
+  <div class="row">
+    <span class="name" data-en="— Alexandre Cormeraie, from the workshop · 2026"
+          data-fr="— Alexandre Cormeraie, depuis l'atelier · 2026">— Alexandre Cormeraie, from the workshop · 2026</span>
+    <span>
+      <a href="methode-digital-natif.html"
+         data-en="curious how my own duo actually works →"
+         data-fr="curieux de voir comment fonctionne mon propre binôme →">curious how my own duo actually works →</a>
+    </span>
+  </div>
+</footer>
+
 <script>
+  // ───── Lang toggle (mirrors index.html behaviour) ─────
   (function () {
     const STORE_KEY = 'ac-vision-lang';
 
     function applyLang(lang) {
-      document.querySelectorAll('[data-fr], [data-en]').forEach(el => {
+      document.querySelectorAll('[data-en], [data-fr]').forEach(el => {
         const v = el.dataset[lang];
         if (v == null) return;
-        // Permet les balises HTML simples comme <em> dans les contenus traduits
         if (/<[a-z][\s\S]*>/i.test(v)) el.innerHTML = v;
         else el.textContent = v;
       });
-
       document.querySelectorAll('.lang-btn').forEach(btn => {
         const active = btn.dataset.lang === lang;
         btn.classList.toggle('is-active', active);
         btn.setAttribute('aria-pressed', active ? 'true' : 'false');
       });
-
       document.documentElement.setAttribute('lang', lang);
       try { localStorage.setItem(STORE_KEY, lang); } catch (e) {}
     }
 
-    let initial = 'fr';
+    // Default = EN for this page (the room is in English)
+    let initial = 'en';
     try {
       const stored = localStorage.getItem(STORE_KEY);
-      if (stored === 'fr' || stored === 'en') initial = stored;
-      else if (navigator.language && navigator.language.toLowerCase().startsWith('en')) initial = 'en';
+      if (stored === 'en' || stored === 'fr') initial = stored;
     } catch (e) {}
     applyLang(initial);
 
@@ -282,10 +837,27 @@
 
     document.addEventListener('keydown', e => {
       if (e.key === 'l' || e.key === 'L') {
-        const cur = document.documentElement.getAttribute('lang') || 'fr';
-        applyLang(cur === 'fr' ? 'en' : 'fr');
+        const cur = document.documentElement.getAttribute('lang') || 'en';
+        applyLang(cur === 'en' ? 'fr' : 'en');
       }
     });
+  })();
+
+  // ───── Calm reveal on scroll ─────
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   })();
 </script>
 

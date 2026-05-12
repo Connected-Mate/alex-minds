@@ -1216,26 +1216,9 @@
         <span class="hand">il annote en lisant son matin</span>
       </div>
 
-      <!-- 2 flèches griffonnées montantes : annotations rouges du Kanban → prod-demande (rose) + prod-branche (bleu)
-           Kanban désormais sous Browser 2 (y=960), il faut traverser ~720px vers le haut pour rejoindre les
-           nodes 2.3 et 2.4 (y=240). ViewBox étendu en hauteur. -->
-      <svg class="kanban-exit-arrows" viewBox="0 0 1040 760" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
-        <!-- Flèche 1 (rose) : depuis le haut-gauche du Kanban (~x=60, y=740) → prod-demande (canvas 6360,240 → SVG ~680, 20) -->
-        <path d="M 60 740 C 180 520, 360 240, 680 30" fill="none"
-              stroke="var(--pink-deep)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 5"/>
-        <path d="M 670 22 L 680 30 L 668 40" fill="none"
-              stroke="var(--pink-deep)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-        <text x="240" y="430" class="hand" fill="var(--pink-deep)"
-              transform="rotate(-58 240 430)">↗ devient demande</text>
-
-        <!-- Flèche 2 (bleu) : depuis le haut-centre du Kanban (~x=380, y=740) → prod-branche (canvas 6700,240 → SVG ~1020, 20) -->
-        <path d="M 380 740 C 540 520, 760 240, 1020 30" fill="none"
-              stroke="var(--blue-deep)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 5"/>
-        <path d="M 1010 22 L 1020 30 L 1008 40" fill="none"
-              stroke="var(--blue-deep)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-        <text x="660" y="420" class="hand" fill="var(--blue-deep)"
-              transform="rotate(-58 660 420)">↗ scope auto</text>
-      </svg>
+      <!-- (.kanban-exit-arrows supprimé : traversait Browser 2 verticalement, illisible
+           visuellement. Le lien Kanban → prod-demande/prod-branche reste matérialisé
+           via ARROW_PAIRS dynamiques qui contournent les composants.) -->
 
       <!-- T16 — Sticky "OK je review ça" : apparaît à 2.6 / 2.6a, ancré
            en haut-droite du Kanban, juste au-dessus de la colonne Review (col 3). -->
@@ -1797,17 +1780,10 @@
       </svg>
     </div>
 
-    <!-- Flèche bonus #2 : prod-logs (x=6020 y=1550) → prod-branche (x=6700 y=240).
-         Monte puis incline vers la droite (delta x ≈ +570, delta y ≈ -1130). -->
-    <div class="phase-arrow phase-arrow-vertical phase-arrow-vertical--tall phase-arrow-vertical--curve-right" style="--x:6130px; --y:420px;" aria-hidden="true">
-      <span class="phase-arrow-label hand">↑ déclenche<br/>branche fix ↗</span>
-      <svg viewBox="0 0 680 1130" preserveAspectRatio="none">
-        <!-- ascension verticale, puis bascule droite vers prod-branche en haut -->
-        <path d="M 25 1130 C 25 880, 40 640, 130 480 C 250 320, 450 160, 670 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- pointe de flèche orientée vers haut-droite -->
-        <path d="M 655 18 L 670 0 L 670 22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+    <!-- (Flèche bonus prod-logs → prod-branche "↑ déclenche branche fix ↗" supprimée :
+         traversait verticalement Browser 2 + Kanban en passant à x=6130, illisible.
+         La relation logs → branche-fix reste indiquée par ARROW_PAIRS dynamique
+         qui contourne les composants.) -->
 
     <!-- ───────────────────────────────────────────────────────────
          ═════════════════ PILLIERS TRANSVERSES ═════════════════

@@ -863,8 +863,9 @@
     //   prod-branche, prod-demande, prod-po et la bannière Partie 2.
     //   Le retour ↺ est déjà matérialisé par .loop-back-arrow (SVG dédié qui
     //   plonge sous y≈1500 puis remonte) + .loop-title-sticky (étiquette).
-    ['prod-bonus', 'prod-tool', '', true],
-    ['prod-logs', 'prod-branche', '', true],
+    // (Cross arrows prod-bonus → prod-tool et prod-logs → prod-branche supprimées :
+    // traversaient Browser 2 + Kanban verticalement, illisible. Le lien sémantique
+    // reste via data-links + le bloc bonus en pied de Partie 2.)
 
     // Piliers → leurs sous-nodes
     ['pillars-profiles-center', 'prof-po', '', true],
