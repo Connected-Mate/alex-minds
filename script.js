@@ -1137,6 +1137,8 @@
     const toggle = document.querySelector('.wf-device-toggle');
     if (!body || !btns.length) return;
     if (toggle) {
+      // Bloque le pan/zoom du canvas qui capture le pointer au stage level
+      toggle.addEventListener('pointerdown', e => e.stopPropagation());
       toggle.addEventListener('mousedown', e => e.stopPropagation());
       toggle.addEventListener('click', e => e.stopPropagation());
     }
