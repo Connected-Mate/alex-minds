@@ -5355,23 +5355,205 @@ strong { font-weight: 700; }
 
 /* ════════════════ MOBILE FALLBACK ════════════════ */
 @media (max-width: 900px) {
+  /* Mobile : abandonne le pan/zoom, scroll vertical natif, blocs empilés full-width */
   html, body { overflow-y: auto; height: auto; }
-  .stage { height: auto; min-height: 100vh; overflow: visible; cursor: auto; }
-  .canvas { position: relative; transform: none !important; width: 100%; height: auto; padding: 100px var(--s-4) var(--s-9); display: flex; flex-direction: column; gap: var(--s-6); }
-  .arrows, .floating-note, .bifurcation, .minimap, .controls, .agents-cluster, .agent-cloud, .swimlane-bg, .legend-actor, .po-overlay, .po-note, .po-sticky-anno, .po-avatar, .github-flow-svg, .loop-return-note, .continuous-closer { display: none; }
-  .zone-marker, .node, .pillar-center, .kanban-annotated, .wireframes-flat, .part-banner, .profile-cluster, .principle-cluster {
+  .stage {
+    height: auto; min-height: 100vh; overflow: visible; cursor: auto;
+    background: var(--paper);
+  }
+  .canvas {
+    position: relative; transform: none !important;
+    width: 100%; height: auto;
+    padding: 80px var(--s-3) 120px;
+    display: flex; flex-direction: column; gap: var(--s-5);
+  }
+  /* Cache tout ce qui ne fonctionne pas en linéaire */
+  .arrows, .floating-note, .bifurcation, .minimap, .controls,
+  .agents-cluster, .agent-cloud, .swimlane-bg, .legend-actor,
+  .po-overlay, .po-note, .po-sticky-anno, .po-avatar,
+  .github-flow-svg, .loop-return-note, .continuous-closer,
+  .phase-arrow, .phase-divider, .flux-legend, .split-exit-arrows,
+  .converge-mini-arrow, .agents-exit-arrows, .predev-exit-arrows,
+  .kanban-up-to-app, .kanban-to-review-up, .review-arrive-trail,
+  .fx9-trait, .fx12-approve-trail, .final-chain, .live-ping,
+  .po-bazar, .end-loop, .end-loop-text,
+  .pitch-pills, .pillars-trio-hint,
+  .reading-cue-keys, .bridge-note { display: none !important; }
+
+  /* Tous les blocs canvas → full width vertical */
+  .zone-marker, .node, .pillar-center, .kanban-annotated,
+  .wireframes-flat, .part-banner, .profile-cluster, .principle-cluster,
+  .app-live-annotated, .specs-full, .pitch-zone, .final-claim,
+  .pillars-banner, .part2-profiles-sticky, .pivot-banner {
     position: relative !important;
     left: auto !important; top: auto !important;
     width: 100% !important; max-width: 100%;
     margin: 0;
     animation-delay: 0ms !important;
+    transform: none !important;
   }
-  .stickies, .pitch-numbers, .kanban-real, .wireframes-body { grid-template-columns: 1fr; }
-  .topbar { position: relative; flex-direction: column; gap: var(--s-3); align-items: flex-start; padding: var(--s-3); }
+
+  /* Container queries-like : forcer 1 colonne sur tous les layouts */
+  .stickies, .pitch-numbers, .kanban-real,
+  .wireframes-body, .app-hero--matin, .app-hero--shop,
+  .app-hero--trip, .app-cards,
+  .converge-stack, .predev-stack, .split-rows {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--s-3) !important;
+  }
+
+  /* Browser 2 : cap height retiré, scroll natif si trop long */
+  .app-live-annotated .computer-frame {
+    height: auto !important;
+    min-height: 0;
+  }
+  .app-live-annotated .app-screen {
+    overflow: visible !important;
+  }
+  .computer-frame { width: 100% !important; }
+  .computer-screen { padding: 0 !important; }
+
+  /* Header du browser : nav compacte */
+  .app-head {
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    padding: 12px;
+  }
+  .app-nav {
+    order: 3;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.82rem;
+  }
+  .app-hero {
+    padding: 16px !important;
+  }
+  .app-hero-title { font-size: 1.35rem !important; }
+  .app-matin-lead { font-size: 0.9rem; }
+  .app-matin-visual { padding: 10px; }
+  .app-matin-visual svg { max-width: 200px; }
+
+  /* Kanban mobile : 3 colonnes deviennent 3 sections empilées */
+  .kanban-real-cols, .kanban-real {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--s-3) !important;
+  }
+  .kanban-real-col {
+    width: 100% !important;
+    border-bottom: 1px dashed var(--ink-faint);
+    padding-bottom: var(--s-3);
+  }
+  .kanban-real-col:last-child { border-bottom: 0; }
+  /* La hero card en transit n'a plus de translateX (pas de colonnes côte à côte) */
+  .kanban-real-card.kcard-hero { transform: none !important; }
+
+  /* Brief table : compact 2 colonnes au lieu du ring */
+  .brief-table {
+    height: auto !important;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 12px 0;
+  }
+  .brief-table .table-disc {
+    position: relative !important;
+    top: auto !important; left: auto !important;
+    transform: none !important;
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+  .brief-table .person {
+    position: relative !important;
+    top: auto !important; bottom: auto !important;
+    left: auto !important; right: auto !important;
+    transform: none !important;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+  .brief-table .person-emoji { width: 28px; height: 28px; }
+
+  /* Wireframes tree : centre + compact */
+  .wf-body-tree { padding: 0; }
+  .wf-tree { gap: 8px; }
+  .wf-link-1to3, .wf-link-3to4 { width: 200px !important; }
+  .wf-card-root { width: 110px; }
+  .wf-card-child { width: 84px; }
+  .wf-card-grand { width: 54px; }
+
+  /* Pillars : pillar-count + sous-cluster en colonne */
+  .pillar-count { font-size: 2rem !important; }
+  .pillar-body { padding-right: 12px !important; }
+
+  /* Typographies banner */
+  .part-tag { font-size: 0.72rem; }
+  .part-title { font-size: 1.35rem; line-height: 1.15; }
+  .part-sub { font-size: 0.85rem; }
+
+  /* UI globale */
+  .topbar {
+    position: sticky; top: 0; z-index: var(--z-ui-frame);
+    flex-direction: column; gap: var(--s-2);
+    align-items: flex-start; padding: var(--s-3);
+    background: oklch(from var(--paper) l c h / 0.96);
+    backdrop-filter: blur(8px);
+  }
   .progress-wrap { width: 100%; max-width: none; }
-  .chrono-nav { position: fixed; bottom: var(--s-3); transform: translateX(-50%) scale(0.92); }
-  .help, .reveal-banner { display: none; }
-  .title-handwritten { font-size: clamp(3.5rem, 14vw, 5.5rem); }
+  .chrono-nav {
+    position: fixed;
+    bottom: var(--s-3);
+    left: 50%;
+    transform: translateX(-50%) scale(0.88);
+    transform-origin: bottom center;
+    max-width: calc(100vw - 24px);
+  }
+  .help, .reveal-banner, .story-hint { display: none; }
+
+  /* Titre handwritten */
+  .title-handwritten { font-size: clamp(3rem, 11vw, 4.5rem); }
+
+  /* Sticky notes : pas de rotation extrême (lisibilité) */
+  .sticky, .pivot-banner, .review-stick {
+    transform: rotate(0) !important;
+    margin: 0 !important;
+  }
+
+  /* Sneaker SVG si encore présent */
+  .app-shop-shoe, .app-shop-image svg { max-width: 220px; }
+  .app-shop-image { padding: 10px; }
+  .app-shop-info { gap: 8px; }
+  .app-shop-price strong { font-size: 1.3rem; }
+
+  /* Intro mobile : courte notice en haut indiquant la lecture verticale */
+  .canvas::before {
+    content: "↓ lecture verticale · scroll de haut en bas";
+    display: block;
+    text-align: center;
+    font-family: var(--font-hand);
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    padding: 8px 12px;
+    background: oklch(from var(--yellow) calc(l + 0.02) calc(c * 0.7) h / 0.5);
+    border: 1.2px dashed var(--ink-line);
+    border-radius: 8px;
+    margin-bottom: var(--s-3);
+  }
+}
+
+@media (max-width: 560px) {
+  /* Phones tighter : reduce padding + font further */
+  .canvas { padding: 70px var(--s-2) 110px; gap: var(--s-4); }
+  .part-title { font-size: 1.2rem; }
+  .app-hero-title { font-size: 1.15rem !important; }
+  .app-matin-visual svg { max-width: 160px; }
+  .wf-card-root { width: 96px; }
+  .wf-card-child { width: 72px; }
+  .wf-card-grand { width: 46px; }
+  .brief-table { grid-template-columns: 1fr; }
+  .pillar-count { font-size: 1.7rem !important; }
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
