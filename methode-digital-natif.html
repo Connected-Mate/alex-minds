@@ -1,0 +1,2162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#f5efe1" />
+<title>Méthode Digital Natif — Alexandre Cormeraie · Connected Mate</title>
+<meta name="description" content="La méthodologie projet IA-augmentée. Agile, c'était avant. Voilà ce qu'on fait maintenant." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Hanken+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=Architects+Daughter&display=swap" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="paper-grain" aria-hidden="true"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     TOP BAR : marque + progression + légende humain/IA
+     ═══════════════════════════════════════════════════════════════════ -->
+<header class="topbar">
+  <div class="brand">
+    <a class="brand-back" href="index.html" aria-label="Retour à Alex Minds" title="← Alex Minds">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40" width="32" height="32"><path d="M5 20 Q12 5, 20 20 T35 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+    </span>
+    <div>
+      <div class="brand-text">Méthode Digital Natif</div>
+      <div class="brand-tag">Alexandre Cormeraie · Connected Mate · édition 2026</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap" aria-label="Progression">
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="progress-labels">
+      <span data-step="0">Amorce</span>
+      <span data-step="1">Postulat</span>
+      <span data-step="2">Partie 1 · From scratch</span>
+      <span data-step="11">Partie 2 · En prod</span>
+      <span data-step="19">Piliers</span>
+      <span data-step="23">Pitch</span>
+      <span data-step="24">Fin · la boucle</span>
+    </div>
+  </div>
+
+  <div class="legend-actor">
+    <span class="legend-item"><span class="legend-dot legend-dot-human"></span>humain</span>
+    <span class="legend-item"><span class="legend-dot legend-dot-ai"></span>agent IA</span>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     CANVAS PAN/ZOOM
+     ═══════════════════════════════════════════════════════════════════ -->
+<main class="stage" id="stage" role="application" aria-label="Canvas méthode Digital Natif">
+
+  <svg class="arrows" id="arrows" aria-hidden="true">
+    <defs>
+      <filter id="ink" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="3"/>
+        <feDisplacementMap in="SourceGraphic" scale="1.6"/>
+      </filter>
+      <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+      </marker>
+    </defs>
+    <g id="arrows-layer"></g>
+  </svg>
+
+  <div class="canvas" id="canvas">
+
+    <!-- ───────────────────────────────────────────────────────────
+         ACTE 0 — OUVERTURE
+         ─────────────────────────────────────────────────────────── -->
+    <section class="zone-marker" data-step="0" data-zone="opening" style="--x:80px; --y:280px;">
+      <div class="kicker-tag">une méthode <em>by Alexandre Cormeraie · Connected Mate</em></div>
+      <h1 class="title-handwritten">Méthode<br/><em>Digital Natif</em></h1>
+      <p class="lede">
+        Aucun projet n'est pareil.<br/>
+        Aucune méthode rigide ne tient.<br/>
+        <strong>Voilà comment on fait. Vraiment.</strong>
+      </p>
+      <p class="intro-pitch">Méthodo projet IA-augmentée. <em>Remplace Agile, Scrum, SAFe.</em></p>
+      <div class="reading-cue">
+        <span class="hand">on lit de gauche à droite →</span>
+        <span class="reading-cue-keys hand" aria-hidden="true">←/→ ou barre du bas</span>
+      </div>
+      <button class="intro-secret" type="button" aria-expanded="false" aria-label="Révéler le credo">
+        <span class="intro-secret-tag">v.1 · 2026</span>
+        <span class="intro-secret-reveal hand">— pas de slide. juste la méthode.</span>
+      </button>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────
+         ACTE 1 — POSTULAT
+         ─────────────────────────────────────────────────────────── -->
+    <section class="zone-marker" data-step="1" data-zone="postulate" style="--x:1040px; --y:200px;">
+      <div class="zone-header">
+        <span class="zone-no">01</span>
+        <h2 class="zone-title">Le postulat</h2>
+        <p class="zone-sub">Quatre vérités. On part de là.</p>
+      </div>
+
+      <div class="stickies">
+        <article class="sticky sticky-yellow" data-bloc="p1" data-links="part1-header" data-num="01" data-mini="→ remplace Scrum/SAFe">
+          <p class="punch">Agile, c'était avant.</p>
+          <p class="detail">Scrum, SAFe, RACI — au feu.</p>
+        </article>
+        <article class="sticky sticky-pink" data-bloc="p2" data-links="pillars-principles-center" data-num="02" data-mini="→ voir 4 principes">
+          <p class="punch">Chaque projet est unique.</p>
+          <p class="detail">Des blocs lego. On compose.</p>
+        </article>
+        <article class="sticky sticky-mint" data-bloc="p3" data-links="pillars-agents-center" data-num="03" data-mini="→ voir 20 agents">
+          <p class="punch">L'IA bosse pour de vrai.</p>
+          <p class="detail">20 agents. Chacun sa mission.</p>
+        </article>
+        <article class="sticky sticky-blue" data-bloc="p4" data-links="pillars-profiles-center" data-num="04" data-mini="→ voir 4 profils">
+          <p class="punch">Moins d'humains. Digital natifs.</p>
+          <p class="detail">Tech, UX, besoin — une seule tête.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Mini bridge Postulat → Partie 1 -->
+    <p class="bridge-note hand" style="--x:1860px; --y:460px;" aria-hidden="true">
+      → et concrètement,<br/>voilà comment on fait.
+    </p>
+
+    <!-- Bifurcation : x=1900 (était 2010) pour libérer 300px de gap avec f-brief (x=2200..2480) -->
+    <div class="bifurcation is-interactive" style="--x:1900px; --y:520px;" tabindex="0" role="img" aria-label="Bifurcation vers Partie 1">
+      <div class="bif-dot" aria-hidden="true"></div>
+      <span class="bif-label hand">deux chemins<br/>séquentiels ↘</span>
+      <span class="bif-hint hand" aria-hidden="true">→ partie 1</span>
+    </div>
+
+    <!-- ───────────────────────────────────────────────────────────
+         ═════════════════ PARTIE 1 — FROM SCRATCH ═════════════════
+         ─────────────────────────────────────────────────────────── -->
+    <section class="part-banner part-1" data-step="2" data-zone="flow-scratch" data-bloc="part1-header" style="--x:2200px; --y:60px;">
+      <span class="part-tag">PARTIE 1</span>
+      <h2 class="part-title">Naître <em>from scratch</em></h2>
+      <p class="part-sub">7 phases · de la table vide au produit live</p>
+      <div class="part-line" aria-hidden="true"></div>
+    </section>
+
+    <!-- ───── PHASE 1.1 — Brief : VRAIE SCÈNE autour de la table ───── -->
+    <article class="node node-human node-brief-scene" data-bloc="f-brief" data-links="f-spec" data-actor="human" style="--x:2200px; --y:260px;">
+      <span class="actor-pill actor-human">👤 × N</span>
+      <span class="phase-num">1.1</span>
+      <h4>Brief — autour de la table</h4>
+
+      <div class="brief-table">
+        <!-- Particules animées : inputs qui partent des personnages vers l'IA -->
+        <span class="input-particle ip-1" aria-hidden="true"></span>
+        <span class="input-particle ip-2" aria-hidden="true"></span>
+        <span class="input-particle ip-3" aria-hidden="true"></span>
+        <span class="input-particle ip-4" aria-hidden="true"></span>
+        <span class="input-particle ip-5" aria-hidden="true"></span>
+        <span class="input-particle ip-6" aria-hidden="true"></span>
+
+        <!-- Table centre avec IA qui charge -->
+        <div class="table-disc">
+          <span class="table-ai-icon">⚡</span>
+          <span class="table-ai-label">IA</span>
+          <span class="table-ai-loading" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span class="table-ai-sub hand">écoute · trie</span>
+        </div>
+
+        <!-- 9 personnages disposés autour : tous les profils qui contribuent au brief -->
+        <div class="person p-po">
+          <span class="person-emoji">👤</span>
+          <span class="person-tag">PO</span>
+        </div>
+        <div class="person p-pm">
+          <span class="person-emoji">📋</span>
+          <span class="person-tag">PM</span>
+        </div>
+        <div class="person p-ux">
+          <span class="person-emoji">🔍</span>
+          <span class="person-tag">UX</span>
+        </div>
+        <div class="person p-ui">
+          <span class="person-emoji">🎨</span>
+          <span class="person-tag">UI</span>
+        </div>
+        <div class="person p-innov">
+          <span class="person-emoji">💡</span>
+          <span class="person-tag">Innov.</span>
+        </div>
+        <div class="person p-tech">
+          <span class="person-emoji">⚙️</span>
+          <span class="person-tag">Tech Lead</span>
+        </div>
+        <div class="person p-direction">
+          <span class="person-emoji">🎯</span>
+          <span class="person-tag">Direction</span>
+        </div>
+        <div class="person p-marketing">
+          <span class="person-emoji">📣</span>
+          <span class="person-tag">Marketing</span>
+        </div>
+        <div class="person p-crm">
+          <span class="person-emoji">🤝</span>
+          <span class="person-tag">Relations client</span>
+        </div>
+
+        <!-- Bulles d'échange -->
+        <span class="brief-bubble bubble-top hand">↻ ils s'auto-challengent</span>
+
+        <!-- Micro-détails FigJam : café, post-it, stylo posés sur la table -->
+        <span class="brief-prop brief-prop-coffee" aria-hidden="true">
+          <svg viewBox="0 0 18 18" width="18" height="18">
+            <path d="M3 6 H 13 V 12 Q 13 14 11 14 H 5 Q 3 14 3 12 Z" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.2"/>
+            <path d="M13 7 Q 16 7.4 16 9.4 Q 16 11.4 13 11.4" fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+            <path d="M5.5 4 Q 5 3 5.8 2" fill="none" stroke="var(--ink-soft)" stroke-width="0.9" stroke-linecap="round"/>
+            <path d="M8 4 Q 7.5 3 8.3 2" fill="none" stroke="var(--ink-soft)" stroke-width="0.9" stroke-linecap="round"/>
+            <path d="M10.5 4 Q 10 3 10.8 2" fill="none" stroke="var(--ink-soft)" stroke-width="0.9" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brief-prop brief-prop-postit" aria-hidden="true"></span>
+        <span class="brief-prop brief-prop-pen" aria-hidden="true">
+          <svg viewBox="0 0 26 8" width="26" height="8">
+            <path d="M1 4 L 19 4" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M19 1.6 L 24 4 L 19 6.4 Z" fill="var(--ink)"/>
+            <path d="M2 4 L 4 4" stroke="var(--carmillon)" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+        </span>
+
+        <!-- Bulle "j'apporte X" qui apparaît au hover persona (texte injecté en JS) -->
+        <span class="person-bubble hand" aria-hidden="true"></span>
+      </div>
+
+      <div class="ai-agents">
+        <span class="ai-agents-label">⚡ agents :</span>
+        <span class="ai-agent-chip">Cadrage</span>
+        <span class="ai-agent-chip">Brief Parser</span>
+      </div>
+    </article>
+
+    <!-- ───── PHASE 1.2 — Spec-driven : NOTE DE SPECS visible ───── -->
+    <article class="node node-human node-spec-note" data-bloc="f-spec" data-links="f-wireframes" data-actor="human" style="--x:2580px; --y:260px;">
+      <span class="actor-pill actor-human">👤+⚡</span>
+      <span class="phase-num">1.2</span>
+      <h4>Spec-driven · la note</h4>
+
+      <div class="note-paper">
+        <div class="note-paper-head">
+          <span>SPECS · projet-x</span>
+          <span class="note-counter" aria-hidden="true"><span class="note-counter-num">14</span><span class="hand">/ 20+ possibles</span></span>
+        </div>
+
+        <div class="note-section">
+          <span class="note-icon">📱</span>
+          <span class="note-name">UX</span>
+          <span class="note-detail">parcours · a11y · mobile-first</span>
+        </div>
+        <div class="note-section">
+          <span class="note-icon">🔧</span>
+          <span class="note-name">Tech</span>
+          <span class="note-detail">stack · API · tests · sécu</span>
+        </div>
+        <div class="note-section">
+          <span class="note-icon">⚡</span>
+          <span class="note-name">Features</span>
+          <span class="note-detail">login · search · notif · auth</span>
+        </div>
+        <div class="note-section note-challenges">
+          <span class="note-icon">🎯</span>
+          <span class="note-name">Auto-challenges</span>
+          <div class="note-challenge-list">
+            <p class="hand">« et si X ? · ça scale ? · RGPD ? »</p>
+          </div>
+        </div>
+        <div class="note-pulse-trail" aria-hidden="true"></div>
+      </div>
+
+      <span class="flux-tag flux-loop">↺ aller-retour H↔IA</span>
+      <div class="ai-agents">
+        <span class="ai-agents-label">⚡ agents :</span>
+        <span class="ai-agent-chip">Spec Writer</span>
+        <span class="ai-agent-chip">UX Mapper</span>
+      </div>
+    </article>
+
+    <!-- ═══ BLOC STANDALONE : LE GROS BLOC DE SPECS (UX / Tech / Features détaillés) ═══ -->
+    <article class="specs-full has-washi has-washi--yellow" data-bloc="f-spec-detail" data-links="f-spec,f-wireframes,f-predev" style="--x:2580px; --y:760px;">
+      <span class="phase-num">1.3</span>
+      <header class="specs-full-head">
+        <span class="specs-full-tag">SPECS · projet-x</span>
+        <span class="specs-full-counter"><span class="specs-full-num">22</span><span class="hand">/ 30+ possibles</span></span>
+      </header>
+
+      <div class="specs-full-grid">
+        <div class="specs-full-group">
+          <h6 class="specs-full-title"><span class="specs-full-icon">📱</span> UX <span class="specs-full-count">7</span></h6>
+          <ul class="specs-full-list">
+            <li><span class="specs-full-pin">01</span> parcours user simple</li>
+            <li><span class="specs-full-pin">02</span> mobile-first</li>
+            <li><span class="specs-full-pin">03</span> a11y AA</li>
+            <li><span class="specs-full-pin">04</span> dark mode</li>
+            <li><span class="specs-full-pin">05</span> i18n FR/EN</li>
+            <li><span class="specs-full-pin">06</span> offline-first</li>
+            <li><span class="specs-full-pin">07</span> perf budget &lt; 200ko</li>
+          </ul>
+        </div>
+
+        <div class="specs-full-group">
+          <h6 class="specs-full-title"><span class="specs-full-icon">🔧</span> Tech <span class="specs-full-count">7</span></h6>
+          <ul class="specs-full-list">
+            <li><span class="specs-full-pin">08</span> stack moderne</li>
+            <li><span class="specs-full-pin">09</span> REST + GraphQL</li>
+            <li><span class="specs-full-pin">10</span> tests auto</li>
+            <li><span class="specs-full-pin">11</span> sécu OAuth</li>
+            <li><span class="specs-full-pin">12</span> rate limiting</li>
+            <li><span class="specs-full-pin">13</span> cache CDN edge</li>
+            <li><span class="specs-full-pin">14</span> monitoring Sentry</li>
+          </ul>
+        </div>
+
+        <div class="specs-full-group specs-full-group--features">
+          <h6 class="specs-full-title"><span class="specs-full-icon">⚡</span> Features <span class="specs-full-count">8</span></h6>
+          <ul class="specs-full-list specs-full-list-features">
+            <li><span class="specs-full-pin specs-full-pin-feat">15</span> login <span class="specs-full-target">→ Login</span></li>
+            <li><span class="specs-full-pin specs-full-pin-feat">16</span> onboarding <span class="specs-full-target">→ Onbrd.</span></li>
+            <li><span class="specs-full-pin specs-full-pin-feat">17</span> feed <span class="specs-full-target">→ Home</span></li>
+            <li><span class="specs-full-pin specs-full-pin-feat">18</span> profil <span class="specs-full-target">→ Profil</span></li>
+            <li><span class="specs-full-pin specs-full-pin-feat">19</span> recherche <span class="specs-full-target">→ Recherche</span></li>
+            <li><span class="specs-full-pin specs-full-pin-feat">20</span> notifs <span class="specs-full-target">→ Notifs</span></li>
+            <li><span class="specs-full-pin specs-full-pin-feat">21</span> dashboard analytics <span class="specs-full-target">→ Stats</span></li>
+            <li><span class="specs-full-pin specs-full-pin-feat">22</span> export PDF <span class="specs-full-target">→ Export</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="specs-full-foot hand">↓ chaque ligne devient un écran ↓</p>
+    </article>
+
+    <!-- ═══ GRAND BLOC WIREFRAMES (sous le bloc specs — uniquement les écrans) ═══ -->
+    <div class="wireframes-flat wireframes-flat-clean" data-bloc="f-wireframes" data-links="f-predev" style="--x:2580px; --y:1240px;">
+      <span class="phase-num">1.4</span>
+      <span class="wf-team-tag hand" aria-hidden="true">👥 TEAM REVIEW</span>
+      <div class="wf-header wf-header-tight wf-header-pin">
+        <span class="wf-label-pin hand">ON GÉNÈRE LES WIREFRAMES</span>
+        <span class="wf-sub-pin hand">· pour que tout le monde soit d'accord sur l'app ·</span>
+      </div>
+
+      <!-- Bloc explicatif : POURQUOI on génère les wireframes -->
+      <aside class="wf-explainer hand" aria-label="Pourquoi des wireframes">
+        <p class="wf-explainer-lead">
+          Pour que <strong>tout le monde</strong> soit d'accord avant de coder.
+        </p>
+        <p class="wf-explainer-body">
+          Le <span class="wf-role wf-role-designer">designer</span>, le <span class="wf-role wf-role-dev">dev</span>,
+          le <span class="wf-role wf-role-po">PO</span>, le <span class="wf-role wf-role-tl">tech lead</span> —
+          tout le monde voit le flow et valide en équipe.
+        </p>
+      </aside>
+
+      <!-- Toggle device : mobile / ordinateur -->
+      <div class="wf-device-toggle" role="radiogroup" aria-label="Type d'écran wireframes">
+        <span class="wf-device-hint hand" aria-hidden="true">↑ change le device</span>
+        <button type="button" class="wf-device-btn is-active" data-device="ordi" aria-checked="true" role="radio">
+          <svg width="14" height="11" viewBox="0 0 14 11" aria-hidden="true"><rect x="0.7" y="0.7" width="12.6" height="8" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M4.5 10.3 H 9.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span class="hand">ordinateur</span>
+        </button>
+        <button type="button" class="wf-device-btn" data-device="mobile" aria-checked="false" role="radio">
+          <svg width="9" height="13" viewBox="0 0 9 13" aria-hidden="true"><rect x="0.7" y="0.7" width="7.6" height="11.6" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="4.5" cy="11" r="0.6" fill="currentColor"/></svg>
+          <span class="hand">mobile</span>
+        </button>
+      </div>
+
+      <div class="wf-body wf-body-tree" data-device="ordi">
+
+        <!-- ── ARBRE 1 → 3 → 4 : génération arborescente IA ── -->
+        <div class="wf-tree" aria-label="Arborescence de génération wireframes">
+
+          <span class="wf-tree-handnote hand">↓ 1 brief · l'IA génère l'arbre…</span>
+
+          <!-- Niveau 0 : 1 wireframe parent -->
+          <div class="wf-tree-level wf-tree-level-root">
+            <div class="wf-card wf-card-root">
+              <span class="wf-card-badge hand">brief</span>
+              <div class="wf-card-topbar">
+                <span class="wf-card-dot"></span>
+                <span class="wf-card-dot"></span>
+                <span class="wf-card-dot"></span>
+              </div>
+              <div class="wf-card-lines">
+                <span class="wf-line wf-line-hero"></span>
+                <span class="wf-line wf-line-80"></span>
+                <span class="wf-line wf-line-60"></span>
+                <span class="wf-line wf-line-cta"></span>
+              </div>
+              <span class="wf-card-label">Home</span>
+            </div>
+          </div>
+
+          <!-- Liens niveau 0 → niveau 1 (1 vers 3) -->
+          <svg class="wf-link wf-link-1to3" viewBox="0 0 360 56" aria-hidden="true">
+            <g filter="url(#ink)">
+              <path d="M180 2 L180 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M180 18 Q 178 32 64 52" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="3 4"/>
+              <path d="M180 18 L180 52" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="3 4"/>
+              <path d="M180 18 Q 182 32 296 52" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="3 4"/>
+            </g>
+          </svg>
+
+          <!-- Niveau 1 : 3 enfants en ligne -->
+          <div class="wf-tree-level wf-tree-level-children">
+            <div class="wf-card wf-card-child">
+              <div class="wf-card-topbar">
+                <span class="wf-card-dot"></span>
+              </div>
+              <div class="wf-card-lines">
+                <span class="wf-line wf-line-80"></span>
+                <span class="wf-line wf-line-60"></span>
+                <span class="wf-line wf-line-80"></span>
+              </div>
+              <span class="wf-card-label">Liste</span>
+            </div>
+            <div class="wf-card wf-card-child">
+              <div class="wf-card-topbar">
+                <span class="wf-card-dot"></span>
+              </div>
+              <div class="wf-card-lines">
+                <span class="wf-line wf-line-hero-s"></span>
+                <span class="wf-line wf-line-80"></span>
+                <span class="wf-line wf-line-60"></span>
+              </div>
+              <span class="wf-card-label">Détail</span>
+            </div>
+            <div class="wf-card wf-card-child">
+              <div class="wf-card-topbar">
+                <span class="wf-card-dot"></span>
+              </div>
+              <div class="wf-card-lines">
+                <span class="wf-line wf-line-circle"></span>
+                <span class="wf-line wf-line-80"></span>
+                <span class="wf-line wf-line-60"></span>
+              </div>
+              <span class="wf-card-label">Profil</span>
+            </div>
+          </div>
+
+          <!-- Liens niveau 1 → niveau 2 (3 vers 4) -->
+          <svg class="wf-link wf-link-3to4" viewBox="0 0 360 44" aria-hidden="true">
+            <g filter="url(#ink)">
+              <path d="M50 0 Q 48 20 45 42" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 4"/>
+              <path d="M50 0 Q 90 20 140 42" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 4"/>
+              <path d="M180 0 Q 200 20 225 42" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 4"/>
+              <path d="M310 0 Q 312 20 315 42" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 4"/>
+            </g>
+          </svg>
+
+          <!-- Niveau 2 : 4 petits-enfants -->
+          <div class="wf-tree-level wf-tree-level-grand">
+            <div class="wf-card wf-card-grand">
+              <div class="wf-card-lines">
+                <span class="wf-line wf-line-60"></span>
+                <span class="wf-line wf-line-80"></span>
+              </div>
+            </div>
+            <div class="wf-card wf-card-grand">
+              <div class="wf-card-lines">
+                <span class="wf-line wf-line-80"></span>
+                <span class="wf-line wf-line-60"></span>
+              </div>
+            </div>
+            <div class="wf-card wf-card-grand">
+              <div class="wf-card-lines">
+                <span class="wf-line wf-line-60"></span>
+                <span class="wf-line wf-line-80"></span>
+              </div>
+            </div>
+            <div class="wf-card wf-card-grand">
+              <div class="wf-card-lines">
+                <span class="wf-line wf-line-80"></span>
+                <span class="wf-line wf-line-60"></span>
+              </div>
+            </div>
+          </div>
+
+          <span class="wf-tree-annot hand">↑ 1 input · 3 pages · 4 variantes ↑</span>
+
+        </div>
+
+      </div>
+
+      <p class="wireframes-caption wireframes-caption-validate wireframes-caption-validate-strong hand">↑ tout le monde valide ce flow avant de coder ↑</p>
+      <p class="wireframes-caption wireframes-caption-sub hand">l'IA déroule l'arbre : <span class="caption-pill">brief</span> → <span class="caption-pill">3 pages</span> → <span class="caption-pill">4 variantes</span></p>
+    </div>
+
+    <!-- Annotation manuscrite — pivot 1.3 → 1.4 (sticky note jaune) -->
+    <div class="pivot-banner" style="--x:3080px; --y:130px;" aria-hidden="true">
+      ↘ ici commence <strong>VRAIMENT</strong> le projet<span class="pivot-banner-sep">·</span>ça se coupe en 2
+    </div>
+
+    <!-- ───── PHASE 1.3 — Pré-développement (vertical : Design ↑ / Tech ↓) ───── -->
+    <article class="node node-predev-split node-predev-stack has-washi has-washi--blue" data-bloc="f-predev" data-links="f-split,f-predev-design,f-predev-tech" data-actor="human" style="--x:2880px; --y:240px;">
+      <span class="actor-pill actor-human actor-pill-onpaper">👤</span>
+      <span class="phase-num">1.5</span>
+      <h4>Pré-développement — on <em>slice</em> les specs</h4>
+
+      <div class="predev-incoming hand">↙ les specs arrivent · on les coupe en 2</div>
+
+      <div class="predev-stack">
+        <!-- Slice DESIGN (au-dessus) -->
+        <div class="predev-lane predev-lane-design" data-bloc="f-predev-design" data-links="f-design-artist,f-split">
+          <span class="predev-lane-tag">🎨 SLICE · design</span>
+          <ul class="predev-lane-list">
+            <li><span class="predev-pin">#01</span> parcours user</li>
+            <li><span class="predev-pin">#03</span> a11y AA</li>
+            <li><span class="predev-pin">#04</span> dark mode</li>
+          </ul>
+          <span class="predev-lane-out hand">→ part en signature</span>
+        </div>
+
+        <span class="predev-divider" aria-hidden="true"></span>
+
+        <!-- Slice TECH (en-dessous) -->
+        <div class="predev-lane predev-lane-tech" data-bloc="f-predev-tech" data-links="f-dev-socle,f-split">
+          <span class="predev-lane-tag">⚙️ SLICE · tech (code initial)</span>
+          <ul class="predev-lane-list">
+            <li><span class="predev-pin">#05</span> stack moderne</li>
+            <li><span class="predev-pin">#06</span> API</li>
+            <li><span class="predev-pin">#07</span> tests auto</li>
+            <li><span class="predev-pin">#08</span> sécu OAuth</li>
+          </ul>
+          <span class="predev-lane-out hand">→ lance les agents</span>
+        </div>
+      </div>
+
+      <!-- 2 flèches griffonnées qui sortent à droite : une par slice, vers Le Split -->
+      <svg class="predev-exit-arrows" viewBox="0 0 60 220" aria-hidden="true">
+        <!-- Flèche du haut : Design → Split lane design -->
+        <path d="M2 56 Q 28 56 50 36" fill="none"
+              stroke="var(--pink-deep)" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M44 30 L50 36 L42 42" fill="none"
+              stroke="var(--pink-deep)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Flèche du bas : Tech → Split lane dev -->
+        <path d="M2 164 Q 28 164 50 184" fill="none"
+              stroke="var(--blue-deep)" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M44 178 L50 184 L42 190" fill="none"
+              stroke="var(--blue-deep)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </article>
+
+    <!-- ───── PHASE 1.4 — Le split (TOUT en parallèle : design + dev font Vibe et DS ensemble) ───── -->
+    <article class="node node-split-block node-split-stacked node-split-wide node-human has-washi has-washi--pink has-washi--double" data-bloc="f-split" data-links="f-design-artist,f-dev-socle,f-vibe,f-components,f-converge" data-actor="human" style="--x:3180px; --y:240px;">
+      <span class="actor-pill actor-human actor-pill-onpaper">👤</span>
+      <span class="phase-num">1.6</span>
+      <h4>Le split — design <em>et</em> dev partent <em>ensemble</em>, du brief jusqu'au DS</h4>
+
+      <div class="split-rows">
+        <!-- Row 1 : DESIGN (au-dessus) — Designer Artist + Vibe Designer + Génère le DS -->
+        <div class="split-row split-row-design split-row-3" data-bloc="f-design-artist" data-links="f-handoff,f-vibe,f-components,f-converge">
+          <span class="split-row-tag">🎨 DESIGN</span>
+          <div class="split-row-steps split-row-steps-3">
+            <div class="split-step" data-bloc="f-design-artist-step">
+              <strong>Designer Artist</strong>
+              <p>Figma · pages signature · dev front pixel-perfect</p>
+            </div>
+            <span class="split-row-arrow hand">→ relais IA →</span>
+            <div class="split-step split-step-ia" data-bloc="f-vibe" data-links="f-converge">
+              <strong>Vibe Designer</strong>
+              <p>vibe-designe le reste · anim. comprises ⚡</p>
+            </div>
+            <span class="split-row-arrow hand">→ surveille →</span>
+            <div class="split-step split-step-ia" data-bloc="f-components" data-links="f-converge">
+              <strong>Génère le DS</strong>
+              <p>composants partagés · dev s'assure que l'IA respecte ET crée le DS</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider parallèle : les deux flots roulent en même temps -->
+        <span class="split-rows-divider" aria-hidden="true">
+          <span class="hand">↕ en parallèle, du début à la fin</span>
+        </span>
+
+        <!-- Row 2 : DEV (en-dessous) — le dev pose la base du code applicatif -->
+        <div class="split-row split-row-dev split-row-3" data-bloc="f-dev-socle" data-links="f-handoff,f-branches,f-converge">
+          <span class="split-row-tag">⚙️ DEV</span>
+          <div class="split-row-steps split-row-steps-3">
+            <div class="split-step">
+              <strong>Dev tech lead</strong>
+              <p>choix techniques · règles de code</p>
+            </div>
+            <span class="split-row-arrow hand">→ lance agents →</span>
+            <div class="split-step" data-bloc="f-branches" data-links="f-converge">
+              <strong>Branches isolées</strong>
+              <p>agents construisent en parallèle ⚡</p>
+            </div>
+            <span class="split-row-arrow hand">→ pose →</span>
+            <div class="split-step" data-bloc="f-handoff" data-links="f-converge">
+              <strong>Base du code applicatif</strong>
+              <p>architecture · routes · modules · socle</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-agents">
+        <span class="ai-agents-label">⚡ agents :</span>
+        <span class="ai-agent-chip">Architecte</span>
+        <span class="ai-agent-chip">Feature Coder</span>
+        <span class="ai-agent-chip">Vibe Design</span>
+        <span class="ai-agent-chip">Composants</span>
+      </div>
+
+      <!-- 2 flèches griffonnées : Design (↘) et Dev (↗) fusionnent au centre, 1 grosse pointe vers Convergence -->
+      <svg class="split-exit-arrows" viewBox="0 0 100 180" aria-hidden="true">
+        <!-- Pink (Design) : depuis right edge Design row (y=62) vers fusion (y=42) -->
+        <path d="M2 62 C 30 62, 55 45, 74 42" fill="none"
+              stroke="var(--pink-deep)" stroke-width="2.6" stroke-linecap="round"/>
+        <!-- Blue (Dev) : depuis right edge Dev row (y=164) vers fusion (y=42), climbing -->
+        <path d="M2 164 C 32 164, 56 50, 74 42" fill="none"
+              stroke="var(--blue-deep)" stroke-width="2.6" stroke-linecap="round"/>
+        <!-- Point de fusion (cercle blanc bordé noir) -->
+        <circle cx="74" cy="42" r="4.5" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.6"/>
+        <!-- Trait de fusion noir + pointe vers Convergence -->
+        <path d="M78 42 L 92 42" fill="none"
+              stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M84 36 L 92 42 L 84 48" fill="none"
+              stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Label manuscrit au-dessus -->
+        <text x="40" y="22" text-anchor="middle" font-size="12"
+              fill="var(--ink-soft)" font-style="italic">tout devient</text>
+        <text x="40" y="36" text-anchor="middle" font-size="13"
+              fill="var(--pink-deep)" font-style="italic" font-weight="700">le FRONT →</text>
+      </svg>
+    </article>
+
+    <!-- ───── PHASE 1.5 — Convergence (vrai bloc : front × back se branchent ICI) ───── -->
+    <article class="node node-converge-wide node-human has-washi has-washi--mint has-washi--double" data-bloc="f-converge" data-links="f-backend,f-live" data-actor="human" style="--x:3960px; --y:240px;">
+      <span class="actor-pill actor-human actor-pill-onpaper">👤</span>
+      <span class="phase-num">1.7</span>
+      <h4>Convergence — <em>front × back se branchent</em></h4>
+
+      <div class="converge-stack">
+        <!-- INPUT FRONT (au-dessus) : sort du Le Split, lane design -->
+        <div class="converge-input converge-input-front">
+          <span class="converge-input-tag">⬇ FRONT</span>
+          <p class="converge-input-text">design + DS + code front sortent de la lane design</p>
+        </div>
+
+        <!-- mini flèche griffonnée FRONT → × (descend en biais) -->
+        <svg class="converge-mini-arrow converge-mini-arrow--front" viewBox="0 0 40 26" aria-hidden="true">
+          <path d="M8 1 C 10 8, 14 12, 19 16 C 22 18, 24 19, 32 23" />
+          <path d="M28 19 L 32 23 L 27 24" />
+        </svg>
+
+        <!-- Point central de fusion : ordi + téléphone (le produit final tourne sur les 2) -->
+        <div class="converge-center converge-center--devices" aria-hidden="true">
+          <span class="converge-devices">
+            <svg class="converge-device converge-device--desktop" viewBox="0 0 42 32" aria-hidden="true">
+              <rect x="2.5" y="2.5" width="37" height="22" rx="2.4" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.6"/>
+              <path d="M6 6 L 36 6" stroke="var(--ink)" stroke-width="0.8" opacity="0.35"/>
+              <path d="M16 27 L 26 27" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M14 30 L 28 30" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <svg class="converge-device converge-device--mobile" viewBox="0 0 22 32" aria-hidden="true">
+              <rect x="2" y="2" width="18" height="28" rx="3" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.6"/>
+              <path d="M9 5 L 13 5" stroke="var(--ink)" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+              <circle cx="11" cy="26.6" r="1" fill="none" stroke="var(--ink)" stroke-width="1"/>
+            </svg>
+          </span>
+          <span class="converge-center-label hand">se branchent</span>
+        </div>
+
+        <!-- mini flèche griffonnée BACK → × (monte en biais) -->
+        <svg class="converge-mini-arrow converge-mini-arrow--back" viewBox="0 0 40 26" aria-hidden="true">
+          <path d="M32 25 C 30 18, 26 14, 21 10 C 18 8, 16 7, 8 3" />
+          <path d="M12 7 L 8 3 L 13 2" />
+        </svg>
+
+        <!-- INPUT BACK (en-dessous) : socle code applicatif + services Backend -->
+        <div class="converge-input converge-input-back">
+          <span class="converge-input-tag">⬆ BACK</span>
+          <p class="converge-input-text">base code applicatif (lane dev) + services Backend remontent</p>
+        </div>
+      </div>
+
+      <p class="converge-foot hand">→ pixel-perfect validé · DS branché · tests passent</p>
+
+      <div class="ai-agents">
+        <span class="ai-agents-label">⚡ agents :</span>
+        <span class="ai-agent-chip">Audit Code</span>
+        <span class="ai-agent-chip">Audit Design</span>
+        <span class="ai-agent-chip">Backend Connect</span>
+        <span class="ai-agent-chip">Test Runner</span>
+      </div>
+    </article>
+
+    <!-- ───── BACKEND — input parallèle, positionné À DROITE de Convergence (entre par le milieu) ───── -->
+    <!-- Wave 1 region C : déplacé de 4380 → 4440 pour gap "expansif" 140px avec Convergence. -->
+    <article class="node node-human node-backend-feed" data-bloc="f-backend" data-links="f-converge" data-actor="human" style="--x:4440px; --y:340px;">
+      <span class="actor-pill actor-human">👤</span>
+      <span class="node-tag node-tag-backend">BACKEND</span>
+      <h4>Services branchés</h4>
+      <p>agents testeurs · routes · auth · data</p>
+      <span class="flux-tag flux-ai2h">← entre dans Convergence</span>
+    </article>
+
+    <!-- Sticky récap fin Partie 1 — flag 1.8 (W3 P1) -->
+    <div class="pivot-banner" style="--x:4830px; --y:130px;" aria-hidden="true">
+      ✓ <strong>live</strong> · prêt pour la vraie vie
+    </div>
+
+    <!-- ───── PHASE 1.8 — Le produit vit (final) ───── -->
+    <!-- Wave 1 region C : déplacé de 4720 → 4820 pour gap "expansif" 150px avec Backend (right=4670). -->
+    <article class="node node-end node-human node-live" data-bloc="f-live" data-links="prod-tool" data-actor="human" style="--x:4820px; --y:240px;">
+      <span class="actor-pill actor-human actor-pill-onpaper">👤</span>
+      <span class="phase-num phase-num-light">1.8</span>
+      <div class="end-icon">🚀</div>
+      <h4>Le produit vit</h4>
+      <ul class="live-checklist" aria-label="checklist de finalisation">
+        <li><span class="live-check">✓</span> devs reprennent en main</li>
+        <li><span class="live-check">✓</span> stabilisation par agents IA</li>
+        <li><span class="live-check">✓</span> tests automatisés passent</li>
+        <li><span class="live-check">✓</span> users testent en interne</li>
+        <li class="live-final"><span class="live-arrow">→</span> prêt pour vivre en prod</li>
+      </ul>
+      <p class="hand">→ partie 2 commence ici</p>
+    </article>
+
+    <!-- ═══ PETITES FLÈCHES MANUSCRITES entre chaque phase (style FigJam) ═══ -->
+    <div class="phase-arrow" style="--x:2490px; --y:360px;" aria-hidden="true">
+      <svg viewBox="0 0 90 30"><path d="M5 15 C 25 5 60 5 80 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M72 7 L 82 15 L 72 23" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <!-- (Plus de flèche 1.2 → 1.5 : le flux passe désormais par 1.3 — voir phase-arrow-vertical x=2670) -->
+    <!-- (Plus de phase-arrow entre 1.3 et 1.4 : 2 flèches griffonnées internes au pré-dev — une par slice) -->
+    <!-- (Plus de phase-arrow entre 1.4 et 1.5 : 2 flèches griffonnées de sortie du Le Split convergent vers 1.5) -->
+    <!-- Phase-arrow entre 1.7 Convergence et 1.8 Le produit vit — passe AU-DESSUS de Backend (re-routée Wave 1 region C : 4500 → 4530 pour centrer entre Convergence right=4300 et Live left=4820, sans toucher Backend (top y=340)) -->
+    <div class="phase-arrow phase-arrow-labeled" style="--x:4530px; --y:180px;" aria-hidden="true">
+      <span class="phase-arrow-label hand">↗ part en prod</span>
+      <svg viewBox="0 0 90 30"><path d="M5 15 C 25 5 60 5 80 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M72 7 L 82 15 L 72 23" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <!-- T06 — Flèche FRONT : entre dans Convergence par le MILIEU-GAUCHE (sortie de f-split à droite) -->
+    <div class="phase-arrow phase-arrow-labeled phase-arrow-front" style="--x:3870px; --y:405px;" aria-hidden="true">
+      <span class="phase-arrow-label hand">→ FRONT entre</span>
+      <svg viewBox="0 0 90 30"><path d="M5 15 C 25 5 60 5 80 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M72 7 L 82 15 L 72 23" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <!-- T06 — Flèche BACK : entre dans Convergence par le MILIEU-DROITE (depuis Backend à droite) — Wave 1 region C : 4290 → 4350 suit le décalage Backend (4380 → 4440) -->
+    <div class="phase-arrow phase-arrow-labeled phase-arrow-back-in" style="--x:4350px; --y:405px;" aria-hidden="true">
+      <span class="phase-arrow-label hand">← BACK entre</span>
+      <svg viewBox="0 0 90 30"><path d="M85 15 C 65 5 30 5 10 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M18 7 L 8 15 L 18 23" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <!-- Flèche verticale de f-spec (1.2) → bloc specs détaillé en dessous -->
+    <!-- y=690 (était 610) : démarre sous f-spec bottom (~680 après shift y=260). svg height réduit à 65px inline pour terminer juste avant f-spec-detail top (760). -->
+    <div class="phase-arrow phase-arrow-vertical" style="--x:2670px; --y:690px;" aria-hidden="true">
+      <span class="phase-arrow-label hand">se déplie ↓</span>
+      <svg viewBox="0 0 50 130" style="height:65px;"><path d="M25 0 Q 35 65 25 130" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M17 122 L 25 130 L 33 122" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <!-- Bidirectionnel specs détaillé ↔ wireframes : flèche descendante (spec→écran) + remontante (écran→spec) -->
+    <div class="phase-arrow phase-arrow-vertical phase-arrow-bidir phase-arrow-bidir--down" style="--x:2660px; --y:1110px;" aria-hidden="true">
+      <span class="phase-arrow-label hand">↓ chaque spec<br/>devient un wireframe</span>
+      <svg viewBox="0 0 50 130"><path d="M25 0 Q 34 65 25 130" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M17 122 L 25 130 L 33 122" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="phase-arrow phase-arrow-vertical phase-arrow-bidir phase-arrow-bidir--up" style="--x:2920px; --y:1110px;" aria-hidden="true">
+      <span class="phase-arrow-label hand">↑ chaque écran<br/>remonte vers sa spec</span>
+      <svg viewBox="0 0 50 130"><path d="M25 130 Q 16 65 25 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 5"/><path d="M17 8 L 25 0 L 33 8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <!-- (Plus de flèche courbe 1.5 → 1.3 : le flux est linéaire 1.2 → 1.3 → 1.5, pas de retour visuel) -->
+
+
+    <!-- ───────────────────────────────────────────────────────────
+         ═════════════════ PARTIE 2 — VIVRE EN PROD ═════════════════
+         ─────────────────────────────────────────────────────────── -->
+    <section class="part-banner part-2" data-step="3" data-zone="flow-prod" data-bloc="part2-header" style="--x:5680px; --y:60px;">
+      <span class="part-tag">PARTIE 2</span>
+      <h2 class="part-title">Vivre <em>en prod</em></h2>
+      <p class="part-sub">7 phases · 2 humains · ça boucle</p>
+      <div class="part-line" aria-hidden="true"></div>
+
+      <aside class="flux-legend" aria-label="Légende des flux">
+        <span class="flux-legend-title hand">les flux</span>
+        <span class="flux-legend-row">
+          <span class="flux-legend-glyph"><span class="fg-human">👤</span><span class="fg-arrow">⇢</span><span class="fg-ai">⚡</span></span>
+          <span class="flux-legend-text">humain → IA <em>(l'humain délègue)</em></span>
+        </span>
+        <span class="flux-legend-row">
+          <span class="flux-legend-glyph"><span class="fg-ai">⚡</span><span class="fg-arrow">⇢</span><span class="fg-human">👤</span></span>
+          <span class="flux-legend-text">IA → humain <em>(l'IA livre)</em></span>
+        </span>
+        <span class="flux-legend-row">
+          <span class="flux-legend-glyph"><span class="fg-ai">⚡</span><span class="fg-ai">⚡</span></span>
+          <span class="flux-legend-text">IA seule <em>(cycle interne)</em></span>
+        </span>
+      </aside>
+    </section>
+
+    <!-- ───── Sticky note hand-written : "2 profils. C'est tout." sous le banner Partie 2 ───── -->
+    <aside class="part2-profiles-sticky part2-profiles-sticky--mini" style="--x:5680px; --y:170px;" aria-label="Cette partie mobilise seulement 2 types de profils : Product Owner et Tech Project Lead">
+      <span class="part2-profiles-sticky__main hand"><strong>2 types de profils :</strong></span>
+      <span class="part2-profiles-sticky__main hand">PO + Tech Project Lead.</span>
+      <span class="part2-profiles-sticky__foot hand">c'est tout.</span>
+    </aside>
+
+    <!-- ───── Séparateurs verticaux discrets entre les 3 phases de la Partie 2 ─────
+         Phase A "PO arrive" (gauche, 5680→6640) ║ Phase B "IA prend" (centre, 6640→7670)
+         ║ Phase C "Review humaine + push prod" (droite, 7670→8550)                       -->
+    <div class="phase-divider phase-divider--ab" style="--x:6640px; --y:200px;" aria-hidden="true">
+      <span class="phase-divider__label hand">phase B · l'IA prend</span>
+    </div>
+    <div class="phase-divider phase-divider--bc" style="--x:7670px; --y:200px;" aria-hidden="true">
+      <span class="phase-divider__label hand">phase C · review + push</span>
+    </div>
+
+    <!-- ───── PHASE 2.1 — Outil stabilisateur ───── -->
+    <article class="node node-human node-start" data-bloc="prod-tool" data-links="prod-po" data-actor="human" style="--x:5680px; --y:240px;" data-phase="A">
+      <span class="actor-pill actor-human">👤</span>
+      <span class="phase-num">2.1</span>
+      <h4>L'outil qui voit le code</h4>
+      <p>installé par la team dev · indexe le code</p>
+    </article>
+
+    <!-- ───── BANDEAU PIPELINE (sticky note résumé au-dessus de la rangée 2.3-2.7) ───── -->
+    <div class="pipeline-banner pivot-banner" style="--x:7300px; --y:60px;" aria-hidden="true">
+      <span>PO valide</span>
+      <span class="pivot-banner-sep">→</span>
+      <strong>GitHub</strong>
+      <span class="pivot-banner-sep">→</span>
+      <span>agents check</span>
+      <span class="pivot-banner-sep">→</span>
+      <span>tech lead</span>
+      <span class="pivot-banner-sep">→</span>
+      <strong>main</strong>
+    </div>
+
+    <!-- ───── MINI-BLOC GITHUB (passerelle Kanban → demande) ───── -->
+    <article class="node node-mini node-github" data-bloc="prod-github" data-links="prod-demande" style="--x:6420px; --y:120px;" data-phase="B">
+      <span class="github-logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.67 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.17a10.8 10.8 0 0 1 5.72 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.59.23 2.76.11 3.05.73.8 1.18 1.82 1.18 3.07 0 4.4-2.7 5.37-5.26 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+      </span>
+      <h5>GitHub</h5>
+      <p class="hand github-caption">↗ envoyé sur GitHub</p>
+    </article>
+
+    <!-- Petite jonction visuelle GitHub → prod-demande (le trajet long Kanban→demande est maintenant
+         pris en charge par .kanban-exit-arrows, donc on garde uniquement l'accent qui matérialise
+         "push auto sur GitHub" juste à côté du mini-bloc GitHub). -->
+    <div class="github-bridge-arrow" style="--x:6420px; --y:140px;" aria-hidden="true">
+      <svg viewBox="0 0 200 160" preserveAspectRatio="xMidYMid meet">
+        <!-- petit arc GitHub (gauche, ~x=20, y=20) vers prod-demande (droite-bas, ~x=160, y=130) -->
+        <path d="M 30 30 C 80 30, 130 80, 160 125" fill="none" stroke="var(--ink-soft)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="6 5"/>
+        <path d="M 152 117 L 160 125 L 148 133" fill="none" stroke="var(--ink-soft)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="60" y="70" class="hand" fill="var(--ink-soft)" transform="rotate(20 60 70)" font-size="14">push auto</text>
+      </svg>
+    </div>
+
+    <!-- ───── ANIMATION "PROCESS QUI VOYAGE" (N4) — station 2.7 ─────────────────
+         Pastille colorée qui parcourt le trajet bouton ENVOYER → GitHub → demande.
+         Révélée par N1 (classe .github-flow-active ajoutée à step 2.7 via script.js).
+         SVG plein canvas (couvre les ~1500px verticaux entre Kanban et GitHub).
+         Waypoints en coords locales SVG (origine canvas 6160, 100, échelle 1:1) :
+           - start : bouton ENVOYER (~canvas 6540,1440 → svg 380,1340)
+           - mid   : node GitHub  (~canvas 6517,160 → svg 357,60)
+           - end   : prod-demande (~canvas 6475,270 → svg 315,170) -->
+    <svg class="github-flow-svg github-flow-hidden" style="--x:6160px; --y:100px;"
+         viewBox="0 0 600 1500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <!-- Trace en pointillés discret pour matérialiser le chemin (visuel statique). -->
+      <path class="github-flow-trail"
+            d="M 380 1340 C 360 900, 350 400, 357 60 C 340 100, 325 140, 315 170"
+            fill="none" stroke="var(--carmillon)" stroke-width="1.8"
+            stroke-linecap="round" stroke-dasharray="4 8" opacity="0.28"/>
+      <!-- Pastille principale qui voyage le long du path (motion-path). -->
+      <circle class="github-flow-process github-flow-process--lead" cx="0" cy="0" r="7"/>
+      <!-- Pastille secondaire, plus douce, décalée pour effet de comète. -->
+      <circle class="github-flow-process github-flow-process--trail" cx="0" cy="0" r="4"/>
+    </svg>
+
+    <!-- ───── PHASE 2.2 — PO consomme via Kanban ───── -->
+    <!-- Mini-tabs : le PO switche entre plusieurs projets -->
+    <div class="po-multi-tabs" data-bloc="prod-po-tabs" aria-label="Le PO gère plusieurs projets" style="--x:5990px; --y:180px;">
+      <span class="po-multi-tab po-multi-tab--active">projet-x</span>
+      <span class="po-multi-tab">projet-y</span>
+      <span class="po-multi-tab">projet-z</span>
+      <span class="po-multi-tab po-multi-tab--add">+ nouveau</span>
+    </div>
+
+    <article class="node node-human" data-bloc="prod-po" data-links="prod-kanban" data-actor="human" style="--x:5990px; --y:240px;" data-phase="A">
+      <span class="actor-pill actor-human">👤</span>
+      <span class="phase-num">2.2</span>
+      <h4>Le PO annote, point.</h4>
+      <p>il entoure, il barre, il écrit en marge — comme sur du papier.</p>
+      <span class="flux-tag flux-h2ai">flux : humain ⇢ IA</span>
+    </article>
+
+    <!-- ─── FX-BAZAR : pensées qui fusent autour du PO (révélé à 2.2 uniquement) ─── -->
+    <!-- Mini flèches griffonnées + stickies manuscrits qui partent du bloc prod-po
+         dans plusieurs directions, comme des réflexions en désordre. Z-index 4
+         (≤ FX4) : passent au-dessus visuellement mais sous les nodes principaux. -->
+    <div class="po-bazar po-bazar-hidden" data-bloc="prod-po-bazar" aria-hidden="true" style="--x:5990px; --y:240px;">
+      <!-- Flèche 1 : haut-gauche, courte griffonnée -->
+      <svg class="po-bazar-arrow po-bazar-arrow--tl" viewBox="0 0 140 90" aria-hidden="true">
+        <path d="M 130 78 C 105 70, 75 55, 50 30 C 45 25, 38 20, 28 12"
+              fill="none" stroke="var(--ink)" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 28 12 L 38 18 M 28 12 L 24 24"
+              fill="none" stroke="var(--ink)" stroke-width="1.8"
+              stroke-linecap="round"/>
+      </svg>
+      <!-- Flèche 2 : haut, presque verticale, légèrement tremblée -->
+      <svg class="po-bazar-arrow po-bazar-arrow--top" viewBox="0 0 60 110" aria-hidden="true">
+        <path d="M 32 100 C 28 75, 36 50, 28 22 C 26 18, 24 14, 22 8"
+              fill="none" stroke="var(--ink)" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 22 8 L 30 16 M 22 8 L 14 18"
+              fill="none" stroke="var(--ink)" stroke-width="1.8"
+              stroke-linecap="round"/>
+      </svg>
+      <!-- Flèche 3 : haut-droite, courbe ample -->
+      <svg class="po-bazar-arrow po-bazar-arrow--tr" viewBox="0 0 160 100" aria-hidden="true">
+        <path d="M 10 85 C 35 75, 70 60, 100 38 C 115 28, 128 20, 142 12"
+              fill="none" stroke="var(--ink)" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 142 12 L 132 20 M 142 12 L 138 24"
+              fill="none" stroke="var(--ink)" stroke-width="1.8"
+              stroke-linecap="round"/>
+      </svg>
+      <!-- Flèche 4 : courte sortie droite, comme une parenthèse rapide -->
+      <svg class="po-bazar-arrow po-bazar-arrow--r" viewBox="0 0 110 60" aria-hidden="true">
+        <path d="M 8 32 C 30 28, 55 26, 82 20 C 88 18, 94 16, 100 12"
+              fill="none" stroke="var(--ink)" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 100 12 L 92 14 M 100 12 L 96 22"
+              fill="none" stroke="var(--ink)" stroke-width="1.7"
+              stroke-linecap="round"/>
+      </svg>
+
+      <!-- Stickies manuscrits : pensées qui fusent -->
+      <span class="po-bazar-note po-bazar-note--y">déjà 3 idées</span>
+      <span class="po-bazar-note po-bazar-note--p">ça va pas ça…</span>
+      <span class="po-bazar-note po-bazar-note--b">à modifier !</span>
+    </div>
+
+    <!-- ═══ BROWSER 2 — APP LIVE (ce que le PO regarde côté client) ═══
+         Produit : "FOULÉE" — boutique e-commerce de chaussures.
+         Marc consulte la dernière sneaker en hero, voit le catalogue
+         "nouveautés" en feed (3 modèles), peut ajouter au panier.
+         Look e-commerce moderne (header / hero produit avec sélecteur
+         de pointure + CTA / feed 3 produits / footer). Garde les
+         mêmes slots HTML que l'ancien Browser 2 pour que les annotations
+         viewBox restent calées (header / titre / CTA / 1ère card). -->
+    <article class="app-live-annotated has-washi has-washi--pink" data-bloc="prod-app-live" data-links="prod-kanban" style="--x:5680px; --y:430px;">
+      <p class="kanban-caption kanban-caption--top hand">↑ il consulte la boutique comme un vrai client</p>
+      <div class="computer-frame">
+        <div class="computer-bar">
+          <span class="cdot cdot-r"></span>
+          <span class="cdot cdot-y"></span>
+          <span class="cdot cdot-g"></span>
+          <span class="curl">foulee.fr / nouveautes / runner-03</span>
+        </div>
+        <div class="computer-screen app-screen app-screen--shop">
+          <!-- Header boutique : logo FOULÉE + nav catégories + panier + compte -->
+          <header class="app-head">
+            <span class="app-logo app-logo--shop"><span class="app-logo-mark" aria-hidden="true">◢</span>FOULÉE</span>
+            <nav class="app-nav">
+              <span class="app-nav-link is-active">Nouveautés</span>
+              <span class="app-nav-link">Homme</span>
+              <span class="app-nav-link">Femme</span>
+              <span class="app-nav-link">Soldes<span class="app-nav-pill">-30%</span></span>
+            </nav>
+            <span class="app-avatar app-avatar--shop">
+              <span class="app-cart" aria-label="Panier" role="button" tabindex="0"><span class="app-cart-icon" aria-hidden="true">⛬</span><span class="app-cart-count">3</span><span class="app-cart-plus" aria-hidden="true">+1</span></span>
+              <em>M</em>
+            </span>
+          </header>
+
+          <!-- Hero : layout PDP e-commerce (image gauche · infos droite) -->
+          <section class="app-hero app-hero--shop">
+            <!-- Colonne gauche : visuel produit -->
+            <div class="app-shop-image">
+              <span class="app-shop-image-badge">−20%</span>
+              <svg class="app-shop-shoe" viewBox="0 0 240 130" aria-hidden="true">
+                <!-- ground shadow -->
+                <ellipse cx="120" cy="116" rx="92" ry="6" fill="oklch(0.30 0.012 60)" opacity="0.10"/>
+                <!-- outsole (thin dark strip) -->
+                <path d="M22 112 Q 18 106 22 102 L 218 102 Q 222 106 218 112 Z" fill="oklch(0.28 0.012 60)"/>
+                <!-- midsole foam (chunky white) -->
+                <path d="M22 102 Q 14 96 18 86 Q 28 78 48 78 L 184 78 Q 208 78 218 86 Q 224 96 218 102 Z" fill="oklch(0.97 0.005 70)" stroke="oklch(0.30 0.012 60)" stroke-width="1.5"/>
+                <!-- midsole accent line -->
+                <path d="M30 92 L 210 92" stroke="oklch(0.30 0.012 60)" stroke-width="0.7" opacity="0.35"/>
+                <!-- upper body silhouette -->
+                <path d="M30 80 Q 32 60 44 50 Q 60 38 86 36 L 156 28 Q 188 30 202 46 Q 212 60 212 80" fill="oklch(0.94 0.012 70)" stroke="oklch(0.20 0.012 60)" stroke-width="1.8" stroke-linejoin="round"/>
+                <!-- toe cap separator -->
+                <path d="M58 42 Q 64 58 60 80" fill="none" stroke="oklch(0.20 0.012 60)" stroke-width="1.3"/>
+                <!-- lace collar opening -->
+                <path d="M86 36 Q 100 18 138 18 L 178 24 Q 186 30 188 44" fill="none" stroke="oklch(0.20 0.012 60)" stroke-width="1.4"/>
+                <!-- tongue under collar -->
+                <path d="M108 32 L 108 56 L 162 56 L 164 30" fill="oklch(0.86 0.012 70)" stroke="oklch(0.20 0.012 60)" stroke-width="1.1"/>
+                <!-- eyelets (4 + 4) -->
+                <circle cx="108" cy="34" r="1.6" fill="oklch(0.20 0.012 60)"/>
+                <circle cx="124" cy="28" r="1.6" fill="oklch(0.20 0.012 60)"/>
+                <circle cx="142" cy="24" r="1.6" fill="oklch(0.20 0.012 60)"/>
+                <circle cx="160" cy="24" r="1.6" fill="oklch(0.20 0.012 60)"/>
+                <!-- laces crossing -->
+                <path d="M108 34 L 142 24 M 124 28 L 160 24 M 108 34 L 124 28 M 142 24 Q 151 21 160 24" fill="none" stroke="oklch(0.20 0.012 60)" stroke-width="1.05" stroke-linecap="round"/>
+                <!-- heel pull tab -->
+                <path d="M202 46 L 220 38 L 220 56 L 208 60 Z" fill="oklch(0.94 0.012 70)" stroke="oklch(0.20 0.012 60)" stroke-width="1.3"/>
+                <!-- 3 brand stripes (carmillon, signature) -->
+                <path d="M132 58 L 116 88" stroke="oklch(0.55 0.20 30)" stroke-width="4" stroke-linecap="round"/>
+                <path d="M146 58 L 130 88" stroke="oklch(0.55 0.20 30)" stroke-width="4" stroke-linecap="round"/>
+                <path d="M160 58 L 144 88" stroke="oklch(0.55 0.20 30)" stroke-width="4" stroke-linecap="round"/>
+                <!-- stitching detail -->
+                <path d="M44 64 Q 78 60 110 60" fill="none" stroke="oklch(0.20 0.012 60)" stroke-width="0.6" stroke-dasharray="2.5 2.5" opacity="0.55"/>
+              </svg>
+              <!-- thumbs gallery (3 mini-vignettes) -->
+              <span class="app-shop-image-thumbs" aria-hidden="true">
+                <span class="app-shop-thumb is-active"></span>
+                <span class="app-shop-thumb"></span>
+                <span class="app-shop-thumb"></span>
+              </span>
+            </div>
+            <!-- Colonne droite : infos produit (PDP-style) -->
+            <div class="app-shop-info">
+              <span class="app-hero-eyebrow">Nouveauté · running <em class="app-hero-live"><i></i>en stock</em></span>
+              <h3 class="app-hero-title">Runner <span class="app-hero-arrow">·</span> 03</h3>
+              <p class="app-shop-subtitle">Édition Paris · semelle bio · −18% CO₂</p>
+              <div class="app-shop-price-row">
+                <span class="app-shop-price"><strong>119 €</strong><i>149 €</i></span>
+                <span class="app-shop-rating" aria-label="Note 4,7 sur 5"><b>★★★★</b><em>★</em><i>4,7 · 312 avis</i></span>
+              </div>
+              <div class="app-shop-sizes" aria-label="Choisir une pointure">
+                <span class="app-shop-sizes-label">pointure</span>
+                <span class="app-shop-size">39</span>
+                <span class="app-shop-size">40</span>
+                <span class="app-shop-size is-active">41</span>
+                <span class="app-shop-size">42</span>
+                <span class="app-shop-size is-out">43</span>
+                <span class="app-shop-size">44</span>
+              </div>
+              <div class="app-shop-colors" aria-label="Coloris disponibles">
+                <span class="app-shop-colors-label">coloris</span>
+                <span class="app-shop-color app-shop-color--ink is-active"></span>
+                <span class="app-shop-color app-shop-color--carm"></span>
+                <span class="app-shop-color app-shop-color--mint"></span>
+              </div>
+              <div class="app-cta-row">
+                <button class="app-cta" data-tip="le PO clique pour tester comme un user"><span class="app-cta-cursor" aria-hidden="true"></span>Ajouter au panier · 119 €</button>
+                <button class="app-cta app-cta--ghost" aria-label="Ajouter aux favoris">♡</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Cards de contenu : feed "autres nouveautés" -->
+          <div class="app-cards">
+            <article class="app-card app-card--offer app-card-hoverable" id="appcard-faq">
+              <span class="app-card-tag">PROMO</span>
+              <h4>City Walker · ed. cuir</h4>
+              <p>Sneaker urbaine cuir grainé, semelle crêpe, deadline soldes ce dimanche minuit.</p>
+              <span class="app-card-meta"><span class="app-card-price">89 €</span><span class="app-card-trend">↓ -28%</span></span>
+              <!-- Halo "ça a changé après cycle IA" — révélé à la station 2.5 -->
+              <div class="app-change-highlight app-change-hidden" aria-hidden="true">
+                <span class="app-change-label hand">→ ça a changé<br/>après cycle IA</span>
+              </div>
+            </article>
+            <article class="app-card app-card--news app-card-hoverable" id="appcard-news">
+              <span class="app-card-tag">NOUVEAU</span>
+              <h4>Trail Pro · grip carbone</h4>
+              <p>Conçue pour les chemins boueux. Tige hydrophobe, semelle Vibram, drop 8 mm.</p>
+              <span class="app-card-meta"><span class="app-card-price">149 €</span><span class="app-card-chip app-card-chip--mint">éco-conçue</span></span>
+            </article>
+            <article class="app-card app-card--help app-card-hoverable" id="appcard-help">
+              <span class="app-card-tag">AVIS CLIENTS</span>
+              <h4>« Confort dingue, 200 km déjà »</h4>
+              <p>Marc, Julien, Léa et 309 autres ont noté le Runner 03 ★★★★★.</p>
+              <span class="app-card-meta">
+                <span class="app-card-avatars" aria-hidden="true">
+                  <em class="app-card-avatar app-card-avatar--a">M</em>
+                  <em class="app-card-avatar app-card-avatar--b">J</em>
+                  <em class="app-card-avatar app-card-avatar--c">L</em>
+                </span>
+                <span class="app-card-chip">+ 309</span>
+              </span>
+            </article>
+          </div>
+
+          <!-- Footer mini -->
+          <footer class="app-foot">
+            <span>FOULÉE · Paris · livraison 24h offerte dès 80 €</span>
+            <span class="app-foot-links">Tailles · Retours · Service client</span>
+          </footer>
+        </div>
+      </div>
+
+      <!-- ANNOTATIONS DU PO sur l'app live (cercles rouges + flèches).
+           viewBox calé sur le computer-frame : 940 (largeur) × 540 (hauteur enrichie).
+           Repères Y (en coords SVG = px réels) :
+             - bar:        0   →  30
+             - head:      30   →  88   (logo / nav / avatar Sophie)
+             - hero:      88   → 320   (eyebrow≈108, title "Paris → Lyon"≈140-170, meta≈195, times≈220, timeline≈250, CTAs≈280-308)
+             - cards:    320   → 480   (3 colonnes ~298px : OFFRE x:22-320 / NEWS x:330-620 / SUPPORT x:630-918)
+             - footer:   480   → 520
+           Chaque path porte .po-draw-path : stroke-dasharray = length du path,
+           stroke-dashoffset animé de length → 0 = effet "écriture à la main". -->
+      <svg class="po-overlay app-annot-hidden" viewBox="0 0 940 540" aria-hidden="true">
+        <!-- 1) Cercle rouge épais autour du CTA principal "Voir mon billet" (CTA Y ≈ 290) -->
+        <ellipse class="po-draw-path po-draw-step-1" cx="138" cy="290" rx="118" ry="26" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="4.5" pathLength="1" transform="rotate(-2 138 290)"/>
+        <!-- 2) Flèche manuscrite descendant du sticky bleu vers le CTA (queue) -->
+        <path class="po-draw-path po-draw-step-2" d="M 50 370 C 80 340, 108 320, 138 304" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="3.5" stroke-linecap="round" pathLength="1"/>
+        <!-- 3) Pointe de la flèche -->
+        <path class="po-draw-path po-draw-step-3" d="M 130 296 L 138 304 L 130 314" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+        <!-- 4) Souligné gras sous le texte tronqué de la card SUGGESTION (fin texte ≈ Y 405) -->
+        <path class="po-draw-path po-draw-step-4" d="M 40 408 Q 145 418 290 406" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="4" stroke-linecap="round" pathLength="1"/>
+        <!-- 5) Petite flèche vers le bas pointant la fin du texte coupé -->
+        <path class="po-draw-path po-draw-step-5" d="M 238 396 L 258 412 L 285 402" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" pathLength="1"/>
+        <!-- 6) Cercle autour du titre hero "Paris → Lyon" (Y title ≈ 155) -->
+        <ellipse class="po-draw-path po-draw-step-6" cx="142" cy="156" rx="140" ry="22" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="3" opacity="0.9" pathLength="1" transform="rotate(-1.5 142 156)"/>
+        <!-- 7) Soulignement ondulé du logo + nav (header, Y ≈ 80) -->
+        <path class="po-draw-path po-draw-step-7" d="M 22 80 Q 90 86 165 80 T 310 80 T 460 80" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="2.8" stroke-linecap="round" opacity="0.85" pathLength="1"/>
+      </svg>
+
+      <!-- Notes manuscrites du PO — chaque note jouxte l'élément qu'elle commente.
+           Coords realignees sur le nouveau hero (CTA Y≈278-302, titre Y≈140-170, card 1 Y≈320-460) -->
+      <!-- "couleur ?" : juste à droite du CTA "Voir mon billet" (Y ≈ 278) -->
+      <span class="po-note po-note-1 hand app-annot-hidden" style="top: 276px; left: 264px;">couleur ?</span>
+      <!-- "texte coupé → bug" : sous la card SUGGESTION (col 1, finit à x≈320), pointe le texte tronqué -->
+      <span class="po-note po-note-2 hand app-annot-hidden" style="top: 428px; left: 74px;">texte coupé<br/>→ bug</span>
+      <!-- Sticky jaune "titre trop générique" : amarré au titre hero "Paris → Lyon" (Y title ≈ 140-170) -->
+      <span class="po-sticky-anno app-annot-hidden" style="top: 118px; right: -34px;">
+        <span class="hand">titre<br/>trop générique</span>
+      </span>
+      <!-- Sticky bleu "à revoir avec design" : amarré au header (Y header ≈ 30-88) -->
+      <span class="po-sticky-anno po-sticky-anno--blue app-annot-hidden" style="top: 30px; left: -48px;">
+        <span class="hand">à revoir<br/>avec design</span>
+      </span>
+
+      <!-- Avatar PO -->
+      <div class="po-avatar app-annot-hidden">
+        <span class="po-avatar-icon">👤</span>
+        <span class="hand">il teste comme un user · il entoure ce qui cloche</span>
+      </div>
+
+      <!-- FX7 — Validation overlay : apparaît à 2.6 (bouton "Je valide"),
+           passe à l'état "Je vois validé" à 2.7. Sticky FigJam carmillon. -->
+      <div class="app-validate-overlay app-validate-hidden">
+        <button type="button" class="app-validate-btn app-validate-state-action">Je valide ✓</button>
+        <span class="app-validate-state-done hand">Je vois validé ✓</span>
+      </div>
+    </article>
+
+    <!-- Flèche courte verticale : Browser 2 (app live, au-dessus) → Kanban (en-dessous).
+         Browser 2 finit vers y≈895, Kanban débute à y=960. Trajet vertical compact ~70px. -->
+    <div class="phase-arrow phase-arrow-labeled phase-arrow-app2kanban phase-arrow-app2kanban--stacked" style="--x:6080px; --y:895px;" aria-hidden="true">
+      <span class="phase-arrow-label hand">↓ les annotations<br/>deviennent des cartes Kanban</span>
+      <svg viewBox="0 0 80 90" preserveAspectRatio="xMidYMid meet">
+        <!-- ligne griffonnée verticale légèrement ondulée -->
+        <path d="M 40 4 C 32 22, 48 44, 40 66 C 36 76, 40 82, 40 84" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+        <!-- pointe vers le bas -->
+        <path d="M 30 74 L 40 86 L 50 74" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- ╔════════════════════════════════════════════════════════════════╗
+         ║  FX6 — Flèche ascendante : Kanban (Review) → Browser 2 (app)   ║
+         ║  Apparaît à la station 2.6 : "on remonte voir le changement"   ║
+         ║  Côté droit du Browser 2/Kanban, ne traverse aucun composant.  ║
+         ║  Container : x=6850 (à droite du Browser 2 qui finit ~6620),   ║
+         ║  y=460 (haut Browser 2), height=550 (atteint top Kanban=960).  ║
+         ╚════════════════════════════════════════════════════════════════╝ -->
+    <svg class="kanban-up-to-app kanban-up-hidden" style="--x:6850px; --y:460px;" viewBox="0 0 100 550" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <!-- Path principal : part du bas (top du Kanban, y≈540) → courbe vers le haut (bas du Browser 2, y≈20).
+           Léger arc vers la gauche pour matérialiser le mouvement de retour vers l'app au-dessus. -->
+      <path class="kanban-up-to-app__path" d="M 50 540 C 70 420, 30 280, 55 150 C 70 80, 45 30, 50 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+      <!-- Pointe de flèche orientée vers le haut (entre dans le bas du Browser 2) -->
+      <path class="kanban-up-to-app__head" d="M 38 32 L 50 14 L 62 32" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Label manuscrit au milieu du tracé -->
+      <foreignObject x="-20" y="240" width="220" height="80">
+        <span xmlns="http://www.w3.org/1999/xhtml" class="kanban-up-to-app__label hand">↑ on remonte voir<br/>le changement</span>
+      </foreignObject>
+    </svg>
+
+    <!-- ╔════════════════════════════════════════════════════════════════╗
+         ║  FX8 — Trait latéral droit + bloc "OK review arrive"           ║
+         ║  Apparaît à la station 2.7 : après "Je vois validé ✓", un      ║
+         ║  trait part du bouton de validation (bas-droite Browser 2)     ║
+         ║  et s'étire vers la droite jusqu'au sticky vert mint.          ║
+         ║  Container SVG : x=6450, y=540, width=420, height=380.         ║
+         ║  Trajet : sort à droite du bouton validate (canvas ~6500,860)  ║
+         ║  → courbe douce vers le haut/droite → entre dans bord gauche   ║
+         ║  du sticky (canvas 6700, ~600). z-index 1 (sous nodes).        ║
+         ╚════════════════════════════════════════════════════════════════╝ -->
+    <svg class="review-arrive-trail review-arrive-hidden" style="--x:6450px; --y:540px;" viewBox="0 0 420 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <!-- Path principal : part du bouton validate (canvas 6500,860 → SVG 50,320),
+           courbe douce vers le haut/droite, arrive sur bord gauche du sticky
+           (canvas 6700,600 → SVG 250,60). Légère ondulation manuscrite. -->
+      <path class="review-arrive-trail__path" d="M 50 320 C 110 300, 150 240, 170 180 C 188 130, 218 90, 250 60" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+      <!-- Pointe de flèche entrant horizontalement dans le bloc -->
+      <path class="review-arrive-trail__head" d="M 240 50 L 252 60 L 240 70" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <!-- Sticky vert mint "OK · review arrive" — révélé à la station 2.7
+         (data-step 2.7, juste après "Je vois validé ✓" sur Browser 2). -->
+    <article class="node node-review-arrive node-review-arrive-hidden" data-bloc="prod-review-arrive" data-links="prod-github-branch" style="--x:7000px; --y:560px;">
+      <span class="node-tag node-tag-review-arrive">REVIEW</span>
+      <h4>OK · review arrive</h4>
+      <p class="hand">PR ouverte · prête à analyser</p>
+    </article>
+
+    <!-- ═══ FAUX ORDINATEUR avec annotations PO sur l'écran ═══ -->
+    <article class="kanban-annotated has-washi has-washi--blue has-washi--double" data-bloc="prod-kanban" data-links="prod-demande,prod-branche" style="--x:5680px; --y:960px;">
+      <p class="kanban-caption kanban-caption--top hand">↑ il ouvre, il lit, il entoure ce qui cloche</p>
+      <!-- L'ordinateur -->
+      <div class="computer-frame">
+        <div class="computer-bar">
+          <span class="cdot cdot-r"></span>
+          <span class="cdot cdot-y"></span>
+          <span class="cdot cdot-g"></span>
+          <span class="curl">kanban.connectedmate.app / projet-x</span>
+        </div>
+        <div class="computer-screen">
+          <div class="kanban-real-head">
+            <span class="kanban-real-title">Demandes du PO<span class="kanban-live-badge" aria-hidden="true"><span class="kanban-live-dot"></span>live</span></span>
+            <span class="kanban-real-pill hand">+ nouvelle</span>
+          </div>
+          <div class="kanban-real">
+            <div class="kanban-real-col">
+              <div class="kanban-real-col-head">
+                <span class="kanban-real-col-label">À faire</span>
+                <span class="kanban-real-col-count">3</span>
+              </div>
+              <div class="kanban-real-card kcard-hoverable kcard-hidden" id="kcard-recherche" data-tip="filtres taille · couleur · marque · prix"><span class="kcard-pellet kcard-pellet--feature" aria-hidden="true"></span><p>Recherche multi-critères</p></div>
+              <div class="kanban-real-card kcard-hoverable kcard-hidden" data-tip="3 lignes max mobile · texte coupé"><span class="kcard-pellet kcard-pellet--bug" aria-hidden="true"></span><p>Texte FAQ tronqué</p></div>
+              <div class="kanban-real-card kcard-hero kcard-hoverable kcard-hidden" id="kcard-cta" data-tip="contraste WCAG · accent carmillon · hover"><span class="kcard-ia-badge kcard-hero-badge" aria-hidden="true"><span class="kcard-ia-dot"></span>agent IA</span><span class="kcard-pellet kcard-pellet--design" aria-hidden="true"></span><p>Couleur du CTA principal</p><span class="kcard-meta kcard-hero-meta" aria-hidden="true">agent · branche design</span></div>
+            </div>
+            <div class="kanban-real-col">
+              <div class="kanban-real-col-head">
+                <span class="kanban-real-col-label">En cours</span>
+                <span class="kanban-real-col-count">2</span>
+              </div>
+              <div class="kanban-real-card kcard-active kcard-hoverable kcard-hidden" id="kcard-login" data-tip="iOS 17.4 · crash sur SSO Apple · agent stab"><span class="kcard-ia-badge"><span class="kcard-ia-dot" aria-hidden="true"></span>agent IA</span><span class="kcard-pellet kcard-pellet--bug" aria-hidden="true"></span><p>Login mobile crash</p></div>
+              <div class="kanban-real-card kcard-active kcard-hoverable kcard-hidden" data-tip="nav sticky · logo recentré · panier visible"><span class="kcard-ia-badge"><span class="kcard-ia-dot" aria-hidden="true"></span>agent IA</span><span class="kcard-pellet kcard-pellet--design" aria-hidden="true"></span><p>Refonte du header</p></div>
+            </div>
+            <div class="kanban-real-col">
+              <div class="kanban-real-col-head">
+                <span class="kanban-real-col-label">Fait</span>
+                <span class="kanban-real-col-count">3</span>
+              </div>
+              <div class="kanban-real-card kcard-done kcard-hoverable kcard-hidden" data-tip="livré v1.1 · APNS + FCM"><span class="kcard-pellet kcard-pellet--feature" aria-hidden="true"></span><p>Notif push iOS</p></div>
+              <div class="kanban-real-card kcard-done kcard-hoverable kcard-hidden" data-tip="livré v1.1 · « bienvenue » → « Bienvenue »"><span class="kcard-pellet kcard-pellet--bug" aria-hidden="true"></span><p>Typo accueil</p></div>
+              <div class="kanban-real-card kcard-done kcard-hoverable kcard-hidden" data-tip="livré v1.1 · spacing token --s-4"><span class="kcard-pellet kcard-pellet--design" aria-hidden="true"></span><p>Padding cards</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANNOTATIONS DU PO sur l'écran (cercles + flèches manuscrites, contraste fort) -->
+      <svg class="po-overlay" viewBox="0 0 940 480" aria-hidden="true">
+        <!-- Gros cercle rouge épais autour du bug login en cours -->
+        <ellipse cx="365" cy="218" rx="115" ry="40" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="4.5" opacity="1"/>
+        <!-- Flèche manuscrite épaisse vers la card -->
+        <path d="M 560 295 Q 490 265 478 230" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 486 224 L 478 230 L 484 242" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Souligné épais sous la première carte feature -->
+        <path d="M 35 188 Q 130 198 220 188" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
+        <!-- Cercle rouge autour d'une carte design en review -->
+        <circle cx="115" cy="290" r="60" fill="none" stroke="oklch(0.55 0.20 25)" stroke-width="3.5" opacity="0.9"/>
+      </svg>
+
+      <!-- Notes manuscrites du PO -->
+      <span class="po-note po-note-1 hand" style="top: 56px; left: 280px;">URGENT !!</span>
+      <span class="po-note po-note-2 hand" style="top: 320px; left: 540px;">à revoir<br/>avec design ↗</span>
+      <span class="po-sticky-anno" style="top: 200px; right: -32px;">
+        <span class="hand">titre<br/>pas clair<br/>pour user</span>
+      </span>
+
+      <!-- Avatar PO -->
+      <div class="po-avatar">
+        <span class="po-avatar-icon">👤</span>
+        <span class="hand">il annote en lisant son matin</span>
+      </div>
+
+      <!-- 2 flèches griffonnées montantes : annotations rouges du Kanban → prod-demande (rose) + prod-branche (bleu)
+           Kanban désormais sous Browser 2 (y=960), il faut traverser ~720px vers le haut pour rejoindre les
+           nodes 2.3 et 2.4 (y=240). ViewBox étendu en hauteur. -->
+      <svg class="kanban-exit-arrows" viewBox="0 0 1040 760" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+        <!-- Flèche 1 (rose) : depuis le haut-gauche du Kanban (~x=60, y=740) → prod-demande (canvas 6360,240 → SVG ~680, 20) -->
+        <path d="M 60 740 C 180 520, 360 240, 680 30" fill="none"
+              stroke="var(--pink-deep)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 5"/>
+        <path d="M 670 22 L 680 30 L 668 40" fill="none"
+              stroke="var(--pink-deep)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="240" y="430" class="hand" fill="var(--pink-deep)"
+              transform="rotate(-58 240 430)">↗ devient demande</text>
+
+        <!-- Flèche 2 (bleu) : depuis le haut-centre du Kanban (~x=380, y=740) → prod-branche (canvas 6700,240 → SVG ~1020, 20) -->
+        <path d="M 380 740 C 540 520, 760 240, 1020 30" fill="none"
+              stroke="var(--blue-deep)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 5"/>
+        <path d="M 1010 22 L 1020 30 L 1008 40" fill="none"
+              stroke="var(--blue-deep)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="660" y="420" class="hand" fill="var(--blue-deep)"
+              transform="rotate(-58 660 420)">↗ scope auto</text>
+      </svg>
+
+      <!-- T16 — Sticky "OK je review ça" : apparaît à 2.6 / 2.6a, ancré
+           en haut-droite du Kanban, juste au-dessus de la colonne Review (col 3). -->
+      <span class="review-stick review-stick-hidden hand" aria-hidden="true">
+        <span class="review-stick-arrow">→</span>OK je review ça
+      </span>
+
+      <!-- Bouton ENVOYER : CTA station 2.7 — push vers GitHub (révélé par N1) -->
+      <button class="kanban-send-btn send-button-hidden" type="button" aria-label="Envoyer en production">
+        <span class="kanban-send-sub hand">→ GitHub · agents check · main</span>
+        <span class="kanban-send-body">
+          <span class="kanban-send-label">envoyer en prod</span>
+          <span class="kanban-send-icon" aria-hidden="true">→</span>
+        </span>
+      </button>
+    </article>
+
+    <!-- ╔════════════════════════════════════════════════════════════════╗
+         ║  T16 — Flèche verticale Kanban → cluster review (haut)         ║
+         ║  Apparaît à 2.6 / 2.6a : "ça remonte vers la review"           ║
+         ║  Part du coin haut-droite du Kanban (canvas ~x=6680, y=960)    ║
+         ║  → courbe vers le haut/droite jusqu'au cluster review          ║
+         ║  (prod-review-arrive canvas ~x=7000, y=560).                   ║
+         ║  Container SVG : x=6660, y=540, width=380, height=480.         ║
+         ║  Tracée bas → haut (stroke-dashoffset).                        ║
+         ╚════════════════════════════════════════════════════════════════╝ -->
+    <svg class="kanban-to-review-up kanban-to-review-up-hidden" style="--x:6660px; --y:540px;" viewBox="0 0 380 480" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <!-- Path principal : part du bas (haut du Kanban canvas y=960 → SVG y=470,
+           x≈40 ~ coin haut-droite du Kanban) → courbe vers le haut/droite jusqu'au
+           cluster review (canvas x=7000,y=560 → SVG x=340, y=30). Double inflexion
+           manuscrite (sinueuse) pour suggérer "ça remonte". -->
+      <path class="kanban-to-review-up__path"
+            d="M 40 470 C 90 380, 180 320, 160 220 C 145 140, 230 90, 340 30"
+            fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <!-- Pointe de flèche entrant dans le cluster review (vers haut-droite) -->
+      <path class="kanban-to-review-up__head"
+            d="M 326 24 L 340 30 L 332 44"
+            fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Label manuscrit au milieu du tracé -->
+      <foreignObject class="kanban-to-review-up__label-fo" x="60" y="220" width="240" height="60">
+        <span xmlns="http://www.w3.org/1999/xhtml" class="kanban-to-review-up__label hand">↗ ça remonte en review</span>
+      </foreignObject>
+    </svg>
+
+    <!-- ───── PHASE 2.3 — Demande créée ───── -->
+    <article class="node node-human" data-bloc="prod-demande" data-links="prod-branche" data-actor="human" style="--x:6360px; --y:240px;" data-phase="B">
+      <span class="actor-pill actor-human">👤</span>
+      <span class="phase-num">2.3</span>
+      <h4>La carte arrive en To-Do</h4>
+      <p>texte · design · feature</p>
+      <span class="risk-pill risk-high" title="risque/urgence">85% urgent</span>
+    </article>
+
+    <!-- ───── PHASE 2.4 — Branche auto + 3 agents ───── -->
+    <article class="node node-ai" data-bloc="prod-branche" data-links="prod-agent-design,prod-agent-rules,prod-agent-stab" data-actor="ai" style="--x:6700px; --y:240px;" data-phase="B">
+      <span class="actor-pill actor-ai">⚡</span>
+      <span class="phase-num">2.4</span>
+      <h4>L'IA scope la branche</h4>
+      <p>l'IA scope · branche dédiée</p>
+      <span class="flux-tag flux-ai2h">flux : IA seule</span>
+      <span class="risk-pill risk-med" title="complexité estimée">50% medium</span>
+    </article>
+
+    <div class="agents-cluster agents-cluster-stacked" style="--x:7020px; --y:160px;">
+      <span class="cluster-label hand">3 agents en cycles ↓</span>
+
+      <div class="agents-stack">
+        <!-- Agent 1 : Design (mint) -->
+        <article class="node node-mini node-ai agent-row agent-row-design" data-bloc="prod-agent-design" data-links="prod-review" data-actor="ai" data-tip="cadre couleurs · typo · spacing · respect du DS">
+          <span class="actor-pill actor-ai">⚡</span>
+          <span class="agent-row-tag">🎨 DESIGN</span>
+          <h5>Agent Design</h5>
+          <p class="node-mission">respect du DS</p>
+          <span class="agent-orbit" aria-hidden="true"><span class="agent-orbit-dot"></span></span>
+          <span class="agent-check-badge agent-check-hidden" data-checking="checking…" data-done="✓ OK" aria-hidden="true">checking…</span>
+        </article>
+
+        <!-- Divider parallèle : les 3 cycles roulent en même temps -->
+        <span class="split-rows-divider agents-divider" aria-hidden="true">
+          <span class="hand">↕ en parallèle</span>
+        </span>
+
+        <!-- Agent 2 : Règles (blue) -->
+        <article class="node node-mini node-ai agent-row agent-row-rules" data-bloc="prod-agent-rules" data-links="prod-review" data-actor="ai" data-tip="naming · conventions · lint · architecture">
+          <span class="actor-pill actor-ai">⚡</span>
+          <span class="agent-row-tag">📐 RÈGLES</span>
+          <h5>Agent Règles</h5>
+          <p class="node-mission">conventions logique</p>
+          <span class="agent-orbit" aria-hidden="true"><span class="agent-orbit-dot"></span></span>
+          <span class="agent-check-badge agent-check-hidden" data-checking="checking…" data-done="✓ OK" aria-hidden="true">checking…</span>
+        </article>
+
+        <span class="split-rows-divider agents-divider" aria-hidden="true">
+          <span class="hand">↕ en parallèle</span>
+        </span>
+
+        <!-- Agent 3 : Stabilité (pink) -->
+        <article class="node node-mini node-ai agent-row agent-row-stab" data-bloc="prod-agent-stab" data-links="prod-review" data-actor="ai" data-tip="tests unitaires · régressions · rien cassé">
+          <span class="actor-pill actor-ai">⚡</span>
+          <span class="agent-row-tag">🛡 STABILITÉ</span>
+          <h5>Agent Stabilité</h5>
+          <p class="node-mission">tests · rien cassé</p>
+          <span class="agent-orbit" aria-hidden="true"><span class="agent-orbit-dot"></span></span>
+          <span class="agent-check-badge agent-check-hidden" data-checking="checking…" data-done="✓ OK" aria-hidden="true">checking…</span>
+        </article>
+      </div>
+
+      <!-- 3 Bezier curves colorées qui convergent vers un cercle blanc bordé d'encre, puis 1 grosse pointe noire vers prod-review -->
+      <svg class="split-exit-arrows agents-exit-arrows" viewBox="0 0 100 300" aria-hidden="true">
+        <!-- Mint (Design) : depuis right edge agent Design (y=40) vers fusion (y=150) -->
+        <path d="M2 40 C 30 40, 55 140, 74 150" fill="none"
+              stroke="var(--mint-deep)" stroke-width="2.6" stroke-linecap="round"/>
+        <!-- Blue (Règles) : depuis right edge agent Règles (y=150) vers fusion (y=150) -->
+        <path d="M2 150 C 30 150, 55 150, 74 150" fill="none"
+              stroke="var(--blue-deep)" stroke-width="2.6" stroke-linecap="round"/>
+        <!-- Pink (Stabilité) : depuis right edge agent Stabilité (y=260) vers fusion (y=150) -->
+        <path d="M2 260 C 30 260, 55 160, 74 150" fill="none"
+              stroke="var(--pink-deep)" stroke-width="2.6" stroke-linecap="round"/>
+        <!-- Point de fusion (cercle blanc bordé noir) -->
+        <circle cx="74" cy="150" r="4.5" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.6"/>
+        <!-- Trait de fusion noir + pointe vers prod-review -->
+        <path d="M78 150 L 94 150" fill="none"
+              stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M86 144 L 94 150 L 86 156" fill="none"
+              stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Label manuscrit au-dessus -->
+        <text x="42" y="22" text-anchor="middle" font-size="13"
+              fill="var(--ink-soft)" font-style="italic">↘ 3 cycles convergent ↗</text>
+      </svg>
+    </div>
+
+    <!-- ───── PHASE 2.5 — Code review préfaite ───── -->
+    <article class="node node-ai" data-bloc="prod-review" data-links="prod-techlead,prod-branche" data-actor="ai" style="--x:7380px; --y:240px;" data-phase="B">
+      <span class="actor-pill actor-ai">⚡</span>
+      <span class="phase-num">2.5</span>
+      <h4>L'IA rend la review</h4>
+      <p>diff annoté · intentions claires</p>
+      <span class="flux-tag flux-ai2h">flux : IA ⇢ humain</span>
+      <span class="risk-pill risk-low" title="confiance / safety">20% safe</span>
+    </article>
+
+    <!-- ───── FX9 — Trait griffonné horizontal : OK review arrive → Branche GitHub → Preview ─────
+         Aligné y=600 (centre des 3 mini-blocs à y=560).
+         Container : x=6890 (right edge de prod-review-arrive @ x=6700) → x=7450 (right edge de Preview).
+         FX4 : z-index 3 (sous les nodes), pointes griffonnées style phase-arrow. -->
+    <div class="fx9-trait fx9-trait-hidden" style="--x:7220px; --y:590px;" aria-hidden="true">
+      <svg viewBox="0 0 540 40" preserveAspectRatio="none">
+        <!-- Segment 1 : right edge review-arrive (canvas 6920 = local 0) → left edge github-branch (canvas 7000 = local 80) -->
+        <path class="fx9-trait__path" d="M 4 22 C 24 16, 50 26, 74 20" fill="none"
+              stroke="var(--ink-line)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="6 5"/>
+        <!-- Pointe griffonnée vers Branche GitHub (left edge, local x≈78) -->
+        <path d="M 68 14 L 78 20 L 68 26" fill="none"
+              stroke="var(--ink-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Segment 2 : right edge github-branch (canvas 7200 = local 280) → left edge preview (canvas 7250 = local 330) -->
+        <path class="fx9-trait__path fx9-trait__path--delay" d="M 282 22 C 298 16, 312 26, 326 20" fill="none"
+              stroke="var(--ink-line)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="6 5"/>
+        <!-- Pointe griffonnée vers Preview (left edge, local x≈328) -->
+        <path d="M 320 14 L 330 20 L 320 26" fill="none"
+              stroke="var(--ink-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- ───── FX9 — Bloc 1 : Branche GitHub faite (post-review) ───── -->
+    <article class="node node-mini node-github-branch node-github-branch-hidden"
+             data-bloc="prod-github-branch" data-links="prod-preview"
+             style="--x:7300px; --y:560px;">
+      <span class="node-tag node-tag-github-branch">GIT</span>
+      <span class="github-branch-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="5" r="2"/>
+          <circle cx="6" cy="19" r="2"/>
+          <circle cx="18" cy="12" r="2"/>
+          <path d="M6 7v10"/>
+          <path d="M6 12c0-3 2-5 5-5h5"/>
+        </svg>
+      </span>
+      <h5>Branche GitHub faite</h5>
+      <p class="hand">commit · push auto</p>
+    </article>
+
+    <!-- ───── FX9 — Bloc 2 : Preview live ───── -->
+    <article class="node node-mini node-preview node-preview-hidden"
+             data-bloc="prod-preview" data-links="prod-verifs"
+             style="--x:7550px; --y:560px;">
+      <span class="node-tag node-tag-preview">PREVIEW</span>
+      <span class="preview-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="5" width="18" height="13" rx="2"/>
+          <path d="M3 9h18"/>
+          <circle cx="6" cy="7" r="0.6" fill="currentColor"/>
+          <circle cx="8.4" cy="7" r="0.6" fill="currentColor"/>
+        </svg>
+      </span>
+      <h5>Preview live</h5>
+      <p class="hand">URL temporaire · pour la review</p>
+    </article>
+
+    <!-- ───── BOUCLE RETRY : prod-review → prod-branche si KO ───── -->
+    <!-- U inversé sous la rangée : container couvre branche (6540) à review (7100) -->
+    <div class="retry-loop-arrow" style="--x:6660px; --y:380px;" aria-hidden="true">
+      <svg viewBox="0 0 800 220" preserveAspectRatio="none">
+        <!-- depuis bas de prod-review (~x=720, y=10) → descente → arc gauche → remontée vers bas de prod-branche (~x=120, y=10) -->
+        <path d="M 720 8 C 740 90, 660 170, 460 170 C 260 170, 160 90, 120 12" fill="none" stroke="var(--carmillon)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 5"/>
+        <!-- pointe vers prod-branche (par le bas) -->
+        <path d="M 110 22 L 120 12 L 134 18" fill="none" stroke="var(--carmillon)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="430" y="205" text-anchor="middle" class="hand" fill="var(--carmillon)" font-size="22">↻ si KO, retry vers branche</text>
+      </svg>
+    </div>
+
+    <!-- ───── PHASE 2.6 — Cluster 5 vérifications IA séquentielles (sous prod-techlead) ───── -->
+    <!-- 5 mini-étapes développées par le Tech Lead : design, code, maquette, impact, test.
+         Reveal séquentiel à step 2.7 via .verifs-revealed (stagger 600ms entre items).
+         FX4 : aucune flèche n'arrive ou ne sort de ce cluster — purement annotatif. -->
+    <div class="node node-mini-cluster verifs-cluster verifs-hidden" data-bloc="prod-verifs" style="--x:7900px; --y:540px;" aria-label="5 vérifications IA séquentielles">
+      <header class="verifs-cluster__head">
+        <span class="verifs-cluster__title hand">↑ 5 vérifs IA — auto avant review</span>
+        <span class="verifs-counter" aria-live="polite">
+          <span class="verifs-counter__num"><span class="verifs-counter__done" data-count="0">0</span><span class="verifs-counter__sep">/</span><span class="verifs-counter__total">5</span></span>
+          <span class="verifs-counter__chip">checks</span>
+        </span>
+      </header>
+
+      <article class="verif-step" data-step-i="0">
+        <span class="verif-step__pin hand">1</span>
+        <span class="verif-step__check" aria-hidden="true">
+          <svg viewBox="0 0 20 20" width="14" height="14">
+            <circle class="verif-step__check-ring" cx="10" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path class="verif-step__check-tick" d="M5.5 10.4 L8.8 13.6 L14.5 6.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="verif-step__label">Tests unit <em>142/142</em></span>
+        <span class="verif-step__chip">OK</span>
+      </article>
+
+      <article class="verif-step" data-step-i="1">
+        <span class="verif-step__pin hand">2</span>
+        <span class="verif-step__check" aria-hidden="true">
+          <svg viewBox="0 0 20 20" width="14" height="14">
+            <circle class="verif-step__check-ring" cx="10" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path class="verif-step__check-tick" d="M5.5 10.4 L8.8 13.6 L14.5 6.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="verif-step__label">Linter <em>0 warn</em></span>
+        <span class="verif-step__chip">OK</span>
+      </article>
+
+      <article class="verif-step" data-step-i="2">
+        <span class="verif-step__pin hand">3</span>
+        <span class="verif-step__check" aria-hidden="true">
+          <svg viewBox="0 0 20 20" width="14" height="14">
+            <circle class="verif-step__check-ring" cx="10" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path class="verif-step__check-tick" d="M5.5 10.4 L8.8 13.6 L14.5 6.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="verif-step__label">Bundle <em>−8 % kB</em></span>
+        <span class="verif-step__chip">OK</span>
+      </article>
+
+      <article class="verif-step" data-step-i="3">
+        <span class="verif-step__pin hand">4</span>
+        <span class="verif-step__check" aria-hidden="true">
+          <svg viewBox="0 0 20 20" width="14" height="14">
+            <circle class="verif-step__check-ring" cx="10" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path class="verif-step__check-tick" d="M5.5 10.4 L8.8 13.6 L14.5 6.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="verif-step__label">A11y <em>98/100</em></span>
+        <span class="verif-step__chip">OK</span>
+      </article>
+
+      <article class="verif-step" data-step-i="4">
+        <span class="verif-step__pin hand">5</span>
+        <span class="verif-step__check" aria-hidden="true">
+          <svg viewBox="0 0 20 20" width="14" height="14">
+            <circle class="verif-step__check-ring" cx="10" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path class="verif-step__check-tick" d="M5.5 10.4 L8.8 13.6 L14.5 6.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="verif-step__label">Type-check <em>0 err</em></span>
+        <span class="verif-step__chip">OK</span>
+      </article>
+
+      <footer class="verifs-cluster__foot" aria-hidden="true">
+        <span class="verifs-cluster__foot-label hand">tout vert · prêt review humaine →</span>
+      </footer>
+    </div>
+
+    <!-- ───── PHASE 2.6 — Tech lead transverse ───── -->
+    <article class="node node-human node-techlead" data-bloc="prod-techlead" data-links="prod-push" data-actor="human" style="--x:7740px; --y:240px;" data-phase="C">
+      <span class="actor-pill actor-human">👤</span>
+      <span class="phase-num">2.6</span>
+      <h4>Tech lead</h4>
+      <p>1 dev sur N projets · tests ready</p>
+      <ul class="techlead-checklist techlead-checklist-hidden" aria-label="checklist tech lead">
+        <li style="--reveal-i:0;"><span class="tlc-check" aria-hidden="true">✓</span> tests passent</li>
+        <li style="--reveal-i:1;"><span class="tlc-check" aria-hidden="true">✓</span> audit code</li>
+        <li style="--reveal-i:2;"><span class="tlc-check" aria-hidden="true">✓</span> audit design</li>
+        <li style="--reveal-i:3;"><span class="tlc-check" aria-hidden="true">✓</span> % risk &lt; 30%</li>
+      </ul>
+      <div class="techlead-decision techlead-decision-hidden" role="status" aria-label="décision tech lead">
+        <span class="techlead-decision-arrow" aria-hidden="true">→</span>
+        <span class="techlead-decision-label">push main</span>
+      </div>
+    </article>
+
+    <!-- ───── PHASE 2.7 — Push prod ───── -->
+    <article class="node node-end node-human" data-bloc="prod-push" data-links="prod-tool" data-actor="human" style="--x:8060px; --y:240px;" data-phase="C">
+      <span class="actor-pill actor-human actor-pill-onpaper">👤</span>
+      <span class="phase-num phase-num-light">2.7</span>
+      <div class="end-icon">✓</div>
+      <h4>Push prod</h4>
+      <p class="hand hand-loop-hint">la boucle recommence ↺</p>
+    </article>
+
+    <!-- ───── FX11 — Tech Lead : décision finale (retour à dev OU push main) ─────
+         Bloc séparé qui montre les 2 options simultanément. Révélé à step 2.7
+         via .techlead-decision-revealed (cf. script.js).
+         Position : x=7780 y=560 — entre prod-push (x=7660 y=240) et pillars
+         (x=8060 y=500). Largeur 240px → 7780+240=8020, gap 40px avant pillars.
+         z-index 5 (FX4 : nodes ≥ 5, arrows ≤ 4).
+    -->
+    <article class="node node-techlead-decision techlead-decision-hidden" data-bloc="prod-techlead-final" data-links="prod-merge-main" style="--x:8230px; --y:560px; z-index:5;">
+      <span class="node-tag node-tag-techlead">TECH LEAD</span>
+      <h4>Décision finale</h4>
+      <p class="hand">il prend l'analyse IA</p>
+      <div class="techlead-actions" role="group" aria-label="décision tech lead : retour à dev ou push main">
+        <span class="techlead-action techlead-action-back" aria-label="retour à dev pour mise à jour">
+          <span class="techlead-action-arrow" aria-hidden="true">↩</span>
+          <span class="techlead-action-label">retour à dev</span>
+          <span class="techlead-action-hand hand" aria-hidden="true">compris le besoin, on retravaille</span>
+        </span>
+        <span class="techlead-action techlead-action-main" aria-label="validé, push main">
+          <span class="techlead-action-arrow" aria-hidden="true">→</span>
+          <span class="techlead-action-label">push main ✓</span>
+          <span class="techlead-action-hand hand" aria-hidden="true">validé, ça part</span>
+        </span>
+      </div>
+    </article>
+
+    <!-- ╔════════════════════════════════════════════════════════════════╗
+         ║  FX12 — TRAIL D'APPROBATION TECH LEAD → MERGE MAIN              ║
+         ║  À step 2.7 : quand la décision finale Tech Lead apparaît, un   ║
+         ║  trait griffonné jaillit du chip "push main ✓" (bas, canvas     ║
+         ║  ~8420,690) → monte en arc vers la droite → entre dans          ║
+         ║  prod-merge-main par le bas (canvas ~8460,320). Matérialise     ║
+         ║  visuellement "validé → ça part en prod / branche main".        ║
+         ║  Deux segments staggered, draw stroke-dashoffset, label hand    ║
+         ║  "validé !" en cours de trajet. z-index 3 (sous nodes).         ║
+         ║  Container : x=8330 y=300 width=240 height=440.                 ║
+         ╚════════════════════════════════════════════════════════════════╝ -->
+    <svg class="fx12-approve-trail fx12-approve-hidden" style="--x:8330px; --y:300px;" viewBox="0 0 240 440" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <!-- Segment 1 : top du chip push main (canvas ~8420, 680) → arc up-right → mid (local 175, 200) -->
+      <path class="fx12-approve-trail__seg fx12-approve-trail__seg-1"
+            d="M 90 380 C 130 340, 160 290, 175 220"
+            fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+      <!-- Segment 2 : mid (175, 200) → courbe vers la gauche-haut → entre dans le bas de merge-main (local 130, 30) -->
+      <path class="fx12-approve-trail__seg fx12-approve-trail__seg-2"
+            d="M 175 200 C 180 150, 160 80, 130 30"
+            fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+      <!-- Pointe griffonnée entrant dans prod-merge-main par le bas -->
+      <path class="fx12-approve-trail__head"
+            d="M 118 44 L 130 28 L 144 42"
+            fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Label hand-written "validé !" -->
+      <foreignObject x="170" y="170" width="100" height="60">
+        <span xmlns="http://www.w3.org/1999/xhtml" class="fx12-approve-trail__label hand">validé !</span>
+      </foreignObject>
+    </svg>
+
+    <!-- ───── MINI-NODE merge main (après prod-push, matérialise la fusion sur la branche principale) ───── -->
+    <article class="node node-mini node-merge-main" data-bloc="prod-merge-main" data-links="prod-tool" style="--x:8400px; --y:240px;" data-phase="C">
+      <span class="merge-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="5" r="2"/>
+          <circle cx="6" cy="19" r="2"/>
+          <circle cx="18" cy="12" r="2"/>
+          <path d="M6 7v10"/>
+          <path d="M6 12c0-3 2-5 5-5h5"/>
+        </svg>
+      </span>
+      <span class="node-tag node-tag-merge">MAIN</span>
+      <h5>merge ✓</h5>
+      <p>branche principale mise à jour</p>
+    </article>
+
+    <!-- ╔══════════════════════════════════════════════════════════════╗
+         ║  T20 — CHAÎNE FINALE techlead-final → push → merge → live   ║
+         ║  3 flèches griffonnées avec labels manuscrits.              ║
+         ║  Container origin x=5680 y=240, viewBox 2920×420.           ║
+         ║  Révélée au step 2.7 (.final-chain-revealed) — cascade      ║
+         ║  stagger 240ms entre f1 → f2 → f3.                          ║
+         ║  Couleurs : carmillon (decision humaine push/merge),        ║
+         ║  mint (live final côté utilisateur).                        ║
+         ╚══════════════════════════════════════════════════════════════╝ -->
+    <div class="final-chain final-chain-hidden" style="--x:5680px; --y:240px;" aria-hidden="true">
+      <svg viewBox="0 0 2920 420" preserveAspectRatio="none">
+        <defs>
+          <marker id="final-chain-head-carm" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+            <path d="M0 0 L12 6 L0 12 Z" fill="var(--carmillon)"/>
+          </marker>
+          <marker id="final-chain-head-mint" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+            <path d="M0 0 L12 6 L0 12 Z" fill="var(--mint-deep)"/>
+          </marker>
+        </defs>
+        <!-- F1 push : prod-techlead-final (top ≈ 2670,320) → prod-push (bottom ≈ 2470,165) -->
+        <path class="final-chain__arrow final-chain__arrow--f1"
+              d="M 2670 320 C 2640 258, 2580 205, 2480 168"
+              fill="none" stroke="var(--carmillon)" stroke-width="2.6" stroke-linecap="round"
+              marker-end="url(#final-chain-head-carm)"/>
+        <path class="final-chain__scratch final-chain__scratch--f1"
+              d="M 2672 324 C 2642 262, 2582 209, 2484 172"
+              fill="none" stroke="var(--carmillon)" stroke-width="1.1" stroke-linecap="round" opacity="0.45"/>
+
+        <!-- F2 merge : prod-push (right ≈ 2560,60) → prod-merge-main (left ≈ 2720,62) -->
+        <path class="final-chain__arrow final-chain__arrow--f2"
+              d="M 2560 62 C 2600 54, 2650 58, 2716 62"
+              fill="none" stroke="var(--carmillon)" stroke-width="2.6" stroke-linecap="round"
+              marker-end="url(#final-chain-head-carm)"/>
+        <path class="final-chain__scratch final-chain__scratch--f2"
+              d="M 2562 66 C 2602 58, 2652 62, 2718 66"
+              fill="none" stroke="var(--carmillon)" stroke-width="1.1" stroke-linecap="round" opacity="0.45"/>
+
+        <!-- F3 live : prod-merge-main (bottom ≈ 2810,120) → prod-app-live (top-right ≈ 410,190).
+             Grand zigzag mint qui passe à y≈300 — au-dessus de la loop-back-arrow
+             (y≈1620) et des bonus, mais sous le niveau des nodes (y=240). -->
+        <path class="final-chain__arrow final-chain__arrow--f3"
+              d="M 2810 120
+                 C 2870 200, 2820 280, 2680 305
+                 C 2200 360, 1400 380, 700 330
+                 C 480 305, 350 260, 420 200"
+              fill="none" stroke="var(--mint-deep)" stroke-width="2.8" stroke-linecap="round"
+              marker-end="url(#final-chain-head-mint)"/>
+        <path class="final-chain__scratch final-chain__scratch--f3"
+              d="M 2812 124
+                 C 2872 204, 2822 284, 2682 309
+                 C 2202 364, 1402 384, 702 334
+                 C 482 309, 352 264, 422 204"
+              fill="none" stroke="var(--mint-deep)" stroke-width="1.1" stroke-linecap="round" opacity="0.45"/>
+      </svg>
+      <!-- Labels manuscrits ancrés en coordonnées absolues (relatives au container) -->
+      <span class="final-chain__label final-chain__label--push hand">push</span>
+      <span class="final-chain__label final-chain__label--merge hand">merge</span>
+      <span class="final-chain__label final-chain__label--live hand">live ✓</span>
+    </div>
+
+    <!-- T20 ping final — badge "v1.1 live" épinglé sur Browser 2 (prod-app-live)
+         Position : top-right de prod-app-live (x=5680 y=430, w≈420 h≈280).
+         Reveal au step 2.7 avec pulse subtil. -->
+    <div class="live-ping live-ping-hidden" style="--x:6020px; --y:410px;" aria-hidden="true">
+      <span class="live-ping__dot" aria-hidden="true"></span>
+      <span class="live-ping__label hand">v1.1 live</span>
+    </div>
+
+    <!-- ───── Œil-neuf #1 : narrative "même app, version d'après" ─────
+         Petit sticky hand-written épinglé sur Browser 2 (prod-app-live, x=5680
+         y=430 width=940 height=460), juste sous le live-ping (x=6020 y=410),
+         pour rendre limpide à la 1ère lecture que le push prod RAMÈNE sur la
+         MÊME app (cohérence avec live-ping qui dit "v1.1 live"). Reveal au
+         step 2.7 via le toggle .live-ping-revealed posé par script.js sur tous
+         les éléments .live-ping-hidden. -->
+    <aside class="loop-return-note live-ping-hidden" style="--x:6020px; --y:445px;" aria-hidden="true">
+      <span class="hand">↩ même app · version d'après</span>
+    </aside>
+
+    <!-- Annotation 2 profils -->
+    <div class="floating-note pill-note" style="--x:8060px; --y:380px;">
+      <span class="hand">2 humains :<br/><strong>PO + Dev</strong></span>
+    </div>
+
+    <!-- ───── Œil-neuf #2 : closer "en continu" en fin de Partie 2 ─────
+         Sticky hand-written placée à droite de prod-merge-main (x=8400 y=240),
+         en dehors de la zone push-decision-merge, pour signer la boucle :
+         "tout ça, en continu, non-stop". Subtil, FigJam, hand-written.
+         Position : x=8500 y=440 (sous prod-merge-main, au-dessus des piliers à y=500 mais
+         décalée à droite pour ne pas chevaucher le pilier dont x=8680). -->
+    <aside class="continuous-closer" style="--x:8510px; --y:430px;" aria-hidden="true">
+      <span class="continuous-closer__main hand">↻ en continu</span>
+      <span class="continuous-closer__sub hand">jamais de pause</span>
+    </aside>
+
+    <!-- ╔══════════════════════════════════════════════════════════════╗
+         ║  T21 — CONCLUSION : "2 profils uniquement font vivre l'app" ║
+         ║  Bloc impact final qui ferme la narration de la Partie 2.   ║
+         ║  Position : x=8500 y=1400 — sous TOUT le bloc piliers       ║
+         ║  (clusters principles se terminent ≈y=1270). Gap 130px.     ║
+         ║  Largeur 1100px → x=8500-9600, gap 100px avant pitch (9700).║
+         ║  Reveal au step 'CONCL' (entre 2.7 et PIT) ou au step PIT.  ║
+         ║  Wave 1 fix : était y=900 → overlap pillars-principles      ║
+         ║  + profile/principle-cluster qui descendent jusqu'à y=1270. ║
+         ╚══════════════════════════════════════════════════════════════╝ -->
+    <section class="final-claim final-claim-hidden" data-zone="conclusion" style="--x:8500px; --y:1400px;" aria-label="Conclusion : 2 profils font vivre l'app">
+      <p class="final-claim__eyebrow hand">au final&nbsp;:</p>
+      <h2 class="final-claim__title">2 profils <em>uniquement</em><br/>font vivre l'app.</h2>
+      <p class="final-claim__sub">PO décide. Tech Project Lead garantit.<br/><span class="final-claim__sub-strong">L'IA fait tout le reste.</span></p>
+      <div class="final-claim__rule" aria-hidden="true"></div>
+      <p class="final-claim__signature hand" aria-hidden="true">— Alexandre, 2026</p>
+    </section>
+
+    <!-- ╔══════════════════════════════════════════════════════════════╗
+         ║  BOUCLE RETOUR 2.7 → 2.1 — flèche Bezier longue griffonnée  ║
+         ║  Part du bas de prod-push (x≈7780 y≈400) ; descend sous     ║
+         ║  Partie 2 ; passe à y≈1620 ; remonte vers haut de prod-tool ║
+         ║  (x≈5790 y=240). Container à l'origine du SVG.              ║
+         ╚══════════════════════════════════════════════════════════════╝ -->
+    <!-- Sticky note : titre de la boucle, mis en avant au-dessus de Partie 2 -->
+    <div class="loop-title-sticky" style="--x:7020px; --y:120px;" aria-hidden="true">
+      <span class="hand">↻ boucle itérative de vidage produit</span>
+    </div>
+    <div class="loop-back-arrow" style="--x:5680px; --y:240px;" aria-hidden="true">
+      <svg viewBox="0 0 2680 1700" preserveAspectRatio="none">
+        <!-- chemin principal : sort de prod-push (bottom, local x≈2380) → descend → traverse SOUS les bonus (y≈1620) → remonte → entre prod-tool (top, local x≈110) -->
+        <path class="loop-back-arrow__flow" d="
+          M 2480 165
+          C 2580 320, 2680 520, 2620 820
+          C 2540 1080, 2200 1340, 1700 1500
+          C 1200 1640, 700 1680, 360 1560
+          C 140 1480, 30 1280, 60 1020
+          C 90 760, 130 480, 110 0
+        " fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <!-- micro-griffonnis pour casser la perfection (style hand-drawn) -->
+        <path d="
+          M 2485 168
+          C 2585 322, 2682 522, 2624 822
+        " fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+        <!-- pointe de flèche entrant dans prod-tool (par le haut, légèrement vers le bas) -->
+        <path d="M 95 10 L 110 0 L 125 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- petit cartouche manuscrit au point bas de la courbe -->
+        <g class="loop-back-arrow__label-anchor" transform="translate(1280 1685)">
+          <circle r="6" fill="currentColor" opacity="0.85"/>
+        </g>
+      </svg>
+      <span class="loop-back-arrow__label hand">↺ retour 2.1</span>
+    </div>
+
+    <!-- Bonus prod (décalés pour ne plus chevaucher le Kanban annoté) -->
+    <article class="node node-bonus" data-bloc="prod-bonus" data-links="prod-tool" style="--x:5680px; --y:1620px;">
+      <span class="bonus-tag">BONUS · communauté</span>
+      <h4>Staff vibe-gen sur l'existant</h4>
+      <p>front consommable · propositions · <strong>vote communauté</strong></p>
+    </article>
+
+    <article class="node node-bonus" data-bloc="prod-logs" data-links="prod-branche" style="--x:6020px; --y:1620px;">
+      <span class="bonus-tag">BONUS · résilience</span>
+      <h4>Les logs s'auto-soignent</h4>
+      <p>erreurs prod → diagnostiquées → branche fix</p>
+    </article>
+
+    <!-- Flèche bonus #1 : prod-bonus (x=5680 y=1550) → prod-tool (x=5680 y=240).
+         Verticale ascendante, légère ondulation. Hauteur ≈1130px (Kanban empilé sous Browser 2, bonus repoussé). -->
+    <div class="phase-arrow phase-arrow-vertical phase-arrow-vertical--tall phase-arrow-vertical--up" style="--x:5790px; --y:420px;" aria-hidden="true">
+      <span class="phase-arrow-label hand">↑ alimente<br/>prod-tool</span>
+      <svg viewBox="0 0 50 1130" preserveAspectRatio="none">
+        <!-- griffonné : ondulation douce ascendante (4 oscillations sur la hauteur) -->
+        <path d="M 25 1130 Q 10 950 25 800 Q 40 650 22 480 Q 8 320 26 160 Q 38 80 25 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- pointe de flèche vers le haut -->
+        <path d="M 17 12 L 25 0 L 33 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- Flèche bonus #2 : prod-logs (x=6020 y=1550) → prod-branche (x=6700 y=240).
+         Monte puis incline vers la droite (delta x ≈ +570, delta y ≈ -1130). -->
+    <div class="phase-arrow phase-arrow-vertical phase-arrow-vertical--tall phase-arrow-vertical--curve-right" style="--x:6130px; --y:420px;" aria-hidden="true">
+      <span class="phase-arrow-label hand">↑ déclenche<br/>branche fix ↗</span>
+      <svg viewBox="0 0 680 1130" preserveAspectRatio="none">
+        <!-- ascension verticale, puis bascule droite vers prod-branche en haut -->
+        <path d="M 25 1130 C 25 880, 40 640, 130 480 C 250 320, 450 160, 670 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- pointe de flèche orientée vers haut-droite -->
+        <path d="M 655 18 L 670 0 L 670 22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- ───────────────────────────────────────────────────────────
+         ═════════════════ PILLIERS TRANSVERSES ═════════════════
+         ─────────────────────────────────────────────────────────── -->
+    <section class="part-banner part-pillars" data-step="4" data-zone="pillars" data-bloc="pillars-header" style="--x:8680px; --y:60px;">
+      <span class="part-tag">PILIERS</span>
+      <h2 class="part-title">Transverses</h2>
+      <p class="part-sub">tiennent tout le reste debout</p>
+      <p class="hand pillars-trio-hint">IA qui bosse · humains qui décident · règles qu'on ne casse pas</p>
+      <div class="part-line" aria-hidden="true"></div>
+    </section>
+
+    <article class="pillar-center pillar-agents has-washi has-washi--mint is-clickable" data-bloc="pillars-agents-center" data-pillar-act="4.1" data-links="prod-agent-design,prod-agent-rules,prod-agent-stab,prod-branche" style="--x:8680px; --y:240px;" role="button" tabindex="0" aria-label="Voir les 20 agents IA en détail">
+      <span class="pillar-glyph" aria-hidden="true">⚡</span>
+      <div class="pillar-body">
+        <span class="pillar-tag flow-tag-mint">20 agents</span>
+        <h3>L'équipe IA</h3>
+        <p class="pillar-sub">une mission claire chacun</p>
+        <p class="hand pillar-role">↳ font le travail</p>
+      </div>
+      <span class="pillar-count" aria-hidden="true">20</span>
+    </article>
+
+    <article class="pillar-center pillar-profiles has-washi has-washi--blue is-clickable" data-bloc="pillars-profiles-center" data-pillar-act="4.2" data-links="prod-po,f-design-artist,f-vibe,f-handoff,prod-techlead" style="--x:8680px; --y:500px;" role="button" tabindex="0" aria-label="Voir les 5 profils humains en détail">
+      <span class="pillar-glyph" aria-hidden="true">👤</span>
+      <div class="pillar-body">
+        <span class="pillar-tag flow-tag-blue">5 profils</span>
+        <h3>5 humains</h3>
+        <p class="pillar-sub">pas un de plus</p>
+        <p class="hand pillar-role">↳ tranchent &amp; orientent</p>
+      </div>
+      <span class="pillar-count" aria-hidden="true">5</span>
+    </article>
+
+    <article class="pillar-center pillar-principles has-washi has-washi--pink is-clickable" data-bloc="pillars-principles-center" data-pillar-act="4.3" data-links="f-branches,prod-branche,f-components,f-converge,prod-bonus" style="--x:8680px; --y:760px;" role="button" tabindex="0" aria-label="Voir les 5 invariants en détail">
+      <span class="pillar-glyph" aria-hidden="true">✓</span>
+      <div class="pillar-body">
+        <span class="pillar-tag flow-tag-pink">5 invariants</span>
+        <h3>Ce qu'on ne casse</h3>
+        <p class="pillar-sub">jamais</p>
+        <p class="hand pillar-role">↳ cadrent les 2 autres</p>
+      </div>
+      <span class="pillar-count" aria-hidden="true">5</span>
+    </article>
+
+    <!-- ═══ AGENT CLOUD refondu (A3) — même grammaire FigJam que specs-full ═══ -->
+    <article class="agent-cloud agent-cloud-grouped has-washi has-washi--mint" style="--x:9020px; --y:240px;">
+      <header class="agent-cloud-head">
+        <span class="agent-cloud-tag">ÉQUIPE IA</span>
+        <span class="agent-cloud-counter"><span class="agent-cloud-num">20</span><span class="hand">/ ∞ possibles</span></span>
+      </header>
+
+      <div class="agent-cloud-stack">
+        <!-- Row 1 : CADRAGE -->
+        <div class="agent-row-group agent-row-group--cadrage">
+          <span class="agent-row-pin">01</span>
+          <span class="agent-row-label">Cadrage</span>
+          <span class="agent agent-chip" title="Capte la table">Cadrage</span>
+          <span class="agent agent-chip" title="Décompose le brief">Brief Parser</span>
+          <span class="agent agent-chip" title="Décompose UX">UX Mapper</span>
+          <span class="agent agent-chip" title="Choix techniques">Architecte</span>
+        </div>
+        <span class="agent-row-divider" aria-hidden="true"></span>
+
+        <!-- Row 2 : BUILD -->
+        <div class="agent-row-group agent-row-group--build">
+          <span class="agent-row-pin">02</span>
+          <span class="agent-row-label">Build</span>
+          <span class="agent agent-chip" title="Code feature">Feature Coder</span>
+          <span class="agent agent-chip" title="DS vivant">Composants</span>
+          <span class="agent agent-chip" title="Front secondaire">Vibe Design</span>
+          <span class="agent agent-chip" title="Connecte services">Backend</span>
+        </div>
+        <span class="agent-row-divider" aria-hidden="true"></span>
+
+        <!-- Row 3 : AUDIT -->
+        <div class="agent-row-group agent-row-group--audit">
+          <span class="agent-row-pin">03</span>
+          <span class="agent-row-label">Audit</span>
+          <span class="agent agent-chip" title="Règles dev">Audit Code</span>
+          <span class="agent agent-chip" title="Cohérence visuelle">Audit Design</span>
+          <span class="agent agent-chip" title="Stabilise">Stabilisateur</span>
+          <span class="agent agent-chip" title="Tests">Test Runner</span>
+        </div>
+        <span class="agent-row-divider" aria-hidden="true"></span>
+
+        <!-- Row 4 : CYCLE -->
+        <div class="agent-row-group agent-row-group--cycle">
+          <span class="agent-row-pin">04</span>
+          <span class="agent-row-label">Cycle</span>
+          <span class="agent agent-chip" title="Code review">Code Review</span>
+          <span class="agent agent-chip" title="Doc auto">Doc Writer</span>
+          <span class="agent agent-chip" title="Scope branche">Branche</span>
+          <span class="agent agent-chip" title="Demande → specs">Spec Writer</span>
+        </div>
+        <span class="agent-row-divider" aria-hidden="true"></span>
+
+        <!-- Row 5 : PROD -->
+        <div class="agent-row-group agent-row-group--prod">
+          <span class="agent-row-pin">05</span>
+          <span class="agent-row-label">Prod</span>
+          <span class="agent agent-chip" title="Erreurs prod">Logs Watcher</span>
+          <span class="agent agent-chip" title="Diagnostic">Diagnostic</span>
+          <span class="agent agent-chip" title="Vibe staff">Staff Vibe</span>
+          <span class="agent agent-chip" title="Vote communauté">Vote</span>
+        </div>
+      </div>
+
+      <p class="agent-cloud-foot hand">↑ 1 agent = 1 mission, pas 2 ↑</p>
+    </article>
+
+    <!-- Détail 5 profils -->
+    <div class="profile-cluster" style="--x:9020px; --y:500px;">
+      <article class="node node-mini node-human" data-bloc="prof-po" data-links="prod-po" data-actor="human"><span class="actor-pill actor-human">👤</span><span class="node-tag node-tag-prof">PO</span><h5>PO Digital Natif</h5><p>vit dans le Kanban</p><span class="prof-phase-tag" aria-label="intervient en phase 2.2"><span class="prof-phase-arrow">↙</span> intervient en <em>2.2</em></span></article>
+      <article class="node node-mini node-human" data-bloc="prof-da" data-links="f-design-artist" data-actor="human"><span class="actor-pill actor-human">👤</span><span class="node-tag node-tag-prof">DA</span><h5>Designer Artist</h5><p>Figma signature</p><span class="prof-phase-tag" aria-label="intervient en phase 1.4"><span class="prof-phase-arrow">↙</span> intervient en <em>1.4</em></span></article>
+      <article class="node node-mini node-human" data-bloc="prof-vd" data-links="f-vibe" data-actor="human"><span class="actor-pill actor-human">👤</span><span class="node-tag node-tag-prof">VD</span><h5>Vibe Designer</h5><p>pilote l'IA</p><span class="prof-phase-tag" aria-label="intervient en phase 1.6"><span class="prof-phase-arrow">↙</span> intervient en <em>1.6</em></span></article>
+      <article class="node node-mini node-human" data-bloc="prof-fp" data-links="f-handoff" data-actor="human"><span class="actor-pill actor-human">👤</span><span class="node-tag node-tag-prof">FP</span><h5>Dev front pixel</h5><p>code main</p><span class="prof-phase-tag" aria-label="intervient en phase 1.4"><span class="prof-phase-arrow">↙</span> intervient en <em>1.4</em></span></article>
+      <article class="node node-mini node-human" data-bloc="prof-tl" data-links="prod-techlead" data-actor="human"><span class="actor-pill actor-human">👤</span><span class="node-tag node-tag-prof">TL</span><h5>Tech lead</h5><p>1 dev · N projets</p><span class="prof-phase-tag" aria-label="intervient en phase 2.6"><span class="prof-phase-arrow">↙</span> intervient en <em>2.6</em></span></article>
+    </div>
+
+    <!-- Détail 5 invariants -->
+    <div class="principle-cluster" style="--x:9020px; --y:760px;">
+      <article class="node node-mini node-principle" data-bloc="pr1" data-links="f-branches"><span class="node-tag node-tag-prin">01</span><span class="prin-glyph" aria-hidden="true">⎇</span><h5>Branches courtes</h5><p>pas de superposition</p></article>
+      <article class="node node-mini node-principle" data-bloc="pr2" data-links="prod-branche"><span class="node-tag node-tag-prin">02</span><span class="prin-glyph" aria-hidden="true">◎</span><h5>Agents scopés</h5><p>1 mission/agent</p></article>
+      <article class="node node-mini node-principle" data-bloc="pr3" data-links="f-components"><span class="node-tag node-tag-prin">03</span><span class="prin-glyph" aria-hidden="true">⧉</span><h5>Front découplé</h5><p>testable seul</p></article>
+      <article class="node node-mini node-principle" data-bloc="pr4" data-links="f-converge"><span class="node-tag node-tag-prin">04</span><span class="prin-glyph" aria-hidden="true">↻</span><h5>Boucles explicites</h5><p>jamais aveugle</p></article>
+      <article class="node node-mini node-principle" data-bloc="pr5" data-links="prod-bonus"><span class="node-tag node-tag-prin">05</span><span class="prin-glyph" aria-hidden="true">▲</span><h5>Communauté vote</h5><p>usagers, pas comité</p></article>
+    </div>
+
+    <!-- ───────────────────────────────────────────────────────────
+         PITCH (extrême droite)
+         ─────────────────────────────────────────────────────────── -->
+    <section class="zone-marker" data-step="5" data-zone="pitch" style="--x:9700px; --y:240px;">
+      <div class="zone-header">
+        <span class="zone-no">PITCH</span>
+        <h2 class="zone-title">Ce que ça change.</h2>
+      </div>
+      <p class="pitch-audience hand" aria-label="Public visé">pour&nbsp;: <em>direction</em> · <em>praticiens</em> · <em>curieux</em></p>
+
+      <div class="pitch-numbers">
+        <article class="pitch-num has-washi has-washi--yellow">
+          <span class="pitch-num-pin">01</span>
+          <span class="num">3×</span>
+          <h4>moins de profils</h4>
+          <p>une feature = 2 humains</p>
+        </article>
+        <article class="pitch-num has-washi has-washi--mint">
+          <span class="pitch-num-pin">02</span>
+          <span class="num">5×</span>
+          <h4>plus de features</h4>
+          <p>20 agents en parallèle</p>
+        </article>
+        <article class="pitch-num has-washi has-washi--pink">
+          <span class="pitch-num-pin">03</span>
+          <span class="num">−70%</span>
+          <h4>de coût projet</h4>
+          <p>moins de réunions</p>
+        </article>
+      </div>
+      <p class="pitch-numbers-foot hand">↑ chiffres réels post-MVP ↑</p>
+
+      <div class="pitch-pills" aria-label="Récap chiffré">
+        <span class="pitch-pill pitch-pill--yellow"><strong>20</strong>&nbsp;agents IA</span>
+        <span class="pitch-pill-sep" aria-hidden="true">·</span>
+        <span class="pitch-pill pitch-pill--mint"><strong>2</strong>&nbsp;humains</span>
+        <span class="pitch-pill-sep" aria-hidden="true">·</span>
+        <span class="pitch-pill pitch-pill--pink"><strong>0</strong>&nbsp;PO épuisé</span>
+      </div>
+
+      <div class="pitch-claim has-washi has-washi--mint">
+        <p class="claim-pre">Et surtout&nbsp;:</p>
+        <p class="claim-handwritten">on répond aux<br/>collaborateurs<br/>en <em>jours</em>,<br/>pas en trimestres.</p>
+        <p class="claim-sign hand">— Alexandre Cormeraie · Connected Mate, 2026</p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────
+         CONCLUSION — la boucle qui tourne (extrême droite finale)
+         ─────────────────────────────────────────────────────────── -->
+    <section class="zone-marker zone-end" data-step="6" data-zone="end" style="--x:10620px; --y:240px;">
+      <div class="zone-header">
+        <span class="zone-no">FIN</span>
+        <h2 class="zone-title">Maintenant&nbsp;: <em>fais tourner la boucle.</em></h2>
+      </div>
+
+      <div class="end-loop" aria-hidden="true">
+        <svg class="end-loop-svg" viewBox="0 0 360 240">
+          <defs>
+            <marker id="end-loop-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+              <path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/>
+            </marker>
+          </defs>
+          <!-- Cercle griffonné -->
+          <ellipse cx="180" cy="120" rx="142" ry="92"
+                   fill="none" stroke="currentColor" stroke-width="2.5"
+                   stroke-linecap="round" stroke-dasharray="0 0"
+                   pathLength="100"
+                   marker-end="url(#end-loop-head)"/>
+          <!-- Petit chevron pour suggérer le sens -->
+          <path d="M315 110 Q 320 122 312 134" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Micro-lignes pointillées : chaque step → point sur l'ellipse -->
+          <g class="end-loop-tethers" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="2 3" fill="none" opacity="0.55">
+            <!-- brief (top)     label centre ~180,16  →  ellipse (180,28) -->
+            <path d="M180 18 L180 28"/>
+            <!-- specs (right)   label centre ~320,72  →  ellipse (322,120) -->
+            <path d="M320 76 Q 324 100 322 116"/>
+            <!-- build (bot-rt)  label centre ~286,210 →  ellipse (294,180) -->
+            <path d="M286 204 Q 292 196 294 184"/>
+            <!-- prod (bot-lt)   label centre ~96,210  →  ellipse (66,180) -->
+            <path d="M88 204 Q 76 196 70 184"/>
+            <!-- vote (left)     label centre ~22,72   →  ellipse (38,120) -->
+            <path d="M22 76 Q 30 100 36 116"/>
+          </g>
+        </svg>
+        <span class="end-loop-step end-loop-step-1 hand">brief</span>
+        <span class="end-loop-step end-loop-step-2 hand">specs</span>
+        <span class="end-loop-step end-loop-step-3 hand">build</span>
+        <span class="end-loop-step end-loop-step-4 hand">prod</span>
+        <span class="end-loop-step end-loop-step-5 hand">vote</span>
+      </div>
+
+      <div class="end-claim has-washi has-washi--yellow has-washi--double has-washi--double-carmillon">
+        <p class="claim-pre">Et au final&nbsp;:</p>
+        <p class="end-claim-line">Pas de comité.</p>
+        <p class="end-claim-line">Pas de roadmap figée.</p>
+        <p class="end-claim-line end-claim-strong">Juste <em>la boucle</em> qui tourne,<br/>jour après jour.</p>
+        <p class="end-claim-sign hand">— Et ça recommence,<br/>par un autre brief. ↻</p>
+        <a class="end-cta hand" href="mailto:staff.1.iaetinno.tgv@gmail.com?subject=Méthode%20Digital%20Natif%20%E2%80%94%20on%20parle%20%3F" aria-label="Nous contacter">
+          <span class="end-cta__label">on parle&nbsp;?</span>
+          <span class="end-cta__arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="end-closing hand" aria-label="Mot de fin">fin&nbsp;→ tu sais. <em>à toi.</em></p>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<!-- Reveal banner -->
+<div class="reveal-banner" id="reveal-banner" aria-live="polite">
+  <span class="reveal-label hand">tu as cliqué :</span>
+  <span class="reveal-name" id="reveal-name">—</span>
+  <span class="reveal-arrow">→</span>
+  <span class="reveal-targets" id="reveal-targets">—</span>
+  <button class="reveal-close" id="reveal-close" aria-label="Fermer">×</button>
+</div>
+
+<!-- Story hint — apparaît sur stations 2.2 → 2.6 pour guider l'utilisateur à cliquer "suivant" -->
+<div class="story-hint" id="story-hint" aria-live="polite" role="status">
+  <span class="story-hint-arrow" aria-hidden="true">↓</span>
+  <span class="story-hint-text" id="story-hint-text">clique suivant pour voir la suite</span>
+</div>
+
+<!-- Chrono nav -->
+<nav class="chrono-nav" aria-label="Navigation chronologique">
+  <button class="chrono-btn" id="chrono-prev" aria-label="Précédent">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="chrono-current" id="chrono-current">
+    <span class="chrono-step">00</span>
+    <span class="chrono-name">Amorce</span>
+  </div>
+  <button class="chrono-btn" id="chrono-next" aria-label="Suivant">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</nav>
+
+<div class="controls" role="toolbar" aria-label="Contrôles">
+  <button class="ctrl" data-action="zoom-out" aria-label="Dézoomer">−</button>
+  <button class="ctrl" data-action="reset" aria-label="Vue d'ensemble">⌂</button>
+  <button class="ctrl" data-action="zoom-in" aria-label="Zoomer">+</button>
+</div>
+
+<div class="help" id="help">
+  <span class="hand">glisse&nbsp;·&nbsp;scrolle&nbsp;·&nbsp;← →&nbsp;·&nbsp;clique pour suivre les liens</span>
+</div>
+
+<aside class="minimap" aria-hidden="true">
+  <div class="minimap-track">
+    <div class="minimap-acts"></div>
+    <div class="minimap-frame" id="minimap-frame"></div>
+  </div>
+</aside>
+
+<script src="script.js" defer></script>
+</body>
+</html>

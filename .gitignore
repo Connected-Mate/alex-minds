@@ -1,0 +1,14 @@
+# Local agent coordination + design notes (non publiés)
+.claude/
+improvements/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

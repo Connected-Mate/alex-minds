@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5efe1" />
+  <title>Vision 02 · Alexandre Cormeraie</title>
+  <meta name="description" content="Brouillon — nouvelle vision en cours d'écriture." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=Architects+Daughter&display=swap" />
+  <link rel="stylesheet" href="home.css" />
+
+  <style>
+    /* ──────────────────────────────────────────────────────────────────
+       Page-locale uniquement : layout d'une vision "longform"
+       Reprend les tokens et la typo de home.css
+       ────────────────────────────────────────────────────────────────── */
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .vision-page {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: var(--s-6) var(--space-page) var(--s-9);
+    }
+
+    /* Top bar : retour atelier + toggle lang */
+    .vision-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-4);
+      padding: var(--s-4) var(--space-page);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-2);
+      text-decoration: none;
+      color: var(--ink);
+      font-family: var(--hand);
+      font-size: 1.25rem;
+      transition: transform .25s var(--ease-out-q);
+    }
+    .back-link:hover { transform: translateX(-3px); }
+    .back-link svg { width: 18px; height: 18px; }
+
+    .lang-toggle {
+      display: inline-flex;
+      gap: 2px;
+      padding: 2px;
+      background: var(--paper-shade);
+      border-radius: 999px;
+    }
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      font-family: var(--body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      color: var(--ink-soft);
+      cursor: pointer;
+    }
+    .lang-btn.is-active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    /* Hero placeholder */
+    .draft-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--yellow);
+      font-family: var(--body);
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--ink);
+      text-transform: uppercase;
+      box-shadow: 0 2px 0 var(--paper-shadow);
+    }
+    .draft-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--carmillon);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.35; }
+    }
+
+    .vision-eyebrow {
+      margin: var(--s-5) 0 0;
+      font-family: var(--hand);
+      font-size: 1.4rem;
+      color: var(--ink-soft);
+    }
+
+    .vision-title {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin: var(--s-3) 0 var(--s-5);
+    }
+    .vision-title em {
+      font-style: italic;
+      color: var(--pink-deep);
+    }
+
+    .vision-lede {
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 62ch;
+    }
+
+    /* Ligne griffonnée séparatrice */
+    .scribble {
+      display: block;
+      margin: var(--s-7) 0;
+      width: 220px;
+      color: var(--ink-line);
+    }
+    .scribble svg { width: 100%; height: auto; filter: url(#ink); }
+
+    /* Bloc "à écrire" */
+    .writing-block {
+      background: var(--paper-shade);
+      border: 1px dashed var(--ink-line);
+      border-radius: 18px;
+      padding: var(--s-6) var(--s-5);
+      margin-top: var(--s-6);
+    }
+    .writing-block h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin: 0 0 var(--s-3);
+    }
+    .writing-block p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .writing-block .hand {
+      font-family: var(--hand);
+      font-size: 1.2rem;
+      color: var(--ink);
+    }
+
+    .vision-footer {
+      margin-top: var(--s-9);
+      padding-top: var(--s-5);
+      border-top: 1px solid var(--ink-line);
+      font-family: var(--hand);
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+    }
+  </style>
+</head>
+<body>
+
+<!-- SVG filter ink (réutilisé pour les traits griffonnés) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="ink">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="5" />
+    <feDisplacementMap in="SourceGraphic" scale="1.4" />
+  </filter>
+</svg>
+
+<header class="vision-topbar">
+  <a class="back-link" href="index.html" aria-label="Retour à l'atelier">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <span data-fr="retour à l'atelier" data-en="back to the workshop">retour à l'atelier</span>
+  </a>
+
+  <div class="lang-toggle" role="tablist" aria-label="Langue / Language">
+    <button type="button" class="lang-btn is-active" data-lang="fr" aria-pressed="true">FR</button>
+    <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<main class="vision-page">
+
+  <span class="draft-badge">
+    <span class="draft-dot" aria-hidden="true"></span>
+    <span data-fr="brouillon" data-en="draft">brouillon</span>
+  </span>
+
+  <p class="vision-eyebrow"
+     data-fr="Vision · 02 · à renommer"
+     data-en="Vision · 02 · to be renamed">Vision · 02 · à renommer</p>
+
+  <h1 class="vision-title"
+      data-fr="Titre <em>à poser</em>."
+      data-en="Title <em>to drop</em>."><span data-static>Titre <em>à poser</em>.</span></h1>
+
+  <p class="vision-lede"
+     data-fr="Page neuve. Je vais penser à voix haute, l'IA va écrire, on va challenger ensemble — puis structurer. Pour l'instant : un cadre vide qui attend la vision."
+     data-en="Fresh page. I'll think out loud, AI will write it down, we'll challenge it — then structure it. For now: an empty frame waiting for the vision.">
+    Page neuve. Je vais penser à voix haute, l'IA va écrire, on va challenger ensemble — puis structurer. Pour l'instant : un cadre vide qui attend la vision.
+  </p>
+
+  <span class="scribble" aria-hidden="true">
+    <svg viewBox="0 0 240 24">
+      <path d="M4 14 Q 60 4 120 14 T 236 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+    </svg>
+  </span>
+
+  <section class="writing-block">
+    <h2 data-fr="Prochaine étape" data-en="Next step">Prochaine étape</h2>
+    <p data-fr="Challenger la vision ensemble, poser les blocs, choisir le format (canvas, manifesto, deck, longform)."
+       data-en="Challenge the vision together, lay down the blocks, pick the format (canvas, manifesto, deck, longform).">
+      Challenger la vision ensemble, poser les blocs, choisir le format (canvas, manifesto, deck, longform).
+    </p>
+    <p class="hand" style="margin-top: var(--s-4);"
+       data-fr="— l'atelier reprend ici."
+       data-en="— the workshop picks up here.">— l'atelier reprend ici.</p>
+  </section>
+
+  <footer class="vision-footer">
+    <span data-fr="Alexandre Cormeraie · Connected Mate · 2026"
+          data-en="Alexandre Cormeraie · Connected Mate · 2026">Alexandre Cormeraie · Connected Mate · 2026</span>
+  </footer>
+
+</main>
+
+<script>
+  (function () {
+    const STORE_KEY = 'ac-vision-lang';
+
+    function applyLang(lang) {
+      document.querySelectorAll('[data-fr], [data-en]').forEach(el => {
+        const v = el.dataset[lang];
+        if (v == null) return;
+        // Permet les balises HTML simples comme <em> dans les contenus traduits
+        if (/<[a-z][\s\S]*>/i.test(v)) el.innerHTML = v;
+        else el.textContent = v;
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        const active = btn.dataset.lang === lang;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      document.documentElement.setAttribute('lang', lang);
+      try { localStorage.setItem(STORE_KEY, lang); } catch (e) {}
+    }
+
+    let initial = 'fr';
+    try {
+      const stored = localStorage.getItem(STORE_KEY);
+      if (stored === 'fr' || stored === 'en') initial = stored;
+      else if (navigator.language && navigator.language.toLowerCase().startsWith('en')) initial = 'en';
+    } catch (e) {}
+    applyLang(initial);
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'l' || e.key === 'L') {
+        const cur = document.documentElement.getAttribute('lang') || 'fr';
+        applyLang(cur === 'fr' ? 'en' : 'fr');
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

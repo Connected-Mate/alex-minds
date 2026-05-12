@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alex Minds · L'atelier où l'IA pose mes idées</title>
+  <meta name="description" content="Alex Minds — les idées d'Alex, posées ici. L'IA tient la plume. Atelier d'Alexandre Cormeraie (Connected Mate)." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Caveat:wght@500;700&family=Architects+Daughter&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+
+<!-- SVG filter ink (rendu griffonné des flèches) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="ink">
+    <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3"/>
+    <feDisplacementMap in="SourceGraphic" scale="1.2"/>
+  </filter>
+</svg>
+
+<header class="home-header">
+  <div class="brand-block">
+    <span class="brand-mark" aria-hidden="true">
+      <svg width="34" height="34" viewBox="0 0 34 34"><path d="M2 18 Q 8 4 14 18 T 26 18 T 38 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </span>
+    <div>
+      <h1>Alex Minds</h1>
+      <p><span
+           data-fr="l'atelier d'Alexandre Cormeraie · "
+           data-en="Alexandre Cormeraie's workshop · ">l'atelier d'Alexandre Cormeraie · </span><span class="hand"
+           data-fr="l'IA pose mes idées ici."
+           data-en="AI drops my ideas here.">l'IA pose mes idées ici.</span></p>
+    </div>
+  </div>
+
+  <div class="lang-toggle" role="tablist" aria-label="Langue / Language">
+    <button type="button" class="lang-btn is-active" data-lang="fr" aria-pressed="true">FR</button>
+    <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<main class="home-main">
+
+  <!-- ───────────────────────────────────────────────────────────
+       INTRO — manifeste court, bilingue
+       ─────────────────────────────────────────────────────────── -->
+  <section class="intro">
+    <p class="intro-eyebrow"
+       data-fr="Alex Minds · 2026"
+       data-en="Alex Minds · 2026">Alex Minds · 2026</p>
+
+    <h2 class="intro-title"
+        data-fr="Les idées d'Alex, posées ici. L'IA tient la plume."
+        data-en="Alex's ideas, dropped here. AI holds the pen.">Les idées d'Alex, posées ici. L'IA tient la plume.</h2>
+
+    <p class="intro-lede"
+       data-fr="Je pense, je décris à voix haute. L'IA écrit, met en scène, structure ma vision. Un projet à la fois. Sans filtre."
+       data-en="I think out loud. AI writes it down, stages it, structures my vision. One project at a time. Unfiltered.">
+      Je pense, je décris à voix haute. L'IA écrit, met en scène, structure ma vision. Un projet à la fois. Sans filtre.
+    </p>
+
+    <span class="intro-line" aria-hidden="true">
+      <svg viewBox="0 0 360 24"><path d="M4 14 Q 80 4 180 14 T 356 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </span>
+  </section>
+
+  <!-- ───────────────────────────────────────────────────────────
+       GRILLE DES VISIONS
+       ─────────────────────────────────────────────────────────── -->
+  <section class="visions" aria-labelledby="visions-title">
+    <header class="visions-head">
+      <h3 id="visions-title"
+          data-fr="Les pièces de l'atelier"
+          data-en="Pieces in the workshop">Les pièces de l'atelier</h3>
+      <p class="visions-counter">
+        <span class="counter-num">1</span>
+        <span class="counter-label hand"
+              data-fr="vision en ligne · d'autres arrivent"
+              data-en="vision online · more incoming">vision en ligne · d'autres arrivent</span>
+      </p>
+    </header>
+
+    <div class="visions-grid">
+
+      <!-- ═══ 01 — MÉTHODE DIGITAL NATIF (actif) ═══ -->
+      <a class="vision-card vision-card-live has-washi has-washi--pink"
+         href="methode-digital-natif.html">
+        <span class="vision-num">01</span>
+        <span class="vision-status">
+          <span class="status-dot"></span>
+          <span class="status-text"
+                data-fr="EN LIGNE"
+                data-en="LIVE">EN LIGNE</span>
+        </span>
+
+        <h4 class="vision-title">Méthode Digital&nbsp;Natif</h4>
+
+        <p class="vision-tagline"
+           data-fr="Une méthodologie projet IA-augmentée qui remplace Agile, Scrum, SAFe."
+           data-en="An AI-augmented project methodology that replaces Agile, Scrum, SAFe.">
+          Une méthodologie projet IA-augmentée qui remplace Agile, Scrum, SAFe.
+        </p>
+
+        <ul class="vision-meta">
+          <li>
+            <span class="meta-key"
+                  data-fr="format"
+                  data-en="format">format</span>
+            <span class="meta-val"
+                  data-fr="canvas FigJam interactif"
+                  data-en="interactive FigJam canvas">canvas FigJam interactif</span>
+          </li>
+          <li>
+            <span class="meta-key"
+                  data-fr="année"
+                  data-en="year">année</span>
+            <span class="meta-val">2026</span>
+          </li>
+          <li>
+            <span class="meta-key"
+                  data-fr="lecture"
+                  data-en="reading">lecture</span>
+            <span class="meta-val"
+                  data-fr="≈ 15 min"
+                  data-en="≈ 15 min">≈ 15 min</span>
+          </li>
+        </ul>
+
+        <span class="vision-cta hand"
+              data-fr="entrer dans le canvas →"
+              data-en="enter the canvas →">entrer dans le canvas →</span>
+      </a>
+
+      <!-- ═══ 02 — SLOT À VENIR ═══ -->
+      <article class="vision-card vision-card-soon has-washi has-washi--blue"
+               aria-disabled="true">
+        <span class="vision-num">02</span>
+        <span class="vision-status status-soon">
+          <span class="status-text"
+                data-fr="BIENTÔT"
+                data-en="SOON">BIENTÔT</span>
+        </span>
+
+        <h4 class="vision-title vision-title-soon hand"
+            data-fr="le prochain projet…"
+            data-en="next project…">le prochain projet…</h4>
+
+        <p class="vision-tagline-soon"
+           data-fr="J'écris bientôt ma vision sur un sujet que je n'ai pas encore décidé de te dire."
+           data-en="I'll soon write up my vision on a topic I haven't decided to tell you about yet.">
+          J'écris bientôt ma vision sur un sujet que je n'ai pas encore décidé de te dire.
+        </p>
+
+        <span class="vision-cta vision-cta-disabled hand"
+              data-fr="↺ reviens ici dans quelques semaines"
+              data-en="↺ come back in a few weeks">↺ reviens ici dans quelques semaines</span>
+      </article>
+
+      <!-- ═══ 03 — SLOT À VENIR ═══ -->
+      <article class="vision-card vision-card-soon has-washi has-washi--mint"
+               aria-disabled="true">
+        <span class="vision-num">03</span>
+        <span class="vision-status status-soon">
+          <span class="status-text"
+                data-fr="BIENTÔT"
+                data-en="SOON">BIENTÔT</span>
+        </span>
+
+        <h4 class="vision-title vision-title-soon hand"
+            data-fr="encore une…"
+            data-en="one more…">encore une…</h4>
+
+        <p class="vision-tagline-soon"
+           data-fr="Il y aura toujours une nouvelle vision à poser ici. Le métier change, j'écris au fur et à mesure."
+           data-en="There will always be another vision to drop here. The craft keeps moving, I keep writing.">
+          Il y aura toujours une nouvelle vision à poser ici. Le métier change, j'écris au fur et à mesure.
+        </p>
+
+        <span class="vision-cta vision-cta-disabled hand"
+              data-fr="↻ stay tuned"
+              data-en="↻ stay tuned">↻ stay tuned</span>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────────────────────────────
+       SECTION SIGNATURE
+       ─────────────────────────────────────────────────────────── -->
+  <section class="signature-section">
+    <p class="signature-quote"
+       data-fr="Je ne fais pas de roadmap. Je pense, l'IA pose, je relis, je publie."
+       data-en="I don't write roadmaps. I think, AI drops it down, I review, I publish.">
+      Je ne fais pas de roadmap. Je pense, l'IA pose, je relis, je publie.
+    </p>
+    <p class="signature-sign hand"
+       data-fr="— Alex, depuis l'atelier"
+       data-en="— Alex, from the workshop">— Alex, depuis l'atelier</p>
+  </section>
+
+</main>
+
+<footer class="home-footer">
+  <p>
+    <strong>Alex Minds</strong>
+    <span class="footer-sep">·</span>
+    <span data-fr="l'atelier en cours · l'IA tient la plume"
+          data-en="workshop in progress · AI holds the pen">l'atelier en cours · l'IA tient la plume</span>
+    <span class="footer-sep">·</span>
+    <span class="footer-author" data-fr="par Alexandre Cormeraie · Connected Mate"
+          data-en="by Alexandre Cormeraie · Connected Mate">par Alexandre Cormeraie · Connected Mate</span>
+  </p>
+</footer>
+
+<script>
+  // ════════════════ LANG TOGGLE (FR / EN) ════════════════
+  (function () {
+    const STORE_KEY = 'ac-vision-lang';
+
+    function applyLang(lang) {
+      // Texte des éléments avec data-fr / data-en
+      document.querySelectorAll('[data-fr], [data-en]').forEach(el => {
+        const v = el.dataset[lang];
+        if (v) el.textContent = v;
+      });
+
+      // État visuel des boutons + ARIA
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        const active = btn.dataset.lang === lang;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      // Lang attribute du <html> pour cohérence sémantique
+      document.documentElement.setAttribute('lang', lang);
+
+      // Persist
+      try { localStorage.setItem(STORE_KEY, lang); } catch (e) { /* ignore */ }
+    }
+
+    // Init au chargement : reprend la préférence ou la langue navigateur
+    let initial = 'fr';
+    try {
+      const stored = localStorage.getItem(STORE_KEY);
+      if (stored === 'fr' || stored === 'en') {
+        initial = stored;
+      } else if (navigator.language && navigator.language.toLowerCase().startsWith('en')) {
+        initial = 'en';
+      }
+    } catch (e) { /* ignore */ }
+    applyLang(initial);
+
+    // Écouteurs sur les boutons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+    });
+
+    // Raccourci clavier : L pour toggle
+    document.addEventListener('keydown', e => {
+      if (e.key === 'l' || e.key === 'L') {
+        const cur = document.documentElement.getAttribute('lang') || 'fr';
+        applyLang(cur === 'fr' ? 'en' : 'fr');
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
