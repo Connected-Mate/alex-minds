@@ -359,24 +359,33 @@
       'review-arrive-revealed'
     );
 
-    // ── Hero card transit : UNE carte (#kcard-cta) parcourt 3 colonnes
-    // 2.4    : transit-doing (IA prend la carte → colonne En cours, halo IA)
-    // 2.5    : transit-passage-review (passage explicite En cours → Fait,
-    //          keyframe long 1400ms + ghost trail — voir styles.css)
-    // 2.6/2.6a/2.7 : transit-done (carte installée en Fait, badge "✓ validé")
-    // Toute autre step → on retire tout, la carte reste en À faire (col 1).
+    // ── Hero card transit : UNE carte (#kcard-cta) parcourt 3 colonnes au rythme
+    // des steps. Narratif demandé par le user (clicks séquentiels) :
+    //   2.4 : la carte arrive en "À faire" (état de base, aucun modifier)
+    //   2.5 : transit-doing (l'IA prend → carte glisse en "En cours", halo travail)
+    //   2.6 : transit-done (carte glisse en "Fait", animation passage explicite)
+    //   2.6a/2.7 : transit-done maintenu + focus-resolved (les autres cartes et
+    //              annotations s'estompent, on ne voit que ce qui a été résolu)
     const hero = document.getElementById('kcard-cta');
     if (hero) {
-      const inDoing       = (step === '2.4');
-      const inPassage     = (step === '2.5');
-      const inReviewFocus = (step === '2.6' || step === '2.6a');
-      const inDone        = (step === '2.5' || step === '2.6' || step === '2.6a' || step === '2.7');
+      const inDoing       = (step === '2.5');
+      const inDone        = (step === '2.6' || step === '2.6a' || step === '2.7');
+      const inReviewFocus = (step === '2.6a' || step === '2.7');
       hero.classList.toggle('transit-doing',          inDoing);
-      hero.classList.toggle('transit-passage-review', inPassage);
+      hero.classList.toggle('transit-passage-review', false);
       hero.classList.toggle('transit-review',         false);
-      hero.classList.toggle('in-review-focus',        inReviewFocus);
       hero.classList.toggle('transit-done',           inDone);
+      hero.classList.toggle('in-review-focus',        inReviewFocus);
     }
+
+    // ── Focus-resolved à 2.6a/2.7 : sur le Kanban, on dim les cartes voisines
+    // pour ne laisser que la kcard-hero ressortir. Sur le Browser 2, on dim les
+    // autres annotations PO pour ne garder que l'annotation résolue visible.
+    const kanban = document.querySelector('.kanban-real');
+    const browser = document.querySelector('.app-live-annotated');
+    const focusResolved = (step === '2.6a' || step === '2.7');
+    if (kanban)  kanban.classList.toggle('is-focus-resolved', focusResolved);
+    if (browser) browser.classList.toggle('is-focus-resolved', focusResolved);
 
     // ── 2.7 : bouton ENVOYER + flow GitHub
     // TODO(N3/N4) : implementer les styles .send-button-revealed et .github-flow-active

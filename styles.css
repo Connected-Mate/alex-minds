@@ -3319,6 +3319,136 @@ strong { font-weight: 700; }
   flex: 0 0 auto;
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   BROWSER 2 — Variante simple "MATIN" (idée du jour, ton calme)
+   Layout épuré : visuel à gauche (gros soleil SVG), texte droite.
+   Slots HTML conservés (app-head, app-hero, app-cards, app-foot) pour
+   garder les annotations T11 viewBox calées sur les mêmes positions.
+   ════════════════════════════════════════════════════════════════════ */
+.app-logo--matin {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.16em;
+  color: var(--ink);
+}
+.app-avatar--simple {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.app-avatar--simple > em {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: oklch(0.92 0.04 80);
+  color: var(--ink);
+  font-style: normal;
+  font-weight: 700;
+  font-family: var(--font-display);
+  border: 1.2px solid var(--ink-line);
+}
+
+.app-hero--matin {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  padding: 24px 28px;
+  background: var(--paper);
+  border-bottom: 1px dashed var(--ink-faint);
+  flex: 0 0 auto;
+  align-items: center;
+}
+.app-matin-visual {
+  background: oklch(0.96 0.012 80);
+  border: 1.5px solid var(--ink);
+  border-radius: 14px 12px 14px 12px;
+  padding: 14px;
+  box-shadow: var(--shadow-hard-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.app-matin-visual svg {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+.app-matin-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.app-matin-content .app-hero-title {
+  margin: 2px 0 0;
+  font-size: 1.75rem;
+  line-height: 1.05;
+}
+.app-matin-lead {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 48ch;
+}
+.app-hero--matin .app-cta-row {
+  gap: 10px;
+  margin-top: 6px;
+}
+.app-hero--matin .app-cta {
+  flex: 0 0 auto;
+}
+.app-hero--matin .app-cta--ghost {
+  flex: 0 0 44px;
+  min-width: 44px;
+  padding: 0;
+  font-size: 1.1rem;
+}
+
+/* ── Focus-resolved (step 2.6a/2.7) ──────────────────────────────────
+   La carte hero (résolue) ressort, les autres cartes Kanban + autres
+   annotations PO du Browser 2 s'estompent. Permet au lecteur de voir
+   précisément CE QUI a été résolu, sans bruit. */
+.kanban-real.is-focus-resolved .kanban-real-card:not(.kcard-hero) {
+  opacity: 0.28;
+  transition: opacity 320ms var(--ease-out-q);
+}
+.kanban-real.is-focus-resolved .kcard-hero {
+  filter: drop-shadow(0 0 0 oklch(from var(--mint-deep) l c h / 0.4));
+}
+.app-live-annotated.is-focus-resolved .po-sticky-anno,
+.app-live-annotated.is-focus-resolved .po-note,
+.app-live-annotated.is-focus-resolved .po-overlay {
+  opacity: 0.22;
+  transition: opacity 320ms var(--ease-out-q);
+}
+.app-live-annotated.is-focus-resolved #appcard-faq {
+  outline: 2px solid var(--mint-deep);
+  outline-offset: 4px;
+  border-radius: 8px;
+  transition: outline-color 320ms var(--ease-out-q);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kanban-real.is-focus-resolved .kanban-real-card:not(.kcard-hero),
+  .app-live-annotated.is-focus-resolved .po-sticky-anno,
+  .app-live-annotated.is-focus-resolved .po-note,
+  .app-live-annotated.is-focus-resolved .po-overlay {
+    transition: none;
+  }
+}
+
 /* Colonne image */
 .app-shop-image {
   position: relative;
