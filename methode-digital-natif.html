@@ -975,38 +975,60 @@
             <!-- Colonne gauche : visuel produit -->
             <div class="app-shop-image">
               <span class="app-shop-image-badge">−20%</span>
-              <svg class="app-shop-shoe" viewBox="0 0 240 130" aria-hidden="true">
-                <!-- ground shadow -->
-                <ellipse cx="120" cy="116" rx="92" ry="6" fill="oklch(0.30 0.012 60)" opacity="0.10"/>
-                <!-- outsole (thin dark strip) -->
-                <path d="M22 112 Q 18 106 22 102 L 218 102 Q 222 106 218 112 Z" fill="oklch(0.28 0.012 60)"/>
-                <!-- midsole foam (chunky white) -->
-                <path d="M22 102 Q 14 96 18 86 Q 28 78 48 78 L 184 78 Q 208 78 218 86 Q 224 96 218 102 Z" fill="oklch(0.97 0.005 70)" stroke="oklch(0.30 0.012 60)" stroke-width="1.5"/>
-                <!-- midsole accent line -->
-                <path d="M30 92 L 210 92" stroke="oklch(0.30 0.012 60)" stroke-width="0.7" opacity="0.35"/>
-                <!-- upper body silhouette -->
-                <path d="M30 80 Q 32 60 44 50 Q 60 38 86 36 L 156 28 Q 188 30 202 46 Q 212 60 212 80" fill="oklch(0.94 0.012 70)" stroke="oklch(0.20 0.012 60)" stroke-width="1.8" stroke-linejoin="round"/>
-                <!-- toe cap separator -->
-                <path d="M58 42 Q 64 58 60 80" fill="none" stroke="oklch(0.20 0.012 60)" stroke-width="1.3"/>
-                <!-- lace collar opening -->
-                <path d="M86 36 Q 100 18 138 18 L 178 24 Q 186 30 188 44" fill="none" stroke="oklch(0.20 0.012 60)" stroke-width="1.4"/>
-                <!-- tongue under collar -->
-                <path d="M108 32 L 108 56 L 162 56 L 164 30" fill="oklch(0.86 0.012 70)" stroke="oklch(0.20 0.012 60)" stroke-width="1.1"/>
-                <!-- eyelets (4 + 4) -->
-                <circle cx="108" cy="34" r="1.6" fill="oklch(0.20 0.012 60)"/>
-                <circle cx="124" cy="28" r="1.6" fill="oklch(0.20 0.012 60)"/>
-                <circle cx="142" cy="24" r="1.6" fill="oklch(0.20 0.012 60)"/>
-                <circle cx="160" cy="24" r="1.6" fill="oklch(0.20 0.012 60)"/>
-                <!-- laces crossing -->
-                <path d="M108 34 L 142 24 M 124 28 L 160 24 M 108 34 L 124 28 M 142 24 Q 151 21 160 24" fill="none" stroke="oklch(0.20 0.012 60)" stroke-width="1.05" stroke-linecap="round"/>
+              <svg class="app-shop-shoe" viewBox="0 0 260 140" aria-hidden="true">
+                <defs>
+                  <linearGradient id="shoe-upper" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stop-color="oklch(0.22 0.012 60)"/>
+                    <stop offset="0.6" stop-color="oklch(0.28 0.012 60)"/>
+                    <stop offset="1" stop-color="oklch(0.24 0.012 60)"/>
+                  </linearGradient>
+                </defs>
+                <!-- ombre au sol -->
+                <ellipse cx="130" cy="128" rx="104" ry="5" fill="oklch(0.20 0.012 60)" opacity="0.13"/>
+                <!-- outsole (gomme noire fine, profile galbé) -->
+                <path d="M28 122 Q 20 122 18 117 L 16 110 Q 16 106 22 105 L 240 105 Q 246 106 246 110 L 244 117 Q 242 122 234 122 Z" fill="oklch(0.16 0.012 60)"/>
+                <!-- midsole (mousse blanche épaisse type running) -->
+                <path d="M22 105 Q 12 100 14 90 Q 18 80 32 78 L 220 78 Q 240 80 246 90 Q 248 100 240 105 Z" fill="oklch(0.97 0.004 80)" stroke="oklch(0.18 0.012 60)" stroke-width="1.5"/>
+                <!-- midsole groove (détail technique) -->
+                <path d="M30 94 L 232 94" stroke="oklch(0.55 0.20 30)" stroke-width="1.4" stroke-linecap="round" opacity="0.85"/>
+                <path d="M30 100 L 232 100" stroke="oklch(0.20 0.012 60)" stroke-width="0.6" opacity="0.25"/>
+                <!-- heel cup (talon arrondi) -->
+                <path d="M210 78 Q 230 60 232 38 Q 232 28 222 26 L 208 26 Q 198 28 194 40 L 192 60" fill="url(#shoe-upper)" stroke="oklch(0.12 0.012 60)" stroke-width="1.4"/>
+                <!-- upper body silhouette (chausson principal) -->
+                <path d="M28 78 Q 30 56 42 42 Q 60 28 90 28 L 168 24 Q 200 26 212 40 L 216 60 Q 216 70 210 78 Z" fill="url(#shoe-upper)" stroke="oklch(0.10 0.012 60)" stroke-width="1.8"/>
+                <!-- toe box (avant pied séparé par couture) -->
+                <path d="M62 32 Q 70 56 64 78" fill="none" stroke="oklch(0.10 0.012 60)" stroke-width="1.4"/>
+                <!-- toe cap reinforcement (pointe blanche) -->
+                <path d="M28 78 Q 30 60 42 46 Q 54 38 64 40 L 64 78 Z" fill="oklch(0.94 0.005 80)" stroke="oklch(0.10 0.012 60)" stroke-width="1.5"/>
+                <!-- lace collar (ouverture haut) -->
+                <path d="M90 28 Q 110 12 152 12 L 192 18" fill="none" stroke="oklch(0.10 0.012 60)" stroke-width="1.4"/>
+                <!-- tongue (languette) -->
+                <path d="M114 24 L 114 56 Q 116 60 128 60 L 162 56 L 164 22" fill="oklch(0.94 0.005 80)" stroke="oklch(0.10 0.012 60)" stroke-width="1.3"/>
+                <!-- œillets (5 paires) + lacets en X -->
+                <g stroke="oklch(0.96 0.005 80)" stroke-width="1.4" stroke-linecap="round" fill="none">
+                  <path d="M116 30 L 158 22 M 124 26 L 166 20 M 132 22 L 174 18 M 140 18 L 182 16"/>
+                  <path d="M116 30 L 124 26 M 158 22 L 166 20 M 132 22 L 140 18 M 174 18 L 182 16"/>
+                </g>
+                <g fill="oklch(0.94 0.005 80)" stroke="oklch(0.10 0.012 60)" stroke-width="0.8">
+                  <circle cx="116" cy="30" r="1.6"/>
+                  <circle cx="132" cy="22" r="1.6"/>
+                  <circle cx="148" cy="16" r="1.6"/>
+                  <circle cx="164" cy="14" r="1.6"/>
+                  <circle cx="124" cy="26" r="1.6"/>
+                  <circle cx="140" cy="18" r="1.6"/>
+                  <circle cx="156" cy="14" r="1.6"/>
+                  <circle cx="172" cy="14" r="1.6"/>
+                </g>
                 <!-- heel pull tab -->
-                <path d="M202 46 L 220 38 L 220 56 L 208 60 Z" fill="oklch(0.94 0.012 70)" stroke="oklch(0.20 0.012 60)" stroke-width="1.3"/>
-                <!-- 3 brand stripes (carmillon, signature) -->
-                <path d="M132 58 L 116 88" stroke="oklch(0.55 0.20 30)" stroke-width="4" stroke-linecap="round"/>
-                <path d="M146 58 L 130 88" stroke="oklch(0.55 0.20 30)" stroke-width="4" stroke-linecap="round"/>
-                <path d="M160 58 L 144 88" stroke="oklch(0.55 0.20 30)" stroke-width="4" stroke-linecap="round"/>
-                <!-- stitching detail -->
-                <path d="M44 64 Q 78 60 110 60" fill="none" stroke="oklch(0.20 0.012 60)" stroke-width="0.6" stroke-dasharray="2.5 2.5" opacity="0.55"/>
+                <path d="M212 42 L 232 32 Q 238 32 238 38 L 236 50 Q 232 54 224 52 Z" fill="url(#shoe-upper)" stroke="oklch(0.10 0.012 60)" stroke-width="1.3"/>
+                <!-- swoosh signature carmillon -->
+                <path d="M82 60 Q 130 36 200 56 Q 178 70 130 72 Q 100 70 82 60 Z" fill="oklch(0.55 0.20 30)" stroke="oklch(0.45 0.18 30)" stroke-width="1"/>
+                <!-- branding FOULÉE -->
+                <text x="155" y="50" font-family="Bricolage Grotesque, sans-serif" font-size="9" font-weight="800" fill="oklch(0.94 0.005 80)" letter-spacing="0.5">FOULÉE</text>
+                <!-- stitching détail talon -->
+                <path d="M194 50 Q 198 64 200 76" fill="none" stroke="oklch(0.94 0.005 80)" stroke-width="0.6" stroke-dasharray="2 2" opacity="0.6"/>
+                <!-- éclat lumineux subtil (highlight) -->
+                <path d="M50 38 Q 80 28 130 28" fill="none" stroke="oklch(0.94 0.005 80)" stroke-width="1.2" opacity="0.35" stroke-linecap="round"/>
               </svg>
               <!-- thumbs gallery (3 mini-vignettes) -->
               <span class="app-shop-image-thumbs" aria-hidden="true">

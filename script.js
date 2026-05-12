@@ -81,7 +81,7 @@
 
     // Section 3 — PARTIE 2 (1 vue globale + 7 phases)
     { name: 'Partie 2 · vue globale', section: 3, step: 'P2',
-      target: { kind: 'group', ids: ['part2-header', 'prod-tool', 'prod-app-live'] }, pad: 140 },
+      target: { kind: 'bloc', id: 'part2-header' }, pad: 80 },
     { name: '2.1 L\'outil qui voit le code', section: 3, step: '2.1',
       target: { kind: 'bloc', id: 'prod-tool' } },
     { name: '2.2 Le PO arrive sur l\'app', section: 3, step: '2.2',
@@ -359,28 +359,21 @@
       'review-arrive-revealed'
     );
 
-    // ── Hero card transit : UNE carte (#kcard-cta) glisse To-Do → Review → Fait
-    // 2.4    : visible dans To-Do (etat de base, aucun modifier)
-    // 2.5    : transit-passage-review (passage explicite To-Do → Review, keyframe
-    //          long 1400ms + ghost trail — voir styles.css)
-    // 2.6/2.6a : transit-review → la carte est arrivée en Review (halo focus)
-    // 2.7    : transit-done → la carte glisse Review → Fait (colonne 3) — T17
-    // Toute autre step → on retire tout, la carte reste en To-Do.
+    // ── Hero card transit : UNE carte (#kcard-cta) parcourt 3 colonnes
+    // 2.4    : transit-doing (IA prend la carte → colonne En cours, halo IA)
+    // 2.5    : transit-passage-review (passage explicite En cours → Fait,
+    //          keyframe long 1400ms + ghost trail — voir styles.css)
+    // 2.6/2.6a/2.7 : transit-done (carte installée en Fait, badge "✓ validé")
+    // Toute autre step → on retire tout, la carte reste en À faire (col 1).
     const hero = document.getElementById('kcard-cta');
     if (hero) {
-      const inDoing      = false; // legacy 2.5 doing → réécrit en passage
-      // En review tant qu'on est à 2.5/2.6/2.6a (la carte est dans la colonne Review).
-      // À 2.7 la carte passe en Fait → on RETIRE transit-review pour laisser
-      // transit-done gagner avec sa translation finale vers colonne 3.
-      const inReview     = (step === '2.5' || step === '2.6' || step === '2.6a');
-      const inPassage    = (step === '2.5'); // déclenche la classe d'anim longue
-      // Focus "tu reviews ÇA" : à 2.5/2.6/2.6a uniquement, pas à 2.7 (carte part en Fait)
-      const inReviewFocus = (step === '2.5' || step === '2.6' || step === '2.6a');
-      // T17 — Passage Review → Fait à 2.7
-      const inDone        = transitDoneSteps.includes(step);
+      const inDoing       = (step === '2.4');
+      const inPassage     = (step === '2.5');
+      const inReviewFocus = (step === '2.6' || step === '2.6a');
+      const inDone        = (step === '2.5' || step === '2.6' || step === '2.6a' || step === '2.7');
       hero.classList.toggle('transit-doing',          inDoing);
-      hero.classList.toggle('transit-review',         inReview);
       hero.classList.toggle('transit-passage-review', inPassage);
+      hero.classList.toggle('transit-review',         false);
       hero.classList.toggle('in-review-focus',        inReviewFocus);
       hero.classList.toggle('transit-done',           inDone);
     }
