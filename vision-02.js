@@ -64,6 +64,22 @@
     return { x, y, w: el.offsetWidth, h: el.offsetHeight };
   }
 
+  function unionRects(els) {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    let count = 0;
+    els.forEach(el => {
+      if (!el) return;
+      const r = getCanvasRect(el);
+      minX = Math.min(minX, r.x);
+      minY = Math.min(minY, r.y);
+      maxX = Math.max(maxX, r.x + r.w);
+      maxY = Math.max(maxY, r.y + r.h);
+      count++;
+    });
+    if (!count) return null;
+    return { x: minX, y: minY, w: maxX - minX, h: maxY - minY };
+  }
+
   function frameRect(r, animated = true, padding = 100, maxScale = 1.4) {
     if (!r) return;
     const sw = stage.clientWidth, sh = stage.clientHeight;
@@ -109,16 +125,16 @@
     // QUESTION → BRIDGE
     ['z1-why',    'bridge-line',   '',                   false, 6],
 
-    // BRIDGE internal
-    ['bridge-line',      'bridge-facts',     '',         false, 7],
-    ['bridge-facts',     'bridge-northstar', '',         true,  7],
-    ['bridge-northstar', 'bridge-rl',        '',         true,  8],
+    // BRIDGE internal — LEFT col (step 7) then RIGHT col (step 8)
+    ['bridge-line',      'bridge-northstar', 'left first',   false, 7],
+    ['bridge-northstar', 'bridge-rl',        '',             true,  7],
+    ['bridge-rl',        'bridge-facts',     'now the right', true,  8],
 
-    // BRIDGE → step-aside (the Danske apps proof)
-    ['bridge-rl',        'bridge-stepaside', 'and yet…', true,  9],
+    // BRIDGE → step-aside (the Danske apps proof, descends below)
+    ['bridge-facts',     'bridge-stepaside', 'and yet…',     true,  9],
 
     // BRIDGE → CHAPTER 1
-    ['bridge-stepaside', 'ch1-inside',       'chapter one', false, 10],
+    ['bridge-stepaside', 'ch1-inside',       'chapter one',  false, 10],
 
     // CHAPTER 1 internal
     ['ch1-inside',  'ch1-outside', 'and outside ?',      true,  11],
@@ -235,14 +251,23 @@
       g.classList.toggle('is-shown', s <= N);
     });
 
-    // Camera : focus the zone of the latest revealed element
+    // Camera : tight on the elements newly revealed AT this step
+    // (not the whole zone — fixes the "ultra-dezoomed" problem when zones are tall)
     if (N < 0) {
       fitWorld(animated);
     } else {
-      const zone = stepZoneCache.get(N);
-      if (zone) {
-        const r = getCanvasRect(zone);
-        frameRect(r, animated, 110, 1.25);
+      const newAtStep = Array.from(canvas.querySelectorAll(`[data-reveal-at="${N}"]`));
+      const r = unionRects(newAtStep);
+      if (r) {
+        // Tighter framing : higher max-scale, smaller padding
+        frameRect(r, animated, 100, 1.4);
+      } else {
+        // Fallback : the parent zone (no elements found at this step)
+        const zone = stepZoneCache.get(N);
+        if (zone) {
+          const zr = getCanvasRect(zone);
+          frameRect(zr, animated, 110, 1.25);
+        }
       }
     }
 
