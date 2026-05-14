@@ -114,25 +114,28 @@
     ['bridge-facts',     'bridge-northstar', '',         true,  7],
     ['bridge-northstar', 'bridge-rl',        '',         true,  8],
 
+    // BRIDGE → step-aside (the Danske apps proof)
+    ['bridge-rl',        'bridge-stepaside', 'and yet…', true,  9],
+
     // BRIDGE → CHAPTER 1
-    ['bridge-rl', 'ch1-inside',    'chapter one',        false, 9],
+    ['bridge-stepaside', 'ch1-inside',       'chapter one', false, 10],
 
     // CHAPTER 1 internal
-    ['ch1-inside',  'ch1-outside', 'and outside ?',      true,  10],
-    ['ch1-outside', 'ch1-stamp',   '',                   false, 11],
+    ['ch1-inside',  'ch1-outside', 'and outside ?',      true,  11],
+    ['ch1-outside', 'ch1-stamp',   '',                   false, 12],
 
     // CHAPTER 1 → CHAPTER 2
-    ['ch1-stamp',   'ch2-flip',    'chapter two',        false, 12],
+    ['ch1-stamp',   'ch2-flip',    'chapter two',        false, 13],
 
     // CHAPTER 2 internal
-    ['ch2-flip',    'ch2-reasons', '',                   true,  13],
-    ['ch2-reasons', 'ch2-alex',    '',                   true,  14],
+    ['ch2-flip',    'ch2-reasons', '',                   true,  14],
+    ['ch2-reasons', 'ch2-alex',    '',                   true,  15],
 
     // CHAPTER 2 → MOVES
-    ['ch2-alex',    'move-1',      'one answer to both', false, 15],
+    ['ch2-alex',    'move-1',      'one answer to both', false, 16],
 
     // MOVES → CLOSING
-    ['move-4',      'closing-line', '',                  false, 16],
+    ['move-4',      'closing-line', '',                  false, 17],
   ];
 
   function drawArrow(fromEl, toEl, label, isCross, revealAt) {
