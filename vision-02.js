@@ -350,6 +350,88 @@
     }
   }, { passive: false });
 
+  /* ════════════════ TOUCH GESTURES (mobile) ════════════════
+     Coexist with the existing single-finger pan above.
+     Hook only pointerType === 'touch'. Pinch with 2 fingers,
+     swipe horizontal for next/prev step, double-tap for fitWorld. */
+  const activePointers = new Map();
+  let pinchStartDist = 0, pinchStartScale = 1, pinchStartMid = null, pinchStartView = null;
+  let isPinching = false;
+  let swipeStartX = 0, swipeStartY = 0, swipeStartT = 0, swipeCandidate = false;
+  let lastTapT = 0, lastTapX = 0, lastTapY = 0;
+  const SWIPE_MIN_DX = 80, SWIPE_MAX_DY = 60, SWIPE_MIN_VEL = 0.3;
+  const DOUBLE_TAP_MS = 300, DOUBLE_TAP_DIST = 30;
+
+  stage.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'touch') return;
+    if (e.target.closest('.progress-labels, .step-counter, .brand-back, a, button')) return;
+    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (activePointers.size === 2) {
+      isDown = false; stage.classList.remove('is-panning');
+      const pts = Array.from(activePointers.values());
+      const dx = pts[1].x - pts[0].x, dy = pts[1].y - pts[0].y;
+      pinchStartDist = Math.hypot(dx, dy) || 1;
+      pinchStartScale = view.scale;
+      pinchStartMid = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+      pinchStartView = { x: view.x, y: view.y };
+      isPinching = true;
+      swipeCandidate = false;
+    } else if (activePointers.size === 1) {
+      swipeStartX = e.clientX; swipeStartY = e.clientY; swipeStartT = performance.now();
+      swipeCandidate = true;
+    }
+  });
+
+  stage.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'touch') return;
+    if (!activePointers.has(e.pointerId)) return;
+    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (isPinching && activePointers.size >= 2) {
+      const pts = Array.from(activePointers.values()).slice(0, 2);
+      const dx = pts[1].x - pts[0].x, dy = pts[1].y - pts[0].y;
+      const dist = Math.hypot(dx, dy) || 1;
+      const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, pinchStartScale * (dist / pinchStartDist)));
+      const rect = stage.getBoundingClientRect();
+      const px = pinchStartMid.x - rect.left, py = pinchStartMid.y - rect.top;
+      const wx = (px - pinchStartView.x) / pinchStartScale;
+      const wy = (py - pinchStartView.y) / pinchStartScale;
+      view.scale = newScale;
+      view.x = px - wx * newScale;
+      view.y = py - wy * newScale;
+      applyTransform();
+    }
+  });
+
+  function endTouch(e) {
+    if (e.pointerType !== 'touch') return;
+    const had = activePointers.get(e.pointerId);
+    activePointers.delete(e.pointerId);
+
+    if (isPinching && activePointers.size < 2) { isPinching = false; swipeCandidate = false; }
+
+    if (!isPinching && activePointers.size === 0 && swipeCandidate && had) {
+      const dt = performance.now() - swipeStartT;
+      const dx = e.clientX - swipeStartX, dy = e.clientY - swipeStartY;
+      const adx = Math.abs(dx), ady = Math.abs(dy);
+      const vel = adx / Math.max(1, dt);
+      if (dt < 250 && adx < 10 && ady < 10) {
+        const now = performance.now();
+        if (now - lastTapT < DOUBLE_TAP_MS && Math.hypot(e.clientX - lastTapX, e.clientY - lastTapY) < DOUBLE_TAP_DIST) {
+          fitWorld(true); lastTapT = 0;
+        } else {
+          lastTapT = now; lastTapX = e.clientX; lastTapY = e.clientY;
+        }
+      } else if (adx > SWIPE_MIN_DX && ady < SWIPE_MAX_DY && vel > SWIPE_MIN_VEL && adx > ady * 1.5) {
+        if (dx < 0) next(); else prev();
+      }
+      swipeCandidate = false;
+    }
+  }
+  stage.addEventListener('pointerup', endTouch);
+  stage.addEventListener('pointercancel', endTouch);
+
   /* ════════════════ KEYBOARD NAV ════════════════ */
   window.addEventListener('keydown', e => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;

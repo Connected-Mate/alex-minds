@@ -411,6 +411,333 @@
     font-family: var(--hand); font-size: 1.05rem;
     color: var(--ink-soft); font-style: italic;
   }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     MOBILE RESPONSIVE — consolidated from 10 parallel mobile agents
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* Allow custom touch gestures (pinch/swipe) without browser interference */
+  #stage { touch-action: none; }
+
+  /* ── TOPBAR ──────────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      flex-direction: row; flex-wrap: wrap;
+      align-items: center;
+      gap: var(--s-2);
+      padding: var(--s-2) var(--s-3);
+      background: oklch(from var(--paper) l c h / 0.97);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--ink-line);
+      z-index: 100;
+    }
+    .brand {
+      flex: 1 1 auto; min-width: 0;
+      padding: 4px 10px; gap: var(--s-2);
+      background: transparent;
+    }
+    .brand-mark { width: 28px; height: 28px; flex-shrink: 0; }
+    .brand-mark svg { width: 24px; height: 24px; }
+    .brand-back { width: 26px; height: 26px; }
+    .brand-text { font-size: 0.88rem; }
+    .brand-tag {
+      font-size: 0.66rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 32ch;
+    }
+    .brand-recipients {
+      display: flex;
+      order: 3;
+      padding-left: 0; margin-left: 0;
+      gap: 6px;
+    }
+    .brand-recipients .recipient-logo { height: 18px; }
+    .brand-recipients .recipient-x { font-size: 0.75rem; }
+    .mode-toggle {
+      order: 4;
+      margin-left: 0;
+      padding: 5px 10px;
+      font-size: 0.66rem;
+      letter-spacing: 0.04em;
+    }
+    .progress-wrap {
+      order: 5;
+      flex: 1 0 100%;
+      max-width: none; width: 100%;
+      margin: 0; padding-top: 4px;
+    }
+    .progress-labels {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      gap: var(--s-3);
+      margin-top: 4px;
+      padding-bottom: 2px;
+      justify-content: flex-start;
+      -webkit-overflow-scrolling: touch;
+    }
+    .progress-labels::-webkit-scrollbar { display: none; }
+    .progress-labels span {
+      flex-shrink: 0;
+      font-size: 0.66rem;
+      white-space: nowrap;
+    }
+  }
+  @media (max-width: 480px) {
+    .topbar { padding: 6px var(--s-2); gap: 6px; }
+    .brand { padding: 2px 6px; gap: 6px; }
+    .brand-back { width: 22px; height: 22px; }
+    .brand-back svg { width: 14px; height: 14px; }
+    .brand-mark { width: 24px; height: 24px; transform: rotate(-5deg); }
+    .brand-mark svg { width: 20px; height: 20px; }
+    .brand-text { font-size: 0.8rem; }
+    .brand-tag { display: none; }
+    .brand-recipients .recipient-logo { height: 14px; }
+    .brand-recipients .recipient-x { font-size: 0.65rem; }
+    .mode-toggle { padding: 4px 8px; font-size: 0.6rem; gap: 4px; }
+    .mode-toggle .dot { width: 5px; height: 5px; }
+    .progress-labels { gap: var(--s-2); }
+    .progress-labels span { font-size: 0.62rem; }
+  }
+
+  /* ── STEP COUNTER (bottom navigator) ─────────────────────────────── */
+  @media (max-width: 768px) {
+    .step-counter {
+      bottom: 14px; right: 50%;
+      transform: translateX(50%);
+      gap: 8px;
+      padding: 8px 12px;
+      font-size: 0.78rem;
+      box-shadow: 0 2px 0 var(--paper-shadow), 0 8px 22px oklch(0 0 0 / 0.10);
+      z-index: 60;
+      max-width: calc(100vw - 24px);
+    }
+    .step-counter .hint { display: none; }
+    .step-counter button { width: 32px; height: 32px; font-size: 1rem; }
+    .faq-btn { padding: 6px 10px; font-size: 0.7rem; letter-spacing: 0.06em; }
+  }
+  @media (max-width: 480px) {
+    .step-counter { bottom: 10px; gap: 6px; padding: 6px 10px; }
+    .step-counter .num { font-size: 0.95rem; }
+    .step-counter button { width: 30px; height: 30px; }
+    /* Compact "IF ASKED" label to "?" on tiny screens */
+    .faq-btn { font-size: 0; padding: 6px 9px; }
+    .faq-btn::before {
+      content: "?";
+      font-size: 0.95rem;
+      font-family: var(--display);
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+  }
+
+  /* ── QUESTION 2×2 → 1 col + aside flow ───────────────────────────── */
+  @media (max-width: 768px) {
+    [data-zone="question"] .v02-2x2 {
+      grid-template-columns: minmax(0, 1fr);
+      grid-auto-rows: auto;
+      gap: 20px;
+      max-width: min(100%, 420px);
+    }
+    [data-zone="question"] .v02-2x2 .sticky {
+      min-width: 0; width: 100%;
+      transform: rotate(-0.4deg);
+    }
+    [data-zone="question"] .v02-2x2 .sticky-pink  { transform: rotate(0.4deg); }
+    [data-zone="question"] .v02-2x2 .sticky-blue  { transform: rotate(0.5deg); }
+    [data-zone="question"] .v02-aside {
+      position: static;
+      display: block;
+      left: auto; top: auto;
+      transform: none;
+      margin: 18px 0 0;
+      max-width: 100%;
+      color: var(--ink-soft);
+    }
+  }
+  @media (max-width: 480px) {
+    [data-zone="question"] .v02-2x2 { gap: 16px; max-width: 100%; }
+    [data-zone="question"] .v02-2x2 .sticky {
+      padding: var(--s-4) var(--s-4) var(--s-5);
+    }
+    [data-zone="question"] .v02-2x2 .sticky .punch  { font-size: 1.15rem; }
+    [data-zone="question"] .v02-2x2 .sticky .detail { font-size: 0.85rem; line-height: 1.4; }
+    [data-zone="question"] .sticky-def .term  { font-size: 1.05rem; }
+    [data-zone="question"] .sticky-def .gloss { font-size: 0.78rem; }
+    [data-zone="question"] .sticky-def .gen   { font-size: 0.82rem; }
+  }
+
+  /* ── BRIDGE : stack 2-col → 1-col, facts FIRST on mobile ─────────── */
+  @media (max-width: 768px) {
+    .bridge-2col {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-top: 24px;
+    }
+    .bridge-col-left, .bridge-col-right { gap: 18px; }
+    .bridge-col-right { order: 1; } /* facts first */
+    .bridge-col-left  { order: 2; }
+    .bridge-2col .sticky { position: static; }
+    .bridge-col-left > p[data-reveal-at="7"] { max-width: 100%; font-size: 1.1rem; }
+  }
+  @media (max-width: 480px) {
+    .bridge-2col { gap: 22px; }
+    [data-zone="bridge"] .v02-handpunch {
+      font-size: clamp(1.6rem, 6.2vw, 2.1rem);
+      line-height: 1.15;
+    }
+    [data-zone="bridge"] .v02-subline { max-width: 100%; font-size: 1rem; }
+    .step-aside-intro .v02-handpunch {
+      font-size: clamp(1.5rem, 5.8vw, 1.9rem);
+      max-width: 24ch;
+    }
+  }
+
+  /* ── STEP-ASIDE screenshots stack ────────────────────────────────── */
+  @media (max-width: 768px) {
+    .bridge-step-aside { margin-top: 36px; padding-top: 20px; }
+    .step-aside-intro { margin-bottom: 18px; }
+    .step-aside-intro .v02-handpunch {
+      font-size: clamp(1.6rem, 5.6vw, 2rem);
+      max-width: 22ch;
+    }
+    .step-aside-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin: 16px 0 22px;
+      align-items: start;
+    }
+    .step-aside-app img { max-width: 300px; border-radius: 26px; }
+    .step-aside-app figcaption { font-size: 0.92rem; max-width: 30ch; margin-top: 12px; }
+    .step-aside-questions { margin-top: 24px; padding: 0 4px; }
+    .step-aside-q { font-size: 0.98rem; line-height: 1.55; margin-bottom: 14px; }
+    .step-aside-q-strong { font-size: clamp(1.3rem, 4.8vw, 1.7rem); line-height: 1.3; }
+  }
+  @media (max-width: 480px) {
+    .bridge-step-aside { margin-top: 28px; padding-top: 16px; }
+    .step-aside-intro .v02-handpunch { font-size: 1.5rem; max-width: 20ch; }
+    .step-aside-grid { gap: 28px; margin: 14px 0 18px; }
+    .step-aside-app img { max-width: 260px; border-radius: 22px; }
+    .step-aside-app figcaption { font-size: 0.88rem; max-width: 28ch; margin-top: 10px; }
+    .step-aside-questions { margin-top: 20px; }
+    .step-aside-q { font-size: 0.94rem; margin-bottom: 12px; }
+    .step-aside-q-strong { font-size: 1.4rem; text-underline-offset: 4px; }
+  }
+
+  /* ── 3 MOVES grid (scoped to "moves" zone only) ──────────────────── */
+  @media (max-width: 768px) {
+    [data-zone="moves"] .v02-2x2 {
+      grid-template-columns: minmax(0, 360px);
+      grid-auto-rows: auto;
+      gap: 22px;
+      max-width: 100%;
+      margin-inline: auto;
+      padding-inline: 16px;
+    }
+    [data-zone="moves"] .v02-2x2 .sticky { transform: none; }
+    [data-zone="moves"] .v02-2x2 .sticky-pink   { transform: rotate(0.8deg); }
+    [data-zone="moves"] .v02-2x2 .sticky-mint   { transform: rotate(-0.6deg); }
+    [data-zone="moves"] .v02-2x2 .sticky-blue   { transform: rotate(0.7deg); }
+    [data-zone="moves"] .v02-2x2 .sticky-yellow { transform: rotate(-0.9deg); }
+    [data-zone="moves"] .v02-2x2 .sticky .punch  { font-size: 1.25rem; line-height: 1.12; }
+    [data-zone="moves"] .v02-2x2 .sticky .detail { font-size: 0.92rem; line-height: 1.5; }
+  }
+  @media (max-width: 480px) {
+    [data-zone="moves"] .v02-2x2 {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+      padding-inline: 12px;
+    }
+    [data-zone="moves"] .v02-2x2 .sticky { padding: 18px 18px 26px; }
+    [data-zone="moves"] .v02-2x2 .sticky .punch  { font-size: 1.18rem; }
+    [data-zone="moves"] .v02-2x2 .sticky .detail { font-size: 0.95rem; }
+  }
+
+  /* ── ABOUT ALEX CARD ─────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .alex-card { padding: 18px 20px !important; max-width: 100%; width: 100%; }
+    .alex-card .name { font-size: 1.4rem; }
+    .alex-card .role { font-size: 0.82rem; margin-bottom: 12px; }
+    .alex-card ul { font-size: 0.9rem; line-height: 1.5; padding-left: 16px; }
+    .alex-card .footer { font-size: 1rem; margin-top: 10px; }
+  }
+  @media (max-width: 480px) {
+    .alex-card { padding: 16px 16px !important; }
+    .alex-card .name { font-size: 1.3rem; line-height: 1.05; }
+    .alex-card .role { font-size: 0.78rem; margin-bottom: 10px; }
+    .alex-card ul { font-size: 0.86rem; line-height: 1.45; padding-left: 14px; }
+    .alex-card ul li { margin-bottom: 3px; }
+    .alex-card .footer { font-size: 0.95rem; margin-top: 10px; }
+  }
+
+  /* ── FLOATING ASIDES → flow normal ─────────────────────────────────
+     Inline style="left:...; top:..." wins by specificity, so we use
+     !important on left/top/transform to defeat the inline values. */
+  @media (max-width: 768px) {
+    .v02-aside {
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      display: block;
+      max-width: 100%;
+      margin: 14px 0 4px;
+      transform: rotate(-1deg) !important;
+      font-size: 1.05rem;
+      line-height: 1.35;
+    }
+    .v02-aside .arrow-glyph { margin-right: 4px; }
+    .v02-aside.speaker-note {
+      padding: 8px 10px;
+      margin: 16px 0;
+      border-radius: 6px;
+    }
+  }
+  @media (max-width: 480px) {
+    .v02-aside {
+      font-size: 0.95rem;
+      margin: 12px 0 2px;
+      transform: none !important;
+      max-width: 100%;
+    }
+    .v02-aside.speaker-note { padding: 6px 8px; font-size: 0.9rem; }
+  }
+
+  /* ── FAQ TRAY (reserve answers) ──────────────────────────────────── */
+  @media (max-width: 768px) {
+    .faq-tray {
+      left: 5vw; right: 5vw;
+      transform: translateY(120%);
+      width: auto; max-width: none;
+      gap: 14px; padding: 14px;
+      max-height: 70vh;
+      overflow-x: auto; overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    body.is-faq-open .faq-tray { transform: translateY(0); }
+    .faq-tray .sticky { width: 280px; scroll-snap-align: center; }
+    .faq-tray-label { left: 16px; transform: none; top: -22px; font-size: 0.62rem; }
+    .faq-close { top: 6px; right: 6px; width: 28px; height: 28px; font-size: 1rem; z-index: 2; }
+  }
+  @media (max-width: 480px) {
+    .faq-tray {
+      left: 5vw; right: 5vw; bottom: 16px;
+      flex-direction: column;
+      gap: 12px; padding: 12px;
+      max-height: 78vh;
+      overflow-x: hidden; overflow-y: auto;
+      scroll-snap-type: none;
+      overscroll-behavior: contain;
+    }
+    .faq-tray .sticky { width: 100%; scroll-snap-align: none; }
+    .faq-tray-label { top: -20px; left: 12px; font-size: 0.58rem; letter-spacing: 0.14em; }
+    .faq-close { top: 8px; right: 8px; width: 32px; height: 32px; font-size: 1.1rem; }
+  }
 </style>
 </head>
 <body>
