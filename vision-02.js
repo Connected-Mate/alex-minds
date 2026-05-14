@@ -101,35 +101,38 @@
   const ARROW_PAIRS = [
     // [from, to, label, isCross, revealAt]
 
-    // Inside QUESTION grid (2×2)
-    ['z1-big',    'z1-rev',        'and you ?',          true,  2],
-    ['z1-rev',    'z1-def',        "what's that ?",      true,  2],
-    ['z1-def',    'z1-why',        '',                   true,  3],
+    // QUESTION internal — now 1-by-1
+    ['z1-big',    'z1-rev',        'and you ?',          true,  3],
+    ['z1-rev',    'z1-def',        "what's that ?",      true,  4],
+    ['z1-def',    'z1-why',        '',                   true,  5],
 
     // QUESTION → BRIDGE
-    ['z1-why',    'bridge-line',   '',                   false, 4],
-    ['bridge-line', 'bridge-northstar', '',              false, 4],
-    ['bridge-northstar', 'bridge-rl',  '',               true,  4],
+    ['z1-why',    'bridge-line',   '',                   false, 6],
+
+    // BRIDGE internal
+    ['bridge-line',      'bridge-facts',     '',         false, 7],
+    ['bridge-facts',     'bridge-northstar', '',         true,  7],
+    ['bridge-northstar', 'bridge-rl',        '',         true,  8],
 
     // BRIDGE → CHAPTER 1
-    ['bridge-rl', 'ch1-inside',    'chapter one',        false, 5],
+    ['bridge-rl', 'ch1-inside',    'chapter one',        false, 9],
 
     // CHAPTER 1 internal
-    ['ch1-inside',  'ch1-outside', 'and outside ?',      true,  6],
-    ['ch1-outside', 'ch1-stamp',   '',                   false, 7],
+    ['ch1-inside',  'ch1-outside', 'and outside ?',      true,  10],
+    ['ch1-outside', 'ch1-stamp',   '',                   false, 11],
 
     // CHAPTER 1 → CHAPTER 2
-    ['ch1-stamp',   'ch2-flip',    'chapter two',        false, 8],
+    ['ch1-stamp',   'ch2-flip',    'chapter two',        false, 12],
 
     // CHAPTER 2 internal
-    ['ch2-flip',    'ch2-reasons', '',                   true,  9],
-    ['ch2-reasons', 'ch2-alex',    '',                   true,  10],
+    ['ch2-flip',    'ch2-reasons', '',                   true,  13],
+    ['ch2-reasons', 'ch2-alex',    '',                   true,  14],
 
     // CHAPTER 2 → MOVES
-    ['ch2-alex',    'move-1',      'one answer to both', false, 11],
+    ['ch2-alex',    'move-1',      'one answer to both', false, 15],
 
     // MOVES → CLOSING
-    ['move-4',      'closing-line', '',                  false, 12],
+    ['move-4',      'closing-line', '',                  false, 16],
   ];
 
   function drawArrow(fromEl, toEl, label, isCross, revealAt) {

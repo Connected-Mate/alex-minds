@@ -17,11 +17,11 @@
      Vision 02 — Become AI-native — 2-chapter speaker canvas
      ────────────────────────────────────────────────────────────────── */
   :root {
-    --world-w: 11800px;
-    --world-h: 1500px;
+    --world-w: 13800px;
+    --world-h: 1600px;
   }
 
-  /* ── Step counter (bottom-right) ─────────────────────────────────── */
+  /* ── Step counter + Reserve button ───────────────────────────────── */
   .step-counter {
     position: fixed;
     bottom: 22px; right: 26px;
@@ -32,9 +32,7 @@
     border: 1px solid var(--ink-line);
     border-radius: 999px;
     box-shadow: 0 2px 0 var(--paper-shadow), 0 6px 18px oklch(0 0 0 / 0.06);
-    font-family: var(--body);
-    font-size: 0.82rem;
-    color: var(--ink-soft);
+    font-family: var(--body); font-size: 0.82rem; color: var(--ink-soft);
     user-select: none;
   }
   .step-counter .num {
@@ -57,34 +55,50 @@
   .step-counter button:disabled { opacity: 0.3; cursor: not-allowed; }
   .step-counter button:disabled:hover { background: var(--paper-shade); color: var(--ink); transform: none; }
 
+  /* "IF ASKED" button — bigger, clearer than before */
+  .faq-btn {
+    border: 0;
+    background: var(--carmillon); color: var(--paper);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: var(--body); font-size: 0.74rem;
+    font-weight: 700; letter-spacing: 0.08em;
+    cursor: pointer;
+    box-shadow: 0 2px 0 oklch(0.35 0.18 25);
+    transition: transform .2s var(--ease-out-q);
+  }
+  .faq-btn:hover { transform: translateY(-1px); }
+
   /* ── Reveal-on-step ──────────────────────────────────────────────── */
   [data-reveal-at] {
     opacity: 0;
     transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
   }
-  [data-reveal-at].is-shown {
-    opacity: 1;
-    pointer-events: auto;
-  }
+  [data-reveal-at].is-shown { opacity: 1; pointer-events: auto; }
   #arrows-layer g.arrow-draw[data-reveal-at] {
     opacity: 0;
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
   #arrows-layer g.arrow-draw[data-reveal-at].is-shown { opacity: 1; }
 
-  /* ── Speaker notes (toggleable) ──────────────────────────────────── */
+  /* ── Speaker notes — visible & explicit ──────────────────────────── */
   .v02-aside.speaker-note {
     color: var(--ink-soft);
     font-style: italic;
-    opacity: 0.78;
+    opacity: 0.88;
+    padding: 6px 12px;
+    background: var(--paper-shade);
+    border: 1px dashed var(--ink-line);
+    border-radius: 6px;
   }
   .v02-aside.speaker-note::before {
-    content: "speaker · ";
-    font-family: var(--body); font-size: 0.7rem;
+    content: "📓 SPEAKER NOTE · ";
+    font-family: var(--body); font-size: 0.66rem;
     text-transform: uppercase; letter-spacing: 0.14em;
-    color: var(--ink-faint); font-style: normal;
-    margin-right: 6px; opacity: 0.6;
+    color: var(--carmillon); font-style: normal;
+    margin-right: 8px; opacity: 0.85;
+    font-weight: 700;
   }
   body.is-public-mode .speaker-note { display: none; }
 
@@ -109,7 +123,7 @@
   body.is-public-mode .mode-toggle .label-speaker { display: none; }
   .mode-toggle .label-public { display: none; }
 
-  /* ── FAQ tray (reserve answers) ──────────────────────────────────── */
+  /* ── FAQ tray ────────────────────────────────────────────────────── */
   .faq-tray {
     position: fixed;
     bottom: 22px; left: 50%;
@@ -117,7 +131,7 @@
     z-index: 60;
     display: flex; gap: 16px;
     padding: 16px;
-    max-width: 720px;
+    max-width: 740px;
     pointer-events: none;
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -125,7 +139,7 @@
     transform: translateX(-50%) translateY(0);
     pointer-events: auto;
   }
-  .faq-tray .sticky { width: 320px; flex-shrink: 0; }
+  .faq-tray .sticky { width: 330px; flex-shrink: 0; }
   .faq-close {
     position: absolute; top: 0; right: 0;
     background: var(--ink); color: var(--paper);
@@ -134,17 +148,14 @@
     font-family: var(--display); font-weight: 700; font-size: 0.9rem;
     cursor: pointer; line-height: 1;
   }
-  .faq-btn {
-    border: 0;
-    background: var(--paper-shade); color: var(--ink);
-    padding: 4px 10px;
-    border-radius: 999px;
+  .faq-tray-label {
+    position: absolute; top: -28px; left: 50%;
+    transform: translateX(-50%);
     font-family: var(--body); font-size: 0.7rem;
-    font-weight: 600; letter-spacing: 0.08em;
-    cursor: pointer;
-    transition: all .2s var(--ease-out-q);
+    font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--carmillon);
   }
-  .faq-btn:hover { background: var(--carmillon); color: var(--paper); }
 
   /* ── Local typography helpers ────────────────────────────────────── */
   .v02-sign {
@@ -158,7 +169,7 @@
     font-family: var(--hand); font-weight: 700;
     font-size: clamp(2.6rem, 4.6vw, 4.4rem);
     line-height: 1.02; color: var(--ink);
-    max-width: 22ch; margin: 0;
+    max-width: 24ch; margin: 0;
   }
   .v02-handpunch em {
     font-style: normal; color: var(--carmillon);
@@ -179,16 +190,14 @@
     box-shadow: 0 4px 0 var(--paper-shadow), 0 10px 28px oklch(0 0 0 / 0.10);
     transform: rotate(-3deg);
     font-family: var(--hand); font-weight: 700;
-    font-size: 3.6rem; color: var(--ink);
-    line-height: 1;
+    font-size: 3.6rem; color: var(--ink); line-height: 1;
   }
 
-  /* Floating hand-written aside */
   .v02-aside {
     position: absolute;
     font-family: var(--hand); font-size: 1.3rem;
     color: var(--carmillon); line-height: 1.2;
-    max-width: 26ch;
+    max-width: 28ch;
     pointer-events: none;
   }
   .v02-aside .arrow-glyph {
@@ -197,7 +206,6 @@
   }
   .v02-aside.is-soft { color: var(--ink-soft); }
 
-  /* 2x2 grid (question + moves) */
   .v02-2x2 {
     display: grid;
     grid-template-columns: repeat(2, minmax(280px, 330px));
@@ -205,15 +213,12 @@
     gap: 28px 32px;
     max-width: 720px;
   }
-
-  /* Single column for chapters (stickies stacked) */
   .v02-stack {
     display: flex; flex-direction: column;
     gap: 24px;
     max-width: 460px;
   }
 
-  /* Definition sticky — dictionary style */
   .sticky-def .term {
     font-family: var(--display); font-weight: 800; font-style: italic;
     font-size: 1.5rem; color: var(--ink); margin: 0 0 4px;
@@ -229,7 +234,6 @@
     font-size: 1.05rem; color: var(--ink);
   }
 
-  /* Chapter label header */
   .chapter-label {
     display: inline-block;
     padding: 6px 14px;
@@ -241,7 +245,7 @@
     margin-bottom: 10px;
   }
 
-  /* ── Topbar recipients (logos) ───────────────────────────────────── */
+  /* ── Topbar recipients ───────────────────────────────────────────── */
   .brand-recipients {
     display: flex; align-items: center; gap: 12px;
     padding-left: 16px; margin-left: auto;
@@ -251,11 +255,9 @@
     font-family: var(--display); font-weight: 700;
     font-size: 0.95rem; color: var(--ink-faint); line-height: 1;
   }
-  @media (max-width: 1100px) {
-    .brand-recipients { display: none; }
-  }
+  @media (max-width: 1200px) { .brand-recipients { display: none; } }
 
-  /* ── Addressed banner inside opening zone ────────────────────────── */
+  /* Addressed banner */
   .v02-addressed {
     display: inline-flex; align-items: center; gap: 18px;
     padding: 10px 18px;
@@ -289,6 +291,31 @@
     background: var(--paper);
   }
   .v02-stamp-big em { font-style: normal; font-size: 2.4rem; display: block; }
+
+  /* About Alex card — special "credentials" sticky */
+  .alex-card {
+    padding: 22px 26px !important;
+    max-width: 420px;
+  }
+  .alex-card .name {
+    font-family: var(--display); font-weight: 800; font-size: 1.6rem;
+    color: var(--ink); margin: 0 0 4px; line-height: 1;
+  }
+  .alex-card .role {
+    font-family: var(--body); font-size: 0.86rem;
+    color: var(--ink-soft); margin: 0 0 14px;
+    font-style: italic;
+  }
+  .alex-card ul {
+    margin: 0; padding-left: 18px;
+    font-size: 0.95rem; color: var(--ink); line-height: 1.55;
+  }
+  .alex-card ul li { margin-bottom: 4px; }
+  .alex-card .footer {
+    margin-top: 12px;
+    font-family: var(--hand); font-size: 1.05rem;
+    color: var(--ink-soft); font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -359,9 +386,9 @@
   <div class="canvas" id="canvas">
 
     <!-- ───────────────────────────────────────────────────────────
-         ACT 0 — OPENING  (reveal 0)
+         ACT 0 — OPENING  (reveals 0..1)
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="0" data-zone="opening" style="--x:80px; --y:380px;">
+    <section class="zone-marker" data-step="0" data-zone="opening" style="--x:80px; --y:340px;">
       <div data-reveal-at="0">
         <div class="v02-addressed">
           <span class="addressed-label">addressed to</span>
@@ -380,111 +407,144 @@
           Those are <em>not</em> the same project.
         </p>
         <span class="v02-sign" style="margin-top:22px;">
-          <strong>— Alexandre Cormeraie</strong><br/>
-          before the room
+          <strong>— Alexandre Cormeraie</strong>
         </span>
       </div>
+
+      <!-- About Alex card — credentials so they know who's talking -->
+      <article class="sticky sticky-mint alex-card" data-bloc="alex-card" data-reveal-at="1"
+               style="margin-top: 32px;">
+        <p class="name">Alexandre Cormeraie · 25</p>
+        <p class="role">Head of AI &amp; Innovation, TGV Europe — speaking for himself today.</p>
+        <ul>
+          <li><strong>12 years</strong> volunteer firefighter — where the duo became my native model.</li>
+          <li>Master's thesis Sept 2025 : <em>"Gen Z in Tech — the urgency."</em></li>
+          <li>Asked this same question in Abu Dhabi to <strong>740 international executives.</strong></li>
+          <li>Mentored at TGV Europe by <strong>Damien Wattez</strong> — 15 yrs senior, our duo built our AI strategy together.</li>
+        </ul>
+        <p class="footer">→ I'm here because I lived what I'm about to propose. Not as theory.</p>
+      </article>
     </section>
 
     <!-- ───────────────────────────────────────────────────────────
-         ACT 1 — THE QUESTION  (reveals 1..3)  ·  2×2 grid
+         ACT 1 — THE QUESTION  (reveals 2..5)  ·  2×2 grid · one by one
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="1" data-zone="question" style="--x:1500px; --y:240px;">
+    <section class="zone-marker" data-step="1" data-zone="question" style="--x:1900px; --y:240px;">
       <div class="zone-header">
-        <span class="zone-no" data-reveal-at="1">01</span>
-        <h2 class="zone-title" data-reveal-at="1">The question</h2>
-        <p class="zone-sub" data-reveal-at="1">One thing before we start.</p>
+        <span class="zone-no" data-reveal-at="2">01</span>
+        <h2 class="zone-title" data-reveal-at="2">The question</h2>
+        <p class="zone-sub" data-reveal-at="2">One thing before we start.</p>
       </div>
 
       <div class="stickies v02-2x2">
-        <article class="sticky sticky-yellow" data-bloc="z1-big" data-reveal-at="1">
+        <article class="sticky sticky-yellow" data-bloc="z1-big" data-reveal-at="2">
           <p class="punch">Who in your ELT is under <em>25</em>?</p>
           <p class="detail">…and under 30?</p>
         </article>
 
-        <article class="sticky sticky-pink" data-bloc="z1-rev" data-reveal-at="2">
+        <article class="sticky sticky-pink" data-bloc="z1-rev" data-reveal-at="3">
           <p class="punch">Do <em>you</em> think you are digital&nbsp;natives?</p>
           <p class="detail">Be honest. No one's looking.</p>
         </article>
 
-        <article class="sticky sticky-mint sticky-def" data-bloc="z1-def" data-reveal-at="2">
+        <article class="sticky sticky-mint sticky-def" data-bloc="z1-def" data-reveal-at="4">
           <p class="term">Digital Native</p>
           <p class="gloss">/ˈdɪdʒɪtəl ˈneɪtɪv/  ·  noun</p>
           <p class="detail">Someone whose cognition was <strong>built with digital tools</strong> during their formative years.</p>
           <p class="gen">→ Gen&nbsp;Z (1997–2012). One foot in, one foot out. The last bridge.</p>
         </article>
 
-        <article class="sticky sticky-blue" data-bloc="z1-why" data-reveal-at="3">
+        <article class="sticky sticky-blue" data-bloc="z1-why" data-reveal-at="5">
           <p class="punch">Then why no one under 30 in your ELT?</p>
-          <p class="detail">You have digital products. Online services. AI everywhere on the roadmap.</p>
+          <p class="detail">You have digital products. Online services. AI everywhere on the Forward '28 roadmap.</p>
           <p class="detail" style="margin-top:8px;"><em>Why aren't they in the room?</em></p>
         </article>
       </div>
 
-      <span class="v02-aside" data-reveal-at="3" style="left: 760px; top: 320px; transform: rotate(-2deg);">
+      <span class="v02-aside" data-reveal-at="5" style="left: 760px; top: 320px; transform: rotate(-2deg);">
         <span class="arrow-glyph">←</span> the silence is the answer.
       </span>
     </section>
 
     <!-- ───────────────────────────────────────────────────────────
-         ACT 2 — THE BRIDGE  (reveal 4)
+         ACT 2 — THE BRIDGE  (reveals 6..8)
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="2" data-zone="bridge" style="--x:3200px; --y:260px;">
+    <section class="zone-marker" data-step="2" data-zone="bridge" style="--x:3700px; --y:200px;">
       <div class="zone-header">
-        <span class="zone-no" data-reveal-at="4">02</span>
-        <h2 class="zone-title" data-reveal-at="4">The bridge</h2>
-        <p class="zone-sub" data-reveal-at="4">What you came here for — and what I came here to say.</p>
+        <span class="zone-no" data-reveal-at="6">02</span>
+        <h2 class="zone-title" data-reveal-at="6">The bridge</h2>
+        <p class="zone-sub" data-reveal-at="6">Two chapters. One ambition.</p>
       </div>
 
-      <div data-bloc="bridge-line" data-reveal-at="4" style="margin-top:14px;">
+      <div data-bloc="bridge-line" data-reveal-at="6" style="margin-top:14px;">
         <p class="v02-handpunch">
-          Two chapters.<br/>Not <em>three questions</em> of mine.
+          Two chapters.<br/>
+          One ambition : <em>AI-native by 2035.</em>
+        </p>
+        <p class="v02-subline" style="margin-top:18px;">
+          You came here for a North Star. The four other rooms today sell you what to <strong>deploy</strong>. I came to help you decide what to <strong>become</strong>.
         </p>
       </div>
 
-      <div data-reveal-at="4" style="margin-top: 32px; display:grid; grid-template-columns: 1fr 1fr; gap:24px; max-width:780px;">
-        <article class="sticky sticky-yellow" data-bloc="bridge-northstar">
-          <p class="punch">Your <em>2035</em> North Star.</p>
-          <p class="detail">Mine for you: <strong>become AI-native by then.</strong> Everything else is projects, not direction.</p>
-          <p class="detail" style="margin-top:8px;"><em>"Not 'we don't invest enough.' 'We don't invest in the right direction.'"</em></p>
+      <div data-reveal-at="7" style="margin-top: 32px; display:grid; grid-template-columns: 1fr 1fr; gap:24px; max-width:780px;">
+        <article class="sticky sticky-carmillon" data-bloc="bridge-facts">
+          <p class="punch">I've done my homework.</p>
+          <p class="detail"><strong>You're not behind. You've started.</strong></p>
+          <p class="detail" style="margin-top:8px;">
+            Forward '28 strategy. <strong>DanskeGPT</strong> in production. Copilot in retail = <strong>+14%</strong> time saved.<br/>
+            AWS multi-year deal. <strong>Dr Fiona Browne</strong> heading AI from Belfast.
+          </p>
+          <p class="detail" style="margin-top:8px;"><em>At Davos in January, Carsten : "AI investments are long-term — build the basics first."</em></p>
+          <p class="detail" style="margin-top:10px;"><strong>The rails are down. The question is who's driving the train.</strong></p>
         </article>
 
-        <article class="sticky sticky-carmillon" data-bloc="bridge-rl">
-          <p class="punch">Responsive Leadership ?</p>
-          <p class="detail">Your framework only <em>responds</em> to what's already in the room.</p>
-          <p class="detail" style="margin-top:8px;"><strong>Make sure the future is already in the room.</strong></p>
+        <article class="sticky sticky-yellow" data-bloc="bridge-northstar">
+          <p class="punch">Your <em>2035</em> North Star.</p>
+          <p class="detail">Mine for you : <strong>AI-native by then.</strong> Everything else is projects, not direction.</p>
+          <p class="detail" style="margin-top:8px;"><em>"Not 'we don't invest enough.' 'We don't invest in the right direction.'"</em></p>
+          <p class="detail" style="margin-top:10px;">That's how you stop running projects, and start choosing them.</p>
         </article>
       </div>
 
-      <span class="v02-aside" data-reveal-at="4" style="left: 0px; top: 560px; transform: rotate(-2deg); color: var(--ink-soft); max-width:32ch;">
-        <span class="arrow-glyph">↑</span> 2 years ago : we did defend → win. today : win → AI-native. you've already shown you can.
+      <article class="sticky sticky-pink" data-bloc="bridge-rl" data-reveal-at="8"
+               style="margin-top: 24px; max-width: 460px;">
+        <p class="punch">Your own framework — Responsive Leadership.</p>
+        <p class="detail">It only <em>responds</em> to what's already in the room.</p>
+        <p class="detail" style="margin-top:8px;"><strong>So make sure the future is already in the room.</strong></p>
+      </article>
+
+      <span class="v02-aside" data-reveal-at="8"
+            style="left: 540px; top: 880px; transform: rotate(-2deg); color: var(--ink-soft); max-width:32ch;">
+        <span class="arrow-glyph">↑</span> 2 years ago we did <em>defend → win</em>. today : <em>win + AI</em>. you've already shown you can shift identities.
       </span>
     </section>
 
     <!-- ───────────────────────────────────────────────────────────
-         ACT 3 — CHAPTER 1 · ADOPT  (reveals 5..7)
+         ACT 3 — CHAPTER 1 · ADOPT  (reveals 9..11)
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="3" data-zone="ch1" style="--x:5100px; --y:220px;">
-      <div data-reveal-at="5">
+    <section class="zone-marker" data-step="3" data-zone="ch1" style="--x:5900px; --y:200px;">
+      <div data-reveal-at="9">
         <span class="chapter-label">Chapter 1 · Adopt</span>
         <h2 class="zone-title">From inside out.</h2>
-        <p class="zone-sub">Tech adoption — across customers <em>and</em> employees.</p>
+        <p class="zone-sub">Adoption across both segments — employees <em>and</em> customers.</p>
       </div>
 
       <div class="v02-stack" style="margin-top: 22px;">
-        <article class="sticky sticky-yellow" data-bloc="ch1-inside" data-reveal-at="5">
-          <p class="punch">Inside : convince the seniors.</p>
-          <p class="detail">Three real gaps : <strong>generation</strong>, <strong>gender</strong>, <strong>tech literacy</strong>. Same answer for all three.</p>
-          <p class="detail" style="margin-top:8px;">Not training. <em>Permission.</em> Make AI the default — not the exception you have to justify.</p>
+        <article class="sticky sticky-yellow" data-bloc="ch1-inside" data-reveal-at="9">
+          <p class="punch">Inside — the seniors and the gaps.</p>
+          <p class="detail">Three real gaps to close : <strong>generation, gender, tech literacy</strong>. Same answer for all three.</p>
+          <p class="detail" style="margin-top:8px;">Not training. <em>Permission.</em> Make AI the default — not the exception someone has to justify.</p>
+          <p class="detail" style="margin-top:8px;"><em>You already have DanskeGPT shipped. The hard part is flipping the default.</em></p>
         </article>
 
-        <article class="sticky sticky-pink" data-bloc="ch1-outside" data-reveal-at="6">
-          <p class="punch">Outside : your customers are becoming AI-native too.</p>
+        <article class="sticky sticky-pink" data-bloc="ch1-outside" data-reveal-at="10">
+          <p class="punch">Outside — your customers became natives too.</p>
           <p class="detail">A 22-year-old gets a denial letter in the voice of 1985. They don't argue. They leave. <em>Quietly.</em> On TikTok.</p>
-          <p class="detail" style="margin-top:8px;"><strong>Two segmentations. Same readiness gap. Both yours to close.</strong></p>
+          <p class="detail" style="margin-top:8px;">Retail = 50% of your activity. Mortgages, deposits. Today's 22-year-olds are your 2035 borrowers.</p>
+          <p class="detail" style="margin-top:8px;"><strong>Two segmentations. Same readiness gap.</strong></p>
         </article>
 
-        <div data-bloc="ch1-stamp" data-reveal-at="7" style="margin-top: 14px;">
+        <div data-bloc="ch1-stamp" data-reveal-at="11" style="margin-top: 14px;">
           <span class="v02-stamp-big">
             Readiness <em>≠</em> deployment.
           </span>
@@ -493,34 +553,35 @@
     </section>
 
     <!-- ───────────────────────────────────────────────────────────
-         ACT 4 — CHAPTER 2 · ATTRACT  (reveals 8..10)
+         ACT 4 — CHAPTER 2 · ATTRACT  (reveals 12..14)
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="4" data-zone="ch2" style="--x:6900px; --y:220px;">
-      <div data-reveal-at="8">
+    <section class="zone-marker" data-step="4" data-zone="ch2" style="--x:7900px; --y:200px;">
+      <div data-reveal-at="12">
         <span class="chapter-label">Chapter 2 · Attract</span>
         <h2 class="zone-title">Who attracted you ? Who keeps you ?</h2>
         <p class="zone-sub">Atypical profiles — how you bring them, how you keep them.</p>
       </div>
 
       <div class="v02-stack" style="margin-top: 22px;">
-        <article class="sticky sticky-yellow" data-bloc="ch2-flip" data-reveal-at="8">
-          <p class="punch">Flip the question — for yourselves.</p>
-          <p class="detail">Each of you : think of the one person who decided you'd stay or go. Was it HR ? No. It was someone you <em>respected</em> in the room.</p>
+        <article class="sticky sticky-yellow" data-bloc="ch2-flip" data-reveal-at="12">
+          <p class="punch">Flip the question — for yourselves first.</p>
+          <p class="detail">Each of you : think of the one person who decided you'd stay or go in your career. Was it HR ? No. It was someone you <em>respected</em> in the room.</p>
           <p class="detail" style="margin-top:8px;"><strong>Now : who in this room makes an Alex want to stay ?</strong></p>
         </article>
 
-        <article class="sticky sticky-mint" data-bloc="ch2-reasons" data-reveal-at="9">
+        <article class="sticky sticky-mint" data-bloc="ch2-reasons" data-reveal-at="13">
           <p class="punch">5 reasons GenZ stays in a 150-year-old institution.</p>
           <p class="detail">
-            <strong>1.</strong> Ownership — can I sign without three approvals ?<br/>
+            <strong>1.</strong> Ownership — sign without three approvals.<br/>
             <strong>2.</strong> Velocity — 6 hours, not 6 weeks.<br/>
             <strong>3.</strong> Mission you can say in one sentence.<br/>
             <strong>4.</strong> Permission to fail visibly.<br/>
             <strong>5.</strong> People who already look like the future.
           </p>
+          <p class="detail" style="margin-top:8px;"><em>Reason 5 is the silent one. It's also the one that matters most.</em></p>
         </article>
 
-        <article class="sticky sticky-blue" data-bloc="ch2-alex" data-reveal-at="10">
+        <article class="sticky sticky-blue" data-bloc="ch2-alex" data-reveal-at="14">
           <p class="punch">The Alex test.</p>
           <p class="detail">Photograph your ELT tomorrow. Show it to a 24-year-old engineer in Lyngby. Ask : <em>"is this where you want to spend 5 years ?"</em></p>
           <p class="detail" style="margin-top:8px;"><strong>Their face tells you everything your engagement survey doesn't.</strong></p>
@@ -529,76 +590,76 @@
     </section>
 
     <!-- ───────────────────────────────────────────────────────────
-         ACT 5 — THREE MOVES  (reveal 11)
+         ACT 5 — THREE MOVES  (reveal 15)
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="5" data-zone="moves" style="--x:8700px; --y:220px;">
-      <div data-reveal-at="11">
+    <section class="zone-marker" data-step="5" data-zone="moves" style="--x:9900px; --y:200px;">
+      <div data-reveal-at="15">
         <span class="chapter-label">One answer to both chapters</span>
         <h2 class="zone-title">Three moves. All real. All already done somewhere.</h2>
       </div>
 
       <div class="v02-2x2" style="margin-top: 22px;">
-        <article class="sticky sticky-pink" data-bloc="move-1" data-reveal-at="11">
+        <article class="sticky sticky-pink" data-bloc="move-1" data-reveal-at="15">
           <p class="punch">Reverse mentoring at the top.</p>
           <p class="detail">Each ELT member gets a coach under 30. 2h / month. Not training — conversation.</p>
-          <p class="detail" style="margin-top:8px;"><em>Orange : 500 duos. <strong>5.8× ROI.</strong> +85% AI adoption.</em></p>
+          <p class="detail" style="margin-top:8px;"><em>Orange : 500 duos. <strong>5.8× ROI.</strong> +85% AI adoption among executives.</em></p>
         </article>
 
-        <article class="sticky sticky-mint" data-bloc="move-2" data-reveal-at="11">
+        <article class="sticky sticky-mint" data-bloc="move-2" data-reveal-at="15">
           <p class="punch">A shadow board of digital natives.</p>
           <p class="detail">15–20 employees under 30 — yours, not consultants. One job : <em>challenge</em> the ELT each quarter.</p>
           <p class="detail" style="margin-top:8px;"><em>Havas : "COMEX of Digital Natives" — 35 with official mandate to push back.</em></p>
         </article>
 
-        <article class="sticky sticky-blue" data-bloc="move-3" data-reveal-at="11">
+        <article class="sticky sticky-blue" data-bloc="move-3" data-reveal-at="15">
           <p class="punch">Indivisible duos on every transformation.</p>
           <p class="detail">Two names at the top. Senior + digital native. Same accountability, same recognition.</p>
           <p class="detail" style="margin-top:8px;"><em>McKinsey : <strong>+27%</strong> profitability, <strong>+19 pts</strong> innovation revenue.</em></p>
         </article>
 
-        <article class="sticky sticky-yellow" data-bloc="move-4" data-reveal-at="11">
+        <article class="sticky sticky-yellow" data-bloc="move-4" data-reveal-at="15">
           <p class="punch">Make this place a magnet.</p>
-          <p class="detail">If "HR will figure it out" is the answer to chapter 2 — they're already at Qonto.</p>
+          <p class="detail">If "HR will figure it out" is your answer to chapter 2 — they're already at Qonto.</p>
           <p class="detail" style="margin-top:8px;"><strong>Decision-makers who <em>are</em> like the talent you want = the only real recruiter.</strong></p>
         </article>
       </div>
     </section>
 
     <!-- ───────────────────────────────────────────────────────────
-         ACT 6 — CLOSING  (reveals 12..14)
+         ACT 6 — CLOSING  (reveals 16..18)
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="6" data-zone="closing" style="--x:10500px; --y:340px;">
-      <div data-bloc="closing-line" data-reveal-at="12">
+    <section class="zone-marker" data-step="6" data-zone="closing" style="--x:11900px; --y:300px;">
+      <div data-bloc="closing-line" data-reveal-at="16">
         <p class="v02-handpunch">
           I came to tell you <em>who</em> to put next&nbsp;to&nbsp;you.
         </p>
       </div>
 
-      <p class="v02-subline" data-reveal-at="12" style="margin-top:24px;">
+      <p class="v02-subline" data-reveal-at="16" style="margin-top:24px;">
         The four other rooms today sell you what to <em>deploy</em>. The first is buyable. The second — who decides — is the only thing actually yours.
       </p>
 
-      <article class="sticky sticky-mint" data-bloc="closing-day3" data-reveal-at="13"
+      <article class="sticky sticky-mint" data-bloc="closing-day3" data-reveal-at="17"
                style="margin-top: 32px; max-width: 380px;">
         <p class="punch">Day 3 — seed planted.</p>
         <p class="detail">Wednesday you'll debate : <em>"Gen Z perspective on Danske as a workplace."</em> You already know what I think.</p>
       </article>
 
-      <span class="v02-aside" data-reveal-at="13"
+      <span class="v02-aside" data-reveal-at="17"
             style="left: 440px; top: 380px; transform: rotate(-3deg); color: var(--ink-soft); max-width: 30ch;">
         <span class="arrow-glyph">↗</span> PS · INSEAD asked me about a 190-year-old rail network. Same answer for a 150-year-old bank.
       </span>
 
-      <div data-reveal-at="14" style="margin-top: 36px;">
+      <div data-reveal-at="18" style="margin-top: 36px;">
         <span class="v02-tak" aria-label="Tak — thank you in Danish">Tak.</span>
       </div>
 
-      <span class="v02-sign" data-reveal-at="14" style="margin-top:32px;">
+      <span class="v02-sign" data-reveal-at="18" style="margin-top:32px;">
         <strong>— Alexandre Cormeraie</strong><br/>
         from the workshop · 2026
       </span>
 
-      <span class="v02-aside" data-reveal-at="14" style="left: 460px; top: 60px; transform: rotate(-3deg);">
+      <span class="v02-aside" data-reveal-at="18" style="left: 460px; top: 60px; transform: rotate(-3deg);">
         <span class="arrow-glyph">←</span> "tak" means thank you in danish.
       </span>
     </section>
@@ -607,31 +668,33 @@
 </main>
 
 <!-- ═══════════════════════════════════════════════════════════════════
-     STEP COUNTER (bottom-right)
+     STEP COUNTER + RESERVE button (bottom-right)
      ═══════════════════════════════════════════════════════════════════ -->
 <div class="step-counter" aria-label="Speech step navigator">
   <button id="step-prev" aria-label="Previous step" title="Previous (←)">‹</button>
-  <span><span class="num" id="step-current">0</span> / <span id="step-total">15</span></span>
+  <span><span class="num" id="step-current">0</span> / <span id="step-total">19</span></span>
   <button id="step-next" aria-label="Next step" title="Next (→ or space)">›</button>
-  <button class="faq-btn" id="faq-btn" title="Reserve answers to the other INSEAD questions (press 'i')">RESERVE</button>
+  <button class="faq-btn" id="faq-btn" title="Reserve answers — only if someone asks you about accountability or the human role (press 'i')">IF&nbsp;ASKED</button>
   <span class="hint">←/→ space · i · p</span>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════════
-     FAQ TRAY — reserve answers (toggle with 'i')
+     FAQ TRAY — reserve answers to the 2 other INSEAD questions
      ═══════════════════════════════════════════════════════════════════ -->
 <div class="faq-tray" id="faq-tray" aria-hidden="true">
+  <span class="faq-tray-label">If someone asks you — here are the answers</span>
+
   <article class="sticky sticky-yellow">
-    <p class="punch" style="font-size:1.05rem;">If asked about <em>accountability</em></p>
+    <p class="punch" style="font-size:1.05rem;">"Who's <em>accountable</em> when AI predicts ?"</p>
     <p class="detail" style="margin-top:8px;">The model executes. The operator follows. The timetable describes. <strong>Accountability sits with whoever defined what "acceptable" is</strong> — acceptable delay, error rate, customer impact. Often years before the model existed.</p>
-    <p class="detail" style="margin-top:8px;"><em>That someone is in this room.</em></p>
+    <p class="detail" style="margin-top:8px;"><em>That someone is in this room. Not in the model.</em></p>
   </article>
 
   <article class="sticky sticky-pink">
-    <p class="punch" style="font-size:1.05rem;">If asked about the <em>human role</em></p>
+    <p class="punch" style="font-size:1.05rem;">"What's left for <em>humans</em> ?"</p>
     <p class="detail" style="margin-top:8px;"><strong>Three things AI can't take :</strong></p>
     <p class="detail" style="margin-top:6px;">1 · Defining what "good" means when there is no precedent.<br/>2 · Holding accountability when things go wrong publicly.<br/>3 · Deciding what NOT to automate — and why.</p>
-    <p class="detail" style="margin-top:8px;"><em>All three are about being someone humans hold to account.</em></p>
+    <p class="detail" style="margin-top:8px;"><em>All three about being someone humans hold to account.</em></p>
   </article>
 
   <button class="faq-close" id="faq-close" aria-label="Close reserve panel">×</button>
