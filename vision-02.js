@@ -253,20 +253,22 @@
 
     // Camera : tight on the elements newly revealed AT this step
     // (not the whole zone — fixes the "ultra-dezoomed" problem when zones are tall)
+    // Mobile : allow higher max-scale + smaller padding to fit stickies in narrow viewport.
+    const isMobileVw = window.innerWidth < 768;
+    const camPadding  = isMobileVw ? 20 : 100;
+    const camMaxScale = isMobileVw ? 2.8 : 1.4;
     if (N < 0) {
       fitWorld(animated);
     } else {
       const newAtStep = Array.from(canvas.querySelectorAll(`[data-reveal-at="${N}"]`));
       const r = unionRects(newAtStep);
       if (r) {
-        // Tighter framing : higher max-scale, smaller padding
-        frameRect(r, animated, 100, 1.4);
+        frameRect(r, animated, camPadding, camMaxScale);
       } else {
-        // Fallback : the parent zone (no elements found at this step)
         const zone = stepZoneCache.get(N);
         if (zone) {
           const zr = getCanvasRect(zone);
-          frameRect(zr, animated, 110, 1.25);
+          frameRect(zr, animated, camPadding, isMobileVw ? 2.2 : 1.25);
         }
       }
     }
