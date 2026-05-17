@@ -13,6 +13,7 @@
   const stepTotalEl   = document.getElementById('step-total');
   const stepPrevBtn   = document.getElementById('step-prev');
   const stepNextBtn   = document.getElementById('step-next');
+  const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
   if (!stage || !canvas || !arrows || !arrowsG) return;
 
@@ -117,41 +118,26 @@
   const ARROW_PAIRS = [
     // [from, to, label, isCross, revealAt]
 
-    // QUESTION internal — now 1-by-1
-    ['z1-big',    'z1-rev',        'and you ?',          true,  3],
-    ['z1-rev',    'z1-def',        "what's that ?",      true,  4],
-    ['z1-def',    'z1-why',        '',                   true,  5],
+    // QUESTION internal — removed cluttered arrows that crossed through stickies;
+    // the 2x2 grid is clear on its own and reveals one sticky at a time anyway.
 
-    // QUESTION → BRIDGE
-    ['z1-why',    'bridge-line',   '',                   false, 6],
+    // QUESTION → OPENING (Alex introduces himself after the silence question)
+    ['z1-why',    'opening-hero',  'now — me',           false, 4],
 
-    // BRIDGE internal — LEFT col (step 7) then RIGHT col (step 8)
-    ['bridge-line',      'bridge-northstar', 'left first',   false, 7],
-    ['bridge-northstar', 'bridge-rl',        '',             true,  7],
-    ['bridge-rl',        'bridge-facts',     'now the right', true,  8],
+    // OPENING → BRIDGE (Alex finishes his story, the room moves to the why)
+    ['alex-critic', 'bridge-line', 'so why DN ?',        false, 9],
 
-    // BRIDGE → step-aside (the Danske apps proof, descends below)
-    ['bridge-facts',     'bridge-stepaside', 'and yet…',     true,  9],
+    // CH.1 close → CH.2 BECOME (sa-punch closes Ch.1, TGV senior opens the duo story)
+    ['sa-punch',     'ch2-tge-senior', 'how we did it', false, 34],
 
-    // BRIDGE → CHAPTER 1
-    ['bridge-stepaside', 'ch1-inside',       'chapter one',  false, 10],
+    // CH.2 BECOME → CH.3 KEEP (readiness/deployment stamp closes ch.2, flip opens ch.3)
+    ['ch1-stamp',    'ch2-flip', 'chapter three — keep them', false, 41],
 
-    // CHAPTER 1 internal
-    ['ch1-inside',  'ch1-outside', 'and outside ?',      true,  11],
-    ['ch1-outside', 'ch1-stamp',   '',                   false, 12],
-
-    // CHAPTER 1 → CHAPTER 2
-    ['ch1-stamp',   'ch2-flip',    'chapter two',        false, 13],
-
-    // CHAPTER 2 internal
-    ['ch2-flip',    'ch2-reasons', '',                   true,  14],
-    ['ch2-reasons', 'ch2-alex',    '',                   true,  15],
-
-    // CHAPTER 2 → MOVES
-    ['ch2-alex',    'move-1',      'one answer to both', false, 16],
+    // CH.3 → MOVES (duos-everywhere closes ch.3, the named-pair move opens)
+    ['ch3-duos-everywhere', 'move-2', 'the three moves', false, 53],
 
     // MOVES → CLOSING
-    ['move-4',      'closing-line', '',                  false, 17],
+    ['move-4',      'closing-line', 'closing',           false, 56],
   ];
 
   function drawArrow(fromEl, toEl, label, isCross, revealAt) {
@@ -245,6 +231,21 @@
       const s = parseInt(el.dataset.revealAt);
       el.classList.toggle('is-shown', s <= N);
     });
+    // Elements with data-hide-at disappear once we reach that step
+    document.querySelectorAll('[data-hide-at]').forEach(el => {
+      const h = parseInt(el.dataset.hideAt);
+      el.classList.toggle('is-hidden', !Number.isNaN(h) && N >= h);
+    });
+    // Bridge pivot : AI-native gets struck through once the "Digital-native first"
+    // correction reveals (step 10). Driven by the same step engine.
+    document.querySelectorAll('.ai-native-target').forEach(el => {
+      el.classList.toggle('struck', N >= 10);
+    });
+    // Split stage : phones land at step 29, THEN tiles fly to their columns at step 30
+    const splitStage = document.getElementById('split-stage');
+    if (splitStage) {
+      splitStage.classList.toggle('is-split', N >= 30);
+    }
     // Arrows (live in #arrows-layer)
     arrowsG.querySelectorAll('g.arrow-draw[data-reveal-at]').forEach(g => {
       const s = parseInt(g.dataset.revealAt);
@@ -260,13 +261,19 @@
     if (N < 0) {
       fitWorld(animated);
     } else {
-      const newAtStep = Array.from(canvas.querySelectorAll(`[data-reveal-at="${N}"]`));
-      const r = unionRects(newAtStep);
-      if (r) {
-        frameRect(r, animated, camPadding, camMaxScale);
+      const zone = stepZoneCache.get(N);
+      // If the zone is marked as "frame whole zone", keep the camera on the full
+      // zone-marker instead of zooming on the just-revealed element. Lets a 2x2
+      // grid stay readable as items appear one by one.
+      if (zone && zone.dataset.frameMode === 'zone') {
+        const zr = getCanvasRect(zone);
+        frameRect(zr, animated, camPadding, isMobileVw ? 2.0 : 1.05);
       } else {
-        const zone = stepZoneCache.get(N);
-        if (zone) {
+        const newAtStep = Array.from(canvas.querySelectorAll(`[data-reveal-at="${N}"]`));
+        const r = unionRects(newAtStep);
+        if (r) {
+          frameRect(r, animated, camPadding, camMaxScale);
+        } else if (zone) {
           const zr = getCanvasRect(zone);
           frameRect(zr, animated, camPadding, isMobileVw ? 2.2 : 1.25);
         }
@@ -437,14 +444,7 @@
   /* ════════════════ KEYBOARD NAV ════════════════ */
   window.addEventListener('keydown', e => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    if (e.key === 'Escape') {
-      if (document.body.classList.contains('is-faq-open')) {
-        toggleFaq(false);
-        return;
-      }
-      applyStep(-1);
-      return;
-    }
+    if (e.key === 'Escape') { applyStep(-1); return; }
     if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
       e.preventDefault();
       next();
@@ -455,10 +455,6 @@
     }
     if (e.key === 'Home' || e.key === '0') applyStep(0);
     if (e.key === 'End') applyStep(MAX_STEP);
-    if (e.key === 'i' || e.key === 'I') {
-      e.preventDefault();
-      toggleFaq();
-    }
     if (e.key === 'p' || e.key === 'P') {
       e.preventDefault();
       togglePublicMode();
@@ -474,34 +470,18 @@
   function togglePublicMode() {
     applyPublicMode(!document.body.classList.contains('is-public-mode'));
   }
-  // Restore preference
   try {
     const stored = localStorage.getItem(STORE_MODE);
     if (stored === '1') applyPublicMode(true);
   } catch (_) {}
 
-  const modeToggleBtn = document.getElementById('mode-toggle');
-  if (modeToggleBtn) modeToggleBtn.addEventListener('click', togglePublicMode);
-
-  /* ════════════════ FAQ TRAY (reserve answers) ════════════════ */
-  const faqTray = document.getElementById('faq-tray');
-  const faqBtn  = document.getElementById('faq-btn');
-  const faqClose = document.getElementById('faq-close');
-
-  function toggleFaq(force) {
-    const open = typeof force === 'boolean' ? force : !document.body.classList.contains('is-faq-open');
-    document.body.classList.toggle('is-faq-open', open);
-    if (faqTray) faqTray.setAttribute('aria-hidden', open ? 'false' : 'true');
-  }
-  if (faqBtn)   faqBtn.addEventListener('click', () => toggleFaq());
-  if (faqClose) faqClose.addEventListener('click', () => toggleFaq(false));
-
   /* ════════════════ PROGRESS LABELS CLICK ════════════════
      Click on a zone label → jump to the first step of that zone */
   document.querySelectorAll('.progress-labels span').forEach(s => {
-    s.addEventListener('click', () => {
+    s.addEventListener('pointerdown', (e) => { e.stopPropagation(); }, { passive: true });
+    s.addEventListener('click', (e) => {
+      e.stopPropagation();
       const targetAct = parseInt(s.dataset.step);
-      // Find the first step whose zone matches this act
       for (let step = 0; step <= MAX_STEP; step++) {
         const zone = stepZoneCache.get(step);
         if (zone && parseInt(zone.dataset.step) === targetAct) {
@@ -513,8 +493,14 @@
   });
 
   /* ════════════════ STEP COUNTER BUTTONS ════════════════ */
-  if (stepPrevBtn) stepPrevBtn.addEventListener('click', prev);
-  if (stepNextBtn) stepNextBtn.addEventListener('click', next);
+  function bindNavBtn(btn, fn) {
+    if (!btn) return;
+    btn.addEventListener('pointerdown', (e) => { e.stopPropagation(); }, { passive: true });
+    btn.addEventListener('touchstart', (e) => { e.stopPropagation(); }, { passive: true });
+    btn.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); fn(); });
+  }
+  bindNavBtn(stepPrevBtn, prev);
+  bindNavBtn(stepNextBtn, next);
 
   /* ════════════════ RESIZE ════════════════ */
   let resizeTimer = null;

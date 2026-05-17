@@ -17,7 +17,7 @@
      Vision 02 — Become AI-native — 2-chapter speaker canvas
      ────────────────────────────────────────────────────────────────── */
   :root {
-    --world-w: 14600px;
+    --world-w: 16600px;
     --world-h: 2000px;
   }
 
@@ -50,24 +50,15 @@
     cursor: pointer;
     display: inline-flex; align-items: center; justify-content: center;
     transition: transform .2s var(--ease-out-q), background .2s var(--ease-out-q);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
   }
   .step-counter button:hover { background: var(--carmillon); color: var(--paper); }
   .step-counter button:disabled { opacity: 0.3; cursor: not-allowed; }
   .step-counter button:disabled:hover { background: var(--paper-shade); color: var(--ink); transform: none; }
-
-  /* "IF ASKED" button — bigger, clearer than before */
-  .faq-btn {
-    border: 0;
-    background: var(--carmillon); color: var(--paper);
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-family: var(--body); font-size: 0.74rem;
-    font-weight: 700; letter-spacing: 0.08em;
-    cursor: pointer;
-    box-shadow: 0 2px 0 oklch(0.35 0.18 25);
-    transition: transform .2s var(--ease-out-q);
-  }
-  .faq-btn:hover { transform: translateY(-1px); }
 
   /* ── Reveal-on-step ──────────────────────────────────────────────── */
   [data-reveal-at] {
@@ -102,61 +93,6 @@
   }
   body.is-public-mode .speaker-note { display: none; }
 
-  /* ── Mode toggle in topbar ───────────────────────────────────────── */
-  .mode-toggle {
-    display: inline-flex; align-items: center; gap: 6px;
-    margin-left: 12px;
-    padding: 6px 12px;
-    border: 1px solid var(--ink-line);
-    background: var(--paper);
-    border-radius: 999px;
-    font-family: var(--body); font-size: 0.72rem;
-    font-weight: 600; letter-spacing: 0.06em;
-    color: var(--ink);
-    cursor: pointer; user-select: none;
-    transition: all .2s var(--ease-out-q);
-  }
-  .mode-toggle:hover { background: var(--paper-shade); }
-  .mode-toggle .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--carmillon); display: inline-block; }
-  body.is-public-mode .mode-toggle .dot { background: var(--mint-deep, oklch(0.52 0.14 162)); }
-  body.is-public-mode .mode-toggle .label-public { display: inline; }
-  body.is-public-mode .mode-toggle .label-speaker { display: none; }
-  .mode-toggle .label-public { display: none; }
-
-  /* ── FAQ tray ────────────────────────────────────────────────────── */
-  .faq-tray {
-    position: fixed;
-    bottom: 22px; left: 50%;
-    transform: translateX(-50%) translateY(120%);
-    z-index: 60;
-    display: flex; gap: 16px;
-    padding: 16px;
-    max-width: 740px;
-    pointer-events: none;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  body.is-faq-open .faq-tray {
-    transform: translateX(-50%) translateY(0);
-    pointer-events: auto;
-  }
-  .faq-tray .sticky { width: 330px; flex-shrink: 0; }
-  .faq-close {
-    position: absolute; top: 0; right: 0;
-    background: var(--ink); color: var(--paper);
-    border: 0; width: 24px; height: 24px;
-    border-radius: 50%;
-    font-family: var(--display); font-weight: 700; font-size: 0.9rem;
-    cursor: pointer; line-height: 1;
-  }
-  .faq-tray-label {
-    position: absolute; top: -28px; left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--body); font-size: 0.7rem;
-    font-weight: 700; letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--carmillon);
-  }
-
   /* ── Local typography helpers ────────────────────────────────────── */
   .v02-sign {
     display: block;
@@ -175,6 +111,64 @@
     font-style: normal; color: var(--carmillon);
     text-decoration: underline wavy var(--carmillon);
     text-underline-offset: 6px;
+  }
+  /* "AI-native" gets crossed out as we pivot to digital-native */
+  .v02-handpunch em.struck,
+  .v02-handpunch em.ai-native-target.struck {
+    color: var(--ink-soft);
+    text-decoration: line-through wavy var(--carmillon);
+    text-decoration-thickness: 4px;
+    opacity: 0.88;
+    transition: color 0.45s ease, opacity 0.45s ease;
+  }
+  /* AI-native target sits ready to be struck — no decoration until JS toggles .struck */
+  .v02-handpunch em.ai-native-target {
+    font-style: normal;
+    color: var(--carmillon);
+    text-decoration: none;
+    transition: color 0.35s ease;
+  }
+
+  /* Bridge PIVOT — "Digital-native first" hand-written correction floating above */
+  .bridge-pivot-container { display: block; }
+  .bridge-correction {
+    position: absolute;
+    top: -78px;
+    left: 18%;
+    margin: 0;
+    font-family: var(--hand);
+    font-weight: 700;
+    font-size: clamp(2rem, 3.4vw, 3rem);
+    line-height: 1.05;
+    color: var(--carmillon);
+    transform: rotate(-3deg);
+    transform-origin: left bottom;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .bridge-correction .bc-arrow {
+    display: inline-block;
+    margin-right: 12px;
+    transform: rotate(15deg) translateY(8px);
+    font-size: 1.5em;
+    color: var(--carmillon);
+  }
+  .bridge-correction .bc-text strong { color: var(--carmillon); font-weight: 700; }
+  .bridge-correction .bc-text em {
+    font-style: italic; color: var(--carmillon);
+    text-decoration: underline wavy var(--carmillon);
+    text-underline-offset: 4px;
+  }
+  /* Enter animation : the correction scribbles in from above */
+  [data-bloc="bridge-correction"][data-reveal-at] {
+    transform: rotate(-3deg) translateY(-12px) scale(0.96);
+    transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  [data-bloc="bridge-correction"][data-reveal-at].is-shown {
+    transform: rotate(-3deg) translateY(0) scale(1);
+  }
+  @media (max-width: 720px) {
+    .bridge-correction { top: -56px; left: 4%; font-size: 1.6rem; }
   }
   .v02-subline {
     font-family: var(--body); font-size: 1.08rem;
@@ -218,6 +212,169 @@
     gap: 24px;
     max-width: 460px;
   }
+
+  /* Ch.2 Become — title swap (two overlapping h2s, first hides as second reveals) */
+  .ch2-title-swap {
+    position: relative;
+    min-height: 6.2em;
+    max-width: 720px;
+  }
+  .ch2-title-state {
+    position: absolute;
+    inset: 0 0 auto 0;
+  }
+
+  /* Ch.2 Become — TGV duo triangle : senior LEFT, junior RIGHT, apex (duo) BELOW */
+  .v02-triangle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 28px;
+    max-width: 820px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  .v02-triangle .triangle-left  { transform: rotate(-0.6deg); }
+  .v02-triangle .triangle-right { transform: rotate(0.7deg); }
+  .v02-triangle .triangle-apex {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 540px;
+    margin-top: 4px;
+    transform: rotate(-0.4deg);
+  }
+  /* Small uppercase label sitting at the top-left of each duo card */
+  .card-label {
+    font-family: var(--hand);
+    font-size: 0.95rem;
+    color: var(--carmillon);
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 720px) {
+    .v02-triangle { grid-template-columns: 1fr; gap: 18px; }
+    .v02-triangle .triangle-apex { max-width: 100%; }
+  }
+
+  /* Ch2 Attract — 2-col grid (Ch2 grew from 3 to 7 stickies, stack would be too tall) */
+  .ch2-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 26px 30px;
+    max-width: 980px;
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .ch2-grid { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  /* OPENING — step 1 layout : TGV photo on the left, "Hi" sticky on the right */
+  .opening-step1 {
+    display: grid;
+    grid-template-columns: minmax(360px, 1.1fr) minmax(280px, 0.9fr);
+    gap: 44px;
+    align-items: center;
+    margin-top: 32px;
+    max-width: 1100px;
+  }
+  .opening-step1 .figjam-photo { margin: 0; }
+  .opening-step1 > .sticky { padding: 26px 26px 30px; max-width: 380px; }
+
+  /* Reveal animation : photo slides in from left, Hi sticky slides in from right with bounce */
+  .opening-step1 .figjam-photo[data-reveal-at] {
+    transform: rotate(-1.2deg) translateX(-50px) scale(0.92);
+    transition:
+      opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .opening-step1 .figjam-photo[data-reveal-at].is-shown {
+    transform: rotate(-1.2deg) translateX(0) scale(1);
+  }
+  .opening-step1 > .sticky[data-bloc="alex-hi"] {
+    transform: rotate(-0.8deg);
+    transform-origin: center;
+  }
+  .opening-step1 > .sticky[data-bloc="alex-hi"][data-reveal-at] {
+    transform: rotate(-0.8deg) translateX(50px) scale(0.94);
+    transition:
+      opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
+  }
+  .opening-step1 > .sticky[data-bloc="alex-hi"][data-reveal-at].is-shown {
+    transform: rotate(-0.8deg) translateX(0) scale(1);
+  }
+  .opening-step1 > .sticky .punch {
+    font-family: var(--display); font-weight: 800;
+    font-size: 1.5rem; line-height: 1.08;
+    margin: 0 0 12px;
+  }
+  .opening-step1 > .sticky .detail {
+    font-size: 0.95rem; line-height: 1.55;
+    margin: 0;
+  }
+  @media (max-width: 820px) {
+    .opening-step1 { grid-template-columns: 1fr; gap: 24px; align-items: start; }
+  }
+
+  /* OPENING — TGV photo, FigJam-style frame (white border + soft shadows + tiny tilt) */
+  .figjam-photo {
+    display: inline-block;
+    padding: 10px 10px 14px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow:
+      0 2px 4px rgba(20, 14, 6, 0.06),
+      0 8px 18px rgba(20, 14, 6, 0.10),
+      0 22px 48px rgba(20, 14, 6, 0.10);
+    transform: rotate(-1.2deg);
+    max-width: 100%;
+    margin: 28px 0 0;
+  }
+  .figjam-photo img {
+    display: block;
+    width: 520px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 3px;
+  }
+  .figjam-photo figcaption {
+    font-family: var(--hand);
+    font-size: 1rem;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-top: 8px;
+    letter-spacing: 0.01em;
+  }
+  /* Elements that disappear once their hide-at step is reached */
+  [data-hide-at].is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* OPENING — multi-sticky intro grid (replaces the single big alex-card) */
+  .opening-stickies {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(260px, 320px));
+    grid-auto-rows: minmax(180px, auto);
+    gap: 24px 28px;
+    max-width: 1040px;
+    align-items: start;
+  }
+  .opening-stickies .sticky { padding: 22px 22px 26px; }
+  .opening-stickies .sticky .punch {
+    font-family: var(--display); font-weight: 800;
+    font-size: 1.35rem; line-height: 1.1;
+    margin: 0 0 10px;
+  }
+  .opening-stickies .sticky .detail {
+    font-size: 0.92rem; line-height: 1.5;
+    margin: 0;
+  }
+  .opening-stickies .sticky-mint    { transform: rotate(-1deg); }
+  .opening-stickies .sticky-yellow  { transform: rotate(0.8deg); }
+  .opening-stickies .sticky-pink    { transform: rotate(-0.6deg); }
+  .opening-stickies .sticky-blue    { transform: rotate(0.5deg); }
+  .opening-stickies .sticky-carmillon { transform: rotate(-0.4deg); }
 
   .sticky-def .term {
     font-family: var(--display); font-weight: 800; font-style: italic;
@@ -292,17 +449,86 @@
   }
   .v02-stamp-big em { font-style: normal; font-size: 2.4rem; display: block; }
 
-  /* ── BRIDGE : 2-column layout (left/right) ───────────────────────── */
+  /* ── BRIDGE : 2-column layout (left wider so TGV Europe sticky stretches sideways) */
   .bridge-2col {
     display: grid;
-    grid-template-columns: 1fr 1.05fr;
-    gap: 48px;
-    max-width: 1120px;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 56px;
+    max-width: 1380px;
     align-items: start;
     margin-top: 36px;
   }
   .bridge-col-left, .bridge-col-right {
     display: flex; flex-direction: column;
+  }
+  /* BRIDGE — vision stack : two real Mobilbank DK screenshots, today on top, 2026 vision below */
+  .vision-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    max-width: 980px;
+    margin: 56px auto 0;
+  }
+  .vision-shot { margin: 0; text-align: center; width: 100%; }
+  .vision-shot img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow:
+      0 4px 10px rgba(20, 14, 6, 0.08),
+      0 20px 44px rgba(20, 14, 6, 0.14);
+    border: 1px solid oklch(0 0 0 / 0.06);
+    display: block;
+  }
+  .vision-shot figcaption {
+    margin-top: 14px;
+    font-family: var(--body);
+    font-size: 1rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    max-width: 600px;
+    margin-left: auto; margin-right: auto;
+  }
+  .vision-shot figcaption strong { color: var(--ink); }
+  .vision-shot figcaption em { color: var(--carmillon); font-style: italic; }
+  .vision-arrow {
+    font-family: var(--hand);
+    font-size: 1.55rem;
+    color: var(--carmillon);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 4px 0;
+    text-align: center;
+  }
+  .vision-arrow em { font-style: italic; color: var(--carmillon); }
+
+  /* Right-column "homework" sticky — bumped readability so it survives zoom-out framing */
+  .bridge-col-right .sticky[data-bloc="bridge-facts"] {
+    padding: 30px 30px 34px;
+  }
+  .bridge-col-right .sticky[data-bloc="bridge-facts"] .punch {
+    font-size: 1.7rem;
+    line-height: 1.08;
+    margin: 0 0 8px;
+  }
+  .bridge-col-right .sticky[data-bloc="bridge-facts"] .detail {
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  /* North Star + Responsive Leadership side by side inside the left column */
+  .bridge-left-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+  .bridge-left-row .sticky { padding: 20px 20px 24px; }
+  .bridge-left-row .sticky .punch  { font-size: 1.25rem; line-height: 1.12; }
+  .bridge-left-row .sticky .detail { font-size: 0.9rem; line-height: 1.5; }
+  @media (max-width: 720px) {
+    .bridge-left-row { grid-template-columns: 1fr; gap: 18px; }
   }
 
   /* ── BRIDGE step-aside : Danske app screenshots showing creative side ──
@@ -358,6 +584,444 @@
   }
   .step-aside-app figcaption strong { color: var(--ink); }
   .step-aside-app figcaption em { color: var(--carmillon); font-style: italic; }
+
+  /* SPLIT STAGE — feature cloud (step 27) → tiles slide one-by-one under each phone (step 28) */
+  .split-stage {
+    position: relative;
+    max-width: 1100px;
+    height: 1380px;
+    margin: 64px auto 0;
+  }
+  .split-stage .phone-tile {
+    position: absolute;
+    top: 340px;     /* phones live in the MIDDLE band, below the cloud */
+    width: 250px;
+  }
+  .split-stage .phone-tile.is-ai-side   { left: 50%; transform-origin: top center; margin-left: -425px; }
+  .split-stage .phone-tile.is-bank-side { left: 50%; transform-origin: top center; margin-left: 175px; }
+
+  /* Feature cloud — wrapper sized to the cloud area only (top band).
+     Tiles inside overflow visually when they migrate at step 28, but the cloud's
+     own bbox stays tight so the camera at step 27 zooms on the cluster, not the full stage. */
+  .feature-cloud {
+    position: absolute;
+    left: 0; right: 0;
+    top: 0;
+    height: 340px;
+    pointer-events: none;
+  }
+  .feature-tile {
+    position: absolute;
+    left: 50%; top: 0;
+    padding: 8px 14px;
+    background: var(--paper);
+    border: 1px solid var(--ink-line);
+    border-radius: 999px;
+    font-family: var(--body); font-weight: 500;
+    font-size: 0.82rem; line-height: 1;
+    color: var(--ink);
+    box-shadow: 0 2px 6px rgba(20,14,6,0.06), 0 8px 20px rgba(20,14,6,0.08);
+    white-space: nowrap;
+    /* Tile is centered horizontally on (50% + --x) and vertically on (--y). */
+    transform: translate(calc(-50% + var(--x, 0px)), var(--y, 0px)) rotate(var(--r, 0deg));
+    transition:
+      opacity 0.45s ease,
+      transform 0.7s cubic-bezier(0.22, 1.2, 0.36, 1),
+      background 0.55s ease,
+      color 0.55s ease,
+      border-color 0.55s ease;
+    transition-delay: calc(var(--i, 0) * 55ms);
+  }
+  /* Step 29 : tile migration — phones are already landed (step 28), so the slide
+     starts immediately, per-tile stagger plays the "one-by-one slide" under each phone. */
+  .split-stage.is-split .feature-tile {
+    transition-delay: calc(var(--i, 0) * 55ms);
+  }
+  /* Default state = cloud : tile uses --cx (X offset from stage horizontal centre) + --cy (Y from stage top) */
+  .split-stage .feature-tile.tile-ai,
+  .split-stage .feature-tile.tile-bank {
+    --x: var(--cx, 0px);
+    --y: var(--cy, 280px);
+    --r: var(--cr, 0deg);
+  }
+  /* Split state = tiles fly to their column directly under the matching phone */
+  .split-stage.is-split .feature-tile.tile-ai,
+  .split-stage.is-split .feature-tile.tile-bank {
+    --x: var(--sx, 0px);
+    --y: var(--sy, 600px);
+    --r: var(--sr, 0deg);
+  }
+  .split-stage.is-split .feature-tile.tile-ai {
+    background: oklch(0.96 0.018 270 / 0.92);
+    border-color: rgba(108, 99, 255, 0.35);
+    color: #2c2870;
+  }
+  .split-stage.is-split .feature-tile.tile-bank {
+    background: oklch(0.96 0.04 70 / 0.92);
+    border-color: rgba(218, 119, 86, 0.35);
+    color: #6b3a1f;
+  }
+  /* Step 27 — invisible framing rect centred on the cloud (y 30..300 → centre y=165).
+     The 500px tall anchor sits symmetrically around the cloud so the camera frames it
+     in the middle of the viewport instead of the bottom half.
+     IMPORTANT : no transform — getCanvasRect() reads offsetLeft/offsetTop only, so
+     centering must be done via `left: calc(50% - half-width)`, not `translateX(-50%)`. */
+  .cloud-frame-anchor {
+    position: absolute;
+    left: calc(50% - 500px);
+    top: -85px;
+    width: 1000px;
+    height: 500px;
+    pointer-events: none;
+  }
+  /* Step 29 — invisible framing rect spanning phones (top:340) down to the bottom
+     of the tile columns (~1380). Camera uses its bbox to frame the full migration. */
+  .split-frame-anchor {
+    position: absolute;
+    left: 0; right: 0;
+    top: 340px;
+    height: 1040px;
+    pointer-events: none;
+  }
+
+  /* AI header variant : logo only, no "DIA" text, no "chat" label */
+  .ph-ai-header--logo-only {
+    justify-content: center !important;
+    border-bottom: 1px solid rgba(245,239,225,0.08);
+    padding: 4px 0 14px;
+    margin-bottom: 12px;
+  }
+  .ph-ai-header--logo-only .ph-ai-dot {
+    width: 36px; height: 36px; border-radius: 10px;
+  }
+
+  /* Shared phone shell */
+  .phone-mockup {
+    width: 250px;
+    border-radius: 36px;
+    box-shadow: 0 4px 10px rgba(20,14,6,0.06), 0 24px 52px rgba(20,14,6,0.16);
+    border: 8px solid #0d0d10;
+    overflow: hidden;
+    background: #0d0d10;
+    position: relative;
+  }
+  .phone-screen {
+    border-radius: 26px;
+    overflow: hidden;
+    padding: 16px 14px 12px;
+    min-height: 460px;
+    position: relative;
+  }
+  .ph-statusbar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'SF Pro Text', system-ui, -apple-system, sans-serif;
+    font-size: 0.62rem; font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 14px;
+    padding: 0 4px;
+  }
+  .ph-statusbar.dark { color: #f5efe1; }
+  .ph-statusbar .ph-icons { letter-spacing: 0.05em; opacity: 0.85; }
+
+  .phone-mockup .phone-tagline {
+    text-align: center;
+    font-family: var(--hand);
+    font-size: 1rem;
+    color: var(--carmillon);
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+  .phone-foot {
+    margin: 12px 0 0;
+    font-family: var(--body);
+    font-size: 0.78rem;
+    text-align: center;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .phone-foot strong { color: var(--ink); font-weight: 700; }
+  .phone-foot em { color: var(--carmillon); font-style: italic; }
+
+  /* STARTER PHONE — today's mobile bank, dense list */
+  .phone-mockup.is-starter .phone-screen { background: var(--paper-shade); }
+  .ph-starter-header {
+    font-family: var(--display); font-weight: 800;
+    font-size: 0.95rem; color: var(--ink);
+    margin: 4px 0 4px;
+  }
+  .ph-starter-sub {
+    font-family: var(--body); font-size: 0.68rem;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+  }
+  .ph-starter-list { list-style: none; padding: 0; margin: 0; font-family: var(--body); font-size: 0.78rem; line-height: 1.5; }
+  .ph-starter-list li { padding: 6px 6px; border-bottom: 1px solid oklch(0 0 0 / 0.05); color: var(--ink); display: flex; justify-content: space-between; }
+  .ph-starter-list li:last-child { border-bottom: none; }
+  .ph-starter-list li span:last-child { color: var(--ink-faint); font-size: 0.86em; }
+
+  /* AI PHONE — DIA / ChatGPT-like dark chat interface */
+  .phone-mockup.is-ai .phone-screen {
+    background: linear-gradient(180deg, #1a1a1f 0%, #0f0f13 100%);
+    color: #f5efe1;
+  }
+  .ph-ai-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 4px 14px;
+    border-bottom: 1px solid rgba(245,239,225,0.08);
+    margin-bottom: 12px;
+  }
+  .ph-ai-dot {
+    width: 26px; height: 26px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #DA7756 0%, #6c63ff 50%, #4285F4 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  .ph-ai-name {
+    font-family: 'SF Pro Display', system-ui, sans-serif;
+    font-weight: 700; font-size: 0.95rem;
+    color: #f5efe1;
+    letter-spacing: -0.01em;
+  }
+  .ph-ai-mode {
+    font-family: 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.62rem; color: rgba(245,239,225,0.5);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-left: auto;
+  }
+  .ph-ai-providers {
+    display: flex; gap: 8px; justify-content: center;
+    padding: 6px 0 14px;
+    border-bottom: 1px solid rgba(245,239,225,0.08);
+    margin-bottom: 12px;
+  }
+  .ai-provider {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px;
+    border-radius: 11px;
+  }
+  .ai-provider svg { width: 22px; height: 22px; }
+  .ai-provider.claude    { background: rgba(218,119,86,0.16);  color: #DA7756; }
+  .ai-provider.chatgpt   { background: rgba(245,239,225,0.92); color: #0d0d10; }
+  .ai-provider.gemini    { background: linear-gradient(135deg, rgba(66,133,244,0.16), rgba(145,104,192,0.22)); }
+  .ph-ai-chat { display: flex; flex-direction: column; gap: 8px; padding: 0 4px; min-height: 220px; }
+  .chat-bubble {
+    font-family: 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.74rem; line-height: 1.35;
+    padding: 8px 12px; border-radius: 14px;
+    max-width: 80%;
+  }
+  .chat-bubble.user {
+    align-self: flex-end;
+    background: #2563eb; color: #f5efe1;
+    border-bottom-right-radius: 4px;
+  }
+  .chat-bubble.ai {
+    align-self: flex-start;
+    background: rgba(245,239,225,0.06); color: #f5efe1;
+    border-bottom-left-radius: 4px;
+  }
+  .ph-ai-input {
+    margin-top: 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 12px;
+    background: rgba(245,239,225,0.06);
+    border-radius: 16px;
+    border: 1px solid rgba(245,239,225,0.08);
+  }
+  .ph-input-text {
+    font-family: 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.74rem; color: rgba(245,239,225,0.45);
+  }
+  .ph-input-mic {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #DA7756 0%, #4285F4 100%);
+    box-shadow: 0 0 8px rgba(218,119,86,0.4);
+  }
+
+  /* BANK PHONE — Danske premium, card-centric experience */
+  .phone-mockup.is-bank .phone-screen {
+    background: linear-gradient(180deg, #f8f2e3 0%, #ebe1cc 100%);
+    color: var(--ink);
+  }
+  .ph-bank-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 4px 4px 12px;
+  }
+  .ph-bank-greet {
+    font-family: 'SF Pro Display', system-ui, sans-serif;
+    font-weight: 700; font-size: 0.86rem;
+    color: var(--ink);
+  }
+  .ph-bank-greet small { display: block; font-weight: 400; font-size: 0.62rem; color: var(--ink-soft); margin-top: 2px; }
+  .ph-bank-avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #003366 0%, #0066cc 100%);
+    color: #f5efe1;
+    font-family: 'SF Pro Display', system-ui, sans-serif;
+    font-weight: 700; font-size: 0.78rem;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .ph-bank-card {
+    background: linear-gradient(135deg, #003366 0%, #001a33 60%, #1a4d80 100%);
+    border-radius: 16px;
+    padding: 14px 16px 16px;
+    color: #f5efe1;
+    position: relative;
+    box-shadow: 0 6px 16px rgba(0,30,60,0.28);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .ph-bank-card::before {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,239,225,0.18), transparent 70%);
+  }
+  .ph-card-label {
+    font-family: 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em;
+    opacity: 0.7; margin-bottom: 4px;
+  }
+  .ph-card-balance {
+    font-family: 'SF Pro Display', system-ui, sans-serif;
+    font-weight: 700; font-size: 1.5rem;
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .ph-card-balance span { font-size: 0.65rem; opacity: 0.6; margin-left: 4px; }
+  .ph-card-foot {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .ph-card-chip {
+    width: 26px; height: 18px;
+    background: linear-gradient(135deg, #d4a76a, #b8853d);
+    border-radius: 4px;
+  }
+  .ph-card-name {
+    font-family: 'SF Mono', ui-monospace, monospace;
+    font-size: 0.62rem; letter-spacing: 0.06em;
+    opacity: 0.85;
+  }
+  .ph-bank-insight {
+    background: rgba(255,255,255,0.55);
+    border-radius: 14px;
+    padding: 10px 12px 12px;
+    margin-bottom: 10px;
+  }
+  .ph-insight-title {
+    font-family: 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.68rem; color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .ph-insight-bars {
+    display: flex; gap: 4px; align-items: flex-end; height: 28px;
+  }
+  .ph-insight-bars span {
+    flex: 1;
+    background: linear-gradient(180deg, #003366, #0066cc);
+    border-radius: 2px 2px 0 0;
+  }
+  .ph-insight-bars span:nth-child(1) { height: 35%; }
+  .ph-insight-bars span:nth-child(2) { height: 55%; }
+  .ph-insight-bars span:nth-child(3) { height: 28%; }
+  .ph-insight-bars span:nth-child(4) { height: 70%; }
+  .ph-insight-bars span:nth-child(5) { height: 45%; }
+  .ph-insight-bars span:nth-child(6) { height: 88%; opacity: 0.55; }
+  .ph-insight-bars span:nth-child(7) { height: 60%; opacity: 0.55; }
+  .ph-bank-goal {
+    display: flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, rgba(218,119,86,0.18), rgba(0,102,204,0.12));
+    border-radius: 14px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+  .ph-goal-icon {
+    width: 28px; height: 28px;
+    background: var(--paper);
+    border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'SF Pro Display', system-ui, sans-serif;
+    font-weight: 700; font-size: 0.85rem;
+    color: var(--carmillon);
+  }
+  .ph-goal-body { flex: 1; min-width: 0; }
+  .ph-goal-text {
+    font-family: 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.74rem; font-weight: 600; color: var(--ink);
+    display: block; line-height: 1.2;
+  }
+  .ph-goal-sub {
+    font-family: 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.62rem; color: var(--ink-soft);
+  }
+  .ph-goal-progress {
+    font-family: 'SF Pro Display', system-ui, sans-serif;
+    font-weight: 700; font-size: 0.78rem;
+    color: var(--ink);
+  }
+  .ph-bank-tabs {
+    display: flex; justify-content: space-around;
+    padding: 8px 0 0;
+    border-top: 1px solid oklch(0 0 0 / 0.06);
+    margin-top: 6px;
+  }
+  .ph-bank-tabs span {
+    font-family: 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.6rem;
+    color: var(--ink-faint);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .ph-bank-tabs span.active { color: var(--carmillon); font-weight: 600; }
+
+  /* Phone-tile reveal motion : slide in toward the centre when the split happens */
+  .split-stage .phone-tile.is-ai-side .phone-mockup   { transform: rotate(-1.5deg); }
+  .split-stage .phone-tile.is-bank-side .phone-mockup { transform: rotate(1.5deg); }
+  .split-stage .phone-tile[data-reveal-at] {
+    transition: opacity 0.6s ease, transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .split-stage .phone-tile.is-ai-side[data-reveal-at]:not(.is-shown)   { transform: translate(0, 140px); }
+  .split-stage .phone-tile.is-bank-side[data-reveal-at]:not(.is-shown) { transform: translate(0, 140px); }
+  .split-stage .phone-tile[data-reveal-at].is-shown { transform: translate(0, 0); }
+  @media (max-width: 760px) {
+    .split-stage { height: auto; min-height: 600px; }
+    .split-stage .phone-tile.is-ai-side,
+    .split-stage .phone-tile.is-bank-side { position: relative; left: auto; right: auto; margin: 12px auto; }
+    .feature-cloud { width: 90%; height: 320px; }
+  }
+
+  /* When the dev evidence is shown alone (its own step), collapse the grid to single col */
+  .step-aside-grid--dev { grid-template-columns: 1fr; }
+
+  /* Wide landscape screenshot (developers.danskebank.com) — spans both columns under the 2 phones */
+  .step-aside-dev {
+    grid-column: 1 / -1;
+    margin: 28px 0 0;
+    text-align: center;
+  }
+  .step-aside-dev img {
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 28px oklch(0 0 0 / 0.14);
+    border: 1px solid oklch(0 0 0 / 0.06);
+    display: block;
+    margin: 0 auto;
+  }
+  .step-aside-dev figcaption {
+    margin-top: 14px;
+    font-family: var(--body);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    max-width: 560px;
+    margin-left: auto; margin-right: auto;
+    line-height: 1.45;
+  }
+  .step-aside-dev figcaption strong { color: var(--ink); }
+  .step-aside-dev figcaption em { color: var(--carmillon); font-style: italic; }
 
   .step-aside-questions {
     text-align: center;
@@ -455,13 +1119,6 @@
     }
     .brand-recipients .recipient-logo { height: 18px; }
     .brand-recipients .recipient-x { font-size: 0.75rem; }
-    .mode-toggle {
-      order: 4;
-      margin-left: 0;
-      padding: 5px 10px;
-      font-size: 0.66rem;
-      letter-spacing: 0.04em;
-    }
     .progress-wrap {
       order: 5;
       flex: 1 0 100%;
@@ -497,8 +1154,6 @@
     .brand-tag { display: none; }
     .brand-recipients .recipient-logo { height: 14px; }
     .brand-recipients .recipient-x { font-size: 0.65rem; }
-    .mode-toggle { padding: 4px 8px; font-size: 0.6rem; gap: 4px; }
-    .mode-toggle .dot { width: 5px; height: 5px; }
     .progress-labels { gap: var(--s-2); }
     .progress-labels span { font-size: 0.62rem; }
   }
@@ -526,35 +1181,6 @@
       min-width: 44px;
       font-size: 1.15rem;
     }
-    /* IF ASKED → round "?" button, same size as prev/next, carmillon bg */
-    .step-counter .faq-btn {
-      width: 44px !important;
-      height: 44px !important;
-      min-width: 44px;
-      padding: 0 !important;
-      border-radius: 50% !important;
-      background: var(--carmillon) !important;
-      color: var(--paper) !important;
-      font-size: 0 !important;
-      letter-spacing: 0 !important;
-      box-shadow: 0 2px 0 oklch(0.35 0.18 25) !important;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-    }
-    .step-counter .faq-btn::before {
-      content: "?";
-      font-family: var(--display);
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--paper);
-      line-height: 1;
-    }
-    .step-counter .faq-btn:hover {
-      transform: translateY(-1px);
-      background: var(--carmillon) !important;
-    }
   }
   @media (max-width: 480px) {
     .step-counter {
@@ -563,13 +1189,11 @@
       padding: 6px 8px;
     }
     .step-counter .num { font-size: 1rem; }
-    .step-counter button,
-    .step-counter .faq-btn {
+    .step-counter button {
       width: 42px !important;
       height: 42px !important;
       min-width: 42px;
     }
-    .step-counter .faq-btn::before { font-size: 1.2rem; }
   }
 
   /* ── QUESTION 2×2 → 1 col + aside flow ───────────────────────────── */
@@ -619,7 +1243,7 @@
     .bridge-col-right { order: 1; } /* facts first */
     .bridge-col-left  { order: 2; }
     .bridge-2col .sticky { position: static; }
-    .bridge-col-left > p[data-reveal-at="7"] { max-width: 100%; font-size: 1.1rem; }
+    .bridge-col-left > p[data-reveal-at="14"] { max-width: 100%; font-size: 1.1rem; }
   }
   @media (max-width: 480px) {
     .bridge-2col { gap: 22px; }
@@ -744,38 +1368,6 @@
     }
     .v02-aside.speaker-note { padding: 6px 8px; font-size: 0.9rem; }
   }
-
-  /* ── FAQ TRAY (reserve answers) ──────────────────────────────────── */
-  @media (max-width: 768px) {
-    .faq-tray {
-      left: 5vw; right: 5vw;
-      transform: translateY(120%);
-      width: auto; max-width: none;
-      gap: 14px; padding: 14px;
-      max-height: 70vh;
-      overflow-x: auto; overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-    body.is-faq-open .faq-tray { transform: translateY(0); }
-    .faq-tray .sticky { width: 280px; scroll-snap-align: center; }
-    .faq-tray-label { left: 16px; transform: none; top: -22px; font-size: 0.62rem; }
-    .faq-close { top: 6px; right: 6px; width: 28px; height: 28px; font-size: 1rem; z-index: 2; }
-  }
-  @media (max-width: 480px) {
-    .faq-tray {
-      left: 5vw; right: 5vw; bottom: 16px;
-      flex-direction: column;
-      gap: 12px; padding: 12px;
-      max-height: 78vh;
-      overflow-x: hidden; overflow-y: auto;
-      scroll-snap-type: none;
-      overscroll-behavior: contain;
-    }
-    .faq-tray .sticky { width: 100%; scroll-snap-align: none; }
-    .faq-tray-label { top: -20px; left: 12px; font-size: 0.58rem; letter-spacing: 0.14em; }
-    .faq-close { top: 8px; right: 8px; width: 32px; height: 32px; font-size: 1.1rem; }
-  }
 </style>
 </head>
 <body>
@@ -805,10 +1397,11 @@
       <span data-step="0">Opening</span>
       <span data-step="1">The question</span>
       <span data-step="2">Bridge</span>
-      <span data-step="3">Ch.1 · Adopt</span>
-      <span data-step="4">Ch.2 · Attract</span>
-      <span data-step="5">3 moves</span>
-      <span data-step="6">Closing</span>
+      <span data-step="3">Ch.1 · AI for tomorrow</span>
+      <span data-step="4">Ch.2 · Become</span>
+      <span data-step="5">Ch.3 · Keep</span>
+      <span data-step="6">3 moves</span>
+      <span data-step="7">Closing</span>
     </div>
   </div>
 
@@ -818,11 +1411,6 @@
     <img src="logo-insead.svg" alt="INSEAD" class="recipient-logo recipient-insead" />
   </div>
 
-  <button class="mode-toggle" id="mode-toggle" aria-label="Toggle speaker / public mode" title="Speaker mode shows your notes. Public mode hides them — for sharing.">
-    <span class="dot" aria-hidden="true"></span>
-    <span class="label-speaker">SPEAKER</span>
-    <span class="label-public">PUBLIC</span>
-  </button>
 </header>
 
 <!-- ═══════════════════════════════════════════════════════════════════
@@ -848,8 +1436,8 @@
     <!-- ───────────────────────────────────────────────────────────
          ACT 0 — OPENING  (reveals 0..1)
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="0" data-zone="opening" style="--x:80px; --y:340px;">
-      <div data-reveal-at="0">
+    <section class="zone-marker" data-step="0" data-zone="opening" style="--x:1900px; --y:340px;">
+      <div data-bloc="opening-hero" data-reveal-at="4">
         <div class="v02-addressed">
           <span class="addressed-label">addressed to</span>
           <span class="addressed-logos">
@@ -871,59 +1459,84 @@
         </span>
       </div>
 
-      <!-- About Alex card — credentials so they know who's talking -->
-      <article class="sticky sticky-mint alex-card" data-bloc="alex-card" data-reveal-at="1"
-               style="margin-top: 32px;">
-        <p class="name">Alexandre Cormeraie · 25</p>
-        <p class="role">Head of AI &amp; Innovation, TGV Europe — speaking for himself today.</p>
-        <ul>
-          <li>Master thesis since <strong>September 2023</strong> : <em>"Gen Z in Tech — the urgency."</em></li>
-          <li>Asked these questions to <strong>500+ executives</strong> so far.</li>
-          <li>Transformed things at my own scale. <em>But it inspired no one else but me. That's the problem.</em></li>
-          <li><strong>12 yrs</strong> volunteer firefighter — where the duo became my native model.</li>
-          <li><strong>Damien Wattez</strong> (15 yrs senior) — built our TGV Europe AI strategy together, as a duo.</li>
-        </ul>
-        <p class="footer">→ I'm here because I lived it. And because no one else moved — yet.</p>
-      </article>
+      <!-- Step 1 : TGV photo on the LEFT, Hi sticky on the RIGHT (side-by-side) -->
+      <div class="opening-step1">
+        <figure class="figjam-photo" data-bloc="alex-train" data-reveal-at="5" data-hide-at="6">
+          <img src="tgv-inoui.jpg" alt="TGV inOui at speed — TGV Europe / SNCF" loading="lazy" />
+          <figcaption>↑ this thing. a 190-year-old French rail group.</figcaption>
+        </figure>
+
+        <article class="sticky sticky-mint" data-bloc="alex-hi" data-reveal-at="5" data-hide-at="6">
+          <p class="punch">Hi.</p>
+          <p class="detail"><strong>Alexandre Cormeraie · 25.</strong></p>
+          <p class="detail" style="margin-top:6px;">Head of AI &amp; Innovation, <strong>TGV Europe</strong>.</p>
+          <p class="detail" style="margin-top:6px;">I work for a <strong>190-year-old rail group</strong> you may have heard of.</p>
+          <p class="detail" style="margin-top:10px;"><em>Today I'm speaking for myself.</em></p>
+        </article>
+      </div>
+
+      <!-- Steps 2-5 : the 4 next post-its appear one by one in a grid below -->
+      <div class="opening-stickies" style="margin-top: 32px;">
+        <article class="sticky sticky-yellow" data-bloc="alex-luck" data-reveal-at="6">
+          <p class="punch">The luck I had.</p>
+          <p class="detail">A manager who <strong>actually listened</strong> to the young ones.</p>
+          <p class="detail" style="margin-top:6px;"><em>That's it. That's the unlock.</em></p>
+          <p class="detail" style="margin-top:10px;">→ <strong>Damien Wattez</strong>, 15 yrs my senior.<br/>Two brains. One job.</p>
+        </article>
+
+        <article class="sticky sticky-pink" data-bloc="alex-result" data-reveal-at="7">
+          <p class="punch">3 years ago — a chance.</p>
+          <p class="detail"><strong>Now —</strong> digital innovation at <strong>TGV Europe</strong>.</p>
+          <p class="detail" style="margin-top:8px;">And the <strong>youngest Digital Evangelist</strong> in the SNCF group.</p>
+        </article>
+
+        <article class="sticky sticky-carmillon" data-bloc="alex-critic" data-reveal-at="8">
+          <p class="punch">And — I've always been critical about digital.</p>
+          <p class="detail">In big groups. In banks. <strong>Banks like yours</strong> — not <em>specifically</em> yours, of course.</p>
+          <p class="detail" style="margin-top:8px;">Same one-liner every time : <em>"You're not thinking from inside people's skin."</em></p>
+          <p class="detail" style="margin-top:14px;">That's why for the last 3 years I've been testing this : a master thesis on <em>"Gen Z in Tech — the urgency,"</em> and the very same questions I just asked you, put to <strong>500+ executives</strong>.</p>
+          <p class="detail" style="margin-top:6px;"><strong>Same gap. Every time.</strong></p>
+        </article>
+      </div>
     </section>
 
     <!-- ───────────────────────────────────────────────────────────
          ACT 1 — THE QUESTION  (reveals 2..5)  ·  2×2 grid · one by one
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="1" data-zone="question" style="--x:1900px; --y:240px;">
+    <section class="zone-marker" data-step="1" data-zone="question" data-frame-mode="zone" style="--x:80px; --y:240px;">
       <div class="zone-header">
-        <span class="zone-no" data-reveal-at="2">01</span>
-        <h2 class="zone-title" data-reveal-at="2">The question</h2>
-        <p class="zone-sub" data-reveal-at="2">One thing before we start.</p>
+        <span class="zone-no" data-reveal-at="0">01</span>
+        <h2 class="zone-title" data-reveal-at="0">The question</h2>
+        <p class="zone-sub" data-reveal-at="0">One thing before we start.</p>
       </div>
 
       <div class="stickies v02-2x2">
-        <article class="sticky sticky-yellow" data-bloc="z1-big" data-reveal-at="2">
+        <article class="sticky sticky-yellow" data-bloc="z1-big" data-reveal-at="0">
           <p class="punch">Who in your ELT is under <em>25</em>?</p>
           <p class="detail">…and under 30?</p>
         </article>
 
-        <article class="sticky sticky-pink" data-bloc="z1-rev" data-reveal-at="3">
+        <article class="sticky sticky-pink" data-bloc="z1-rev" data-reveal-at="1">
           <p class="punch">Do <em>you</em> think you are digital&nbsp;natives?</p>
           <p class="detail">Be honest. No one's looking.</p>
         </article>
 
-        <article class="sticky sticky-mint sticky-def" data-bloc="z1-def" data-reveal-at="4">
+        <article class="sticky sticky-mint sticky-def" data-bloc="z1-def" data-reveal-at="2">
           <p class="term">Digital Native</p>
           <p class="gloss">/ˈdɪdʒɪtəl ˈneɪtɪv/  ·  noun</p>
           <p class="detail">Someone whose cognition was <strong>built with digital tools</strong> during their formative years.</p>
           <p class="gen">→ Gen&nbsp;Z (1997–2012). One foot in, one foot out. The last bridge.</p>
         </article>
 
-        <article class="sticky sticky-blue" data-bloc="z1-why" data-reveal-at="5">
+        <article class="sticky sticky-blue" data-bloc="z1-why" data-reveal-at="3">
           <p class="punch">Then why no one under 30 in your ELT?</p>
           <p class="detail">You have digital products. Online services. AI everywhere on the Forward '28 roadmap.</p>
           <p class="detail" style="margin-top:8px;"><em>Why aren't they in the room?</em></p>
         </article>
       </div>
 
-      <span class="v02-aside" data-reveal-at="5" style="left: 760px; top: 320px; transform: rotate(-2deg);">
-        <span class="arrow-glyph">←</span> the silence is the answer.
+      <span class="v02-aside" data-reveal-at="3" style="left: 760px; top: 320px; transform: rotate(-2deg);">
+        <span class="arrow-glyph">←</span> silence <em>could</em> be the answer.
       </span>
     </section>
 
@@ -932,19 +1545,34 @@
          ─────────────────────────────────────────────────────────── -->
     <section class="zone-marker" data-step="2" data-zone="bridge" style="--x:3700px; --y:160px;">
       <!-- Header + handpunch + subline : full width -->
-      <div class="zone-header" data-reveal-at="6">
+      <div class="zone-header" data-reveal-at="9">
         <span class="zone-no">02</span>
         <h2 class="zone-title">The bridge</h2>
         <p class="zone-sub">Two chapters. One ambition.</p>
       </div>
 
-      <div data-bloc="bridge-line" data-reveal-at="6" style="margin-top:14px;">
-        <p class="v02-handpunch">
-          Two chapters.<br/>
-          One ambition : <em>AI-native by 2035.</em>
+      <!-- PIVOT : step 9 = "You came here for AI-native" only.
+                   step 10 = AI-native gets struck + "Digital-native first" appears ABOVE -->
+      <div data-bloc="bridge-pivot" class="bridge-pivot-container" style="margin-top:14px; position:relative;">
+        <p data-bloc="bridge-correction" data-reveal-at="10" class="bridge-correction">
+          <span class="bc-arrow" aria-hidden="true">↘</span>
+          <span class="bc-text"><strong>Digital-native</strong> <em>first</em>.</span>
         </p>
-        <p class="v02-subline" style="margin-top:18px; max-width:62ch;">
-          You came here for a North Star. The four other rooms today sell you what to <strong>deploy</strong>. I came to help you decide what to <strong>become</strong>.
+        <p data-bloc="bridge-line" data-reveal-at="9" class="v02-handpunch">
+          You came here for <em class="ai-native-target">AI-native</em>.
+        </p>
+      </div>
+
+      <div data-bloc="bridge-def" data-reveal-at="11" style="margin-top:24px; max-width: 720px;">
+        <p class="v02-subline" style="max-width: 44ch; font-size: 1.18rem;">
+          The four other rooms sell you what to <strong>deploy</strong>. I came to help you decide what to <strong>become</strong>.
+        </p>
+        <p class="v02-subline" style="margin-top:18px; max-width: 50ch; font-size: 1.1rem;">
+          <strong>Be AI-native</strong> = you build AI products.<br/>
+          <strong>Be digital-native</strong> = you build digital experiences. <em>AI lives inside them.</em>
+        </p>
+        <p class="v02-subline" style="margin-top:18px; max-width: 44ch; font-size: 1.15rem;">
+          You're a bank. <strong>You're an experience.</strong>
         </p>
       </div>
 
@@ -952,28 +1580,37 @@
       <div class="bridge-2col">
         <!-- LEFT COLUMN -->
         <div class="bridge-col-left">
-          <article class="sticky sticky-yellow" data-bloc="bridge-northstar" data-reveal-at="7">
-            <p class="punch">Your <em>2035</em> North Star.</p>
-            <p class="detail">Mine for you : <strong>AI-native by then.</strong> Everything else is projects, not direction.</p>
-            <p class="detail" style="margin-top:8px;"><em>"Not 'we don't invest enough.' 'We don't invest in the right direction.'"</em></p>
-            <p class="detail" style="margin-top:10px;">That's how you stop running projects, and start choosing them.</p>
-          </article>
+          <div class="bridge-left-row">
+            <article class="sticky sticky-yellow" data-bloc="bridge-northstar" data-reveal-at="12">
+              <p class="punch">Your <em>2035</em> North Star — re-framed.</p>
+              <p class="detail">Not "AI-native." <strong>Digital-native by 2035.</strong></p>
+              <p class="detail" style="margin-top:8px;">AI is the engine — it lives <em>inside</em>. The <strong>shape</strong> of your bank is what matters.</p>
+              <p class="detail" style="margin-top:8px;"><em>"Not 'we don't invest enough.' 'We don't invest in the right direction.'"</em></p>
+              <p class="detail" style="margin-top:10px;">That's how you stop running projects, and start choosing them.</p>
+            </article>
 
-          <article class="sticky sticky-pink" data-bloc="bridge-rl" data-reveal-at="7"
+            <article class="sticky sticky-pink" data-bloc="bridge-rl" data-reveal-at="13">
+              <p class="punch">Your own framework — Responsive Leadership.</p>
+              <p class="detail">It only <em>responds</em> to what's already in the room.</p>
+              <p class="detail" style="margin-top:8px;"><strong>So make sure the future is already in the room.</strong></p>
+            </article>
+          </div>
+
+          <article class="sticky sticky-mint" data-bloc="bridge-tge" data-reveal-at="14"
                    style="margin-top: 22px;">
-            <p class="punch">Your own framework — Responsive Leadership.</p>
-            <p class="detail">It only <em>responds</em> to what's already in the room.</p>
-            <p class="detail" style="margin-top:8px;"><strong>So make sure the future is already in the room.</strong></p>
+            <p class="punch">We did this shift — at TGV Europe.</p>
+            <p class="detail">3 years ago : a <em>graveyard of decks</em>. Today : an AI strategy built by a <strong>duo</strong>. Still the only ones in the group.</p>
+            <p class="detail" style="margin-top:10px;"><em>→ Full story in Chapter 2.</em></p>
           </article>
 
-          <p data-reveal-at="7" style="margin-top: 22px; font-family: var(--hand); font-size: 1.25rem; color: var(--ink-soft); line-height: 1.3; max-width: 38ch;">
+          <p data-reveal-at="14" style="margin-top: 22px; font-family: var(--hand); font-size: 1.25rem; color: var(--ink-soft); line-height: 1.3; max-width: 38ch;">
             <span style="color: var(--carmillon);">↑</span> 2 years ago we did <em>defend → win</em>. today : <em>win + AI</em>. you've already shown you can shift identities.
           </p>
         </div>
 
         <!-- RIGHT COLUMN -->
         <div class="bridge-col-right">
-          <article class="sticky sticky-carmillon" data-bloc="bridge-facts" data-reveal-at="8">
+          <article class="sticky sticky-carmillon" data-bloc="bridge-facts" data-reveal-at="15">
             <p class="punch">I've done my homework.</p>
             <p class="detail" style="margin-top:6px;"><strong>You're not behind. You've started.</strong></p>
             <p class="detail" style="margin-top:10px;">
@@ -990,72 +1627,342 @@
         </div>
       </div>
 
-      <!-- STEP-ASIDE : full-width block at the bottom with Danske app screenshots -->
-      <div class="bridge-step-aside" data-bloc="bridge-stepaside" data-reveal-at="9">
-        <div class="step-aside-intro">
-          <p class="v02-handpunch">
-            And yet — you already know how to <em>step aside</em>.
+      <!-- bridge-punch removed : the "profiles by two" message is already carried by
+           move-2 (3 moves), ch2-attract-duos, and closing-mgmt — redundant here. -->
+
+      <!-- STEP-ASIDE : split 1 beat per step — each line gets its own speaker moment -->
+      <div class="bridge-step-aside">
+        <!-- Step 16 : "you've stepped aside before — at a specific era" with 2 mobile app proofs -->
+        <div data-bloc="sa-evidence-apps" data-reveal-at="16">
+          <p class="v02-subline" style="text-align: center; margin: 22px auto 6px; max-width: 60ch; font-style: italic;">
+            And honestly — <strong>you've already stepped aside.</strong> You've shipped things that were digital-native — <em>for their time.</em>
           </p>
+
+          <div class="step-aside-grid step-aside-grid--apps">
+            <figure class="step-aside-app">
+              <img src="danske-app-manadspengen.png" alt="Månadspengen — Danske Bank app for kids with a penguin mascot" loading="lazy" />
+              <figcaption>
+                <strong>Månadspengen</strong> — kids 4+.<br/>
+                <em>You can speak digital native.</em>
+              </figcaption>
+            </figure>
+            <figure class="step-aside-app">
+              <img src="danske-app-moneyville.png" alt="Moneyville — Danske Bank educational game for children" loading="lazy" />
+              <figcaption>
+                <strong>Moneyville</strong> — kids 4+.<br/>
+                <em>You did. Then you stopped at 16.</em>
+              </figcaption>
+            </figure>
+          </div>
         </div>
 
-        <div class="step-aside-grid">
-          <figure class="step-aside-app">
-            <img src="danske-app-manadspengen.png" alt="Månadspengen — Danske Bank app for kids with a penguin mascot" loading="lazy" />
-            <figcaption>
-              <strong>Månadspengen</strong> — on the Swedish App Store today.<br/>
-              Pingouin mascot. Purple car. Hand-drawn skies.<br/>
-              <em>Shipped by Danske Bank Group.</em>
-            </figcaption>
-          </figure>
-          <figure class="step-aside-app">
-            <img src="danske-app-moneyville.png" alt="Moneyville — Danske Bank educational game for children" loading="lazy" />
-            <figcaption>
-              <strong>Moneyville</strong> — educational game about money.<br/>
-              Cartoon characters. For kids 4+.<br/>
-              <em>Also shipped by Danske Bank Group.</em>
-            </figcaption>
-          </figure>
+        <!-- Step 18 : second proof — and you still know a bit how to do it (dev platform) -->
+        <div data-bloc="sa-evidence-dev" data-reveal-at="17" style="margin-top: 36px;">
+          <p class="v02-subline" style="text-align: center; margin: 0 auto 14px; max-width: 58ch; font-style: italic;">
+            And honestly — <strong>you still know how to do it</strong>, a bit. Not just for kids — for the tech crowd too.
+          </p>
+
+          <div class="step-aside-grid step-aside-grid--dev">
+            <figure class="step-aside-dev">
+              <img src="danske-developers.png" alt="developers.danskebank.com — Danske Bank's public developers platform with banking APIs" loading="lazy" />
+              <figcaption>
+                <strong>developers.danskebank.com</strong> — <em>"Build the future of financial services."</em><br/>
+                A <strong>public developers platform</strong>. Open APIs. <em>A real digital-native muscle. You shipped this. It's the dream.</em>
+              </figcaption>
+            </figure>
+          </div>
         </div>
 
         <div class="step-aside-questions">
-          <p class="step-aside-q">
-            You shipped these. For people who can't even open an account yet.<br/>
-            <strong>So you know how to step aside from the voice of 1985.</strong> You've done it.
+          <p class="step-aside-q" data-bloc="sa-chatgpt" data-reveal-at="18">
+            Per the research I did with ChatGPT, you're <strong>one of the most digitalized banks</strong> on the market. True. Real.
           </p>
-          <p class="step-aside-q-strong">
-            Why did it stop <em>here</em> ?<br/>
-            Will you do it again — but <em>at scale</em>, for AI ?
+
+          <p class="step-aside-q" data-bloc="sa-2026" data-reveal-at="19" style="margin-top: 20px;">
+            <strong>But that was then.</strong> You're not on <em>2026 standards</em>.
+          </p>
+
+          <p class="step-aside-q" data-bloc="sa-evolves" data-reveal-at="20" style="margin-top: 20px;">
+            And that's the whole point — <strong>digital-native isn't a state.</strong><br/>
+            It's a <em>movement</em>. It evolves with its time. <strong>You froze.</strong>
+          </p>
+
+          <p class="step-aside-q" data-bloc="sa-revolut" data-reveal-at="21" style="margin-top: 26px;">
+            By 22, today's customer is online.<br/>
+            <strong>Revolut. Memo. N26. Bunq.</strong> Digital native. Soon AI native.
+          </p>
+        </div>
+
+        <!-- Step 22 : the 2035 question — now reveals AFTER the Revolut/Memo statement -->
+        <div class="step-aside-intro" data-bloc="sa-intro" data-reveal-at="22" style="margin-top: 48px;">
+          <p class="v02-handpunch">
+            <em>In 2035</em>, your today's 22-year-old<br/>
+            is your <strong>main customer.</strong>
+          </p>
+          <p class="v02-subline" style="margin-top: 14px; max-width: 56ch; margin-left: auto; margin-right: auto;">
+            So — <strong>where will they bank ?</strong>
           </p>
         </div>
       </div>
+
+      <!-- VISION STACK : today (24) → tomorrow Revolut + outro (25) — one beat per step -->
+      <div class="vision-stack" style="margin-top: 64px;">
+        <figure class="vision-shot is-today" data-bloc="vision-today" data-reveal-at="23">
+          <img src="danske-mobile-today.png" alt="Mobilbank DK — Danske Bank today on the Mac App Store, 4.6 stars on 140 ratings, classic blue UI" loading="lazy" />
+          <figcaption>
+            <strong>Today.</strong> Mobilbank DK · 4.6★ · 140 ratings · <em>functional, digitalized, real.</em><br/>
+            Built for 2014–2020 standards. <strong>It works.</strong>
+          </figcaption>
+        </figure>
+
+        <p class="vision-arrow" data-bloc="vision-arrow" data-reveal-at="24">↓ <em>evolve with the time</em> ↓</p>
+
+        <figure class="vision-shot is-tomorrow" data-bloc="vision-tomorrow" data-reveal-at="24">
+          <img src="danske-mobile-tomorrow.png" alt="Mobilbank DK reimagined for 2026 — premium glassmorphism dark UI, 4.7 stars on 210 ratings, money / expenses / payments / future as four crisp tiles" loading="lazy" />
+          <figcaption>
+            <strong>What it could look like tomorrow.</strong> <em>Same brand. Same balance. 4.7★ · 210 ratings.</em><br/>
+            Premium. Personal. <strong>Digital-native.</strong> <em>An experience — not a list of accounts.</em>
+          </figcaption>
+        </figure>
+      </div>
+
+      <p data-bloc="bridge-vision-line" data-reveal-at="24" style="margin: 44px auto 0; text-align: center; font-family: var(--hand); font-size: 1.45rem; color: var(--ink-soft); max-width: 64ch; line-height: 1.35;">
+        <span style="color: var(--carmillon);">→</span> <em>Go where they consume.</em> Don't force them to come to where you sit.<br/>
+        <span style="color: var(--carmillon);">→</span> <em>You're not an AI provider.</em> You're a banking <strong>experience.</strong>
+      </p>
+
     </section>
 
     <!-- ───────────────────────────────────────────────────────────
          ACT 3 — CHAPTER 1 · ADOPT  (reveals 9..11)
          ─────────────────────────────────────────────────────────── -->
     <section class="zone-marker" data-step="3" data-zone="ch1" style="--x:5900px; --y:200px;">
-      <div data-reveal-at="10">
-        <span class="chapter-label">Chapter 1 · Adopt</span>
-        <h2 class="zone-title">From inside out.</h2>
-        <p class="zone-sub">Adoption across both segments — employees <em>and</em> customers.</p>
+      <div data-reveal-at="25">
+        <span class="chapter-label">Chapter 1 · AI for tomorrow</span>
+        <h2 class="zone-title">AI for tomorrow.</h2>
+        <p class="zone-sub">What AI is for. What <em>you</em> are for. The split, visualised.</p>
+      </div>
+      <div class="v02-stack" style="margin-top: 22px; margin-left: auto; margin-right: auto;">
+      <article class="sticky sticky-blue" data-bloc="ch1-ai-role" data-reveal-at="26">
+        <p class="punch">What AI is for. What <em>you</em> are for.</p>
+        <p class="detail"><strong>AI :</strong> the forms. The repetitive. The compliance. The boring.</p>
+        <p class="detail" style="margin-top:6px;"><strong>You :</strong> the experience. The story. The trust. The voice that doesn't sound like 1985.</p>
+        <p class="detail" style="margin-top:10px;"><em>Revolut already runs this way. Everyone ends up with the same AI — the difference is what you build it into.</em></p>
+      </article>
       </div>
 
-      <div class="v02-stack" style="margin-top: 22px;">
-        <article class="sticky sticky-yellow" data-bloc="ch1-inside" data-reveal-at="10">
-          <p class="punch">Inside — the seniors and the gaps.</p>
-          <p class="detail">Three real gaps to close : <strong>generation, gender, tech literacy</strong>. Same answer for all three.</p>
-          <p class="detail" style="margin-top:8px;">Not training. <em>Permission.</em> Make AI the default — not the exception someone has to justify.</p>
-          <p class="detail" style="margin-top:8px;"><em>You already have DanskeGPT shipped. The hard part is flipping the default.</em></p>
+      <!-- AI-native split visualisation — kicks off Ch.1 once "What AI is for, what you are for" lands. -->
+      <div data-bloc="bridge-vision-intro" data-reveal-at="27" style="margin-top: 80px; text-align: center;">
+        <p class="v02-handpunch" style="font-size: clamp(2rem, 3.4vw, 3rem); display: inline-block;">
+          So — <em>what does the split look like ?</em>
+        </p>
+        <p class="v02-subline" style="margin-top: 14px; max-width: 58ch; margin-left: auto; margin-right: auto;">
+          One app today. Two apps tomorrow. <strong>AI gets the boring. You get the experience.</strong>
+        </p>
+      </div>
+
+
+      <!-- Step 32 : feature cloud — 24 features fade in one-by-one (staggered via --i).
+           Step 33 : two phones land in the middle band (designed mockups visible).
+           Step 34 : tiles slide one-by-one from the cloud into the columns under their
+                     matching phone (AI left, Bank right). -->
+      <div class="split-stage" id="split-stage">
+        <!-- Step 32 framing target : keeps the cloud centred in the viewport instead of
+             sliding to the lower half (camera frames this anchor + the 24 tile rects). -->
+        <span class="cloud-frame-anchor" data-reveal-at="28" aria-hidden="true"></span>
+        <div class="feature-cloud" data-bloc="phone-starter">
+          <!-- Cloud lives in the TOP band of the stage (y 30 → 280, 4 rows × 6 tiles).
+               At step 34, tiles migrate DOWN to the bottom band (y 960 → 1356),
+               forming two columns under each phone. Each tile carries its own
+               data-reveal-at="28" so the reveal staggers per-tile via --i. -->
+
+          <!-- Row 1 — cloud y ~40 -->
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx:-330px; --cy: 30px; --cr:-3deg; --sx:-300px; --sy: 960px; --sr:-1deg; --i: 0;">KYC form</span>
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx:-180px; --cy: 50px; --cr: 2deg; --sx: 300px; --sy: 960px; --sr: 1deg; --i: 1;">Bank transfer</span>
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx: -40px; --cy: 35px; --cr:-2deg; --sx:-300px; --sy: 996px; --sr: 1deg; --i: 2;">Tax filing</span>
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx: 110px; --cy: 55px; --cr: 3deg; --sx: 300px; --sy: 996px; --sr:-1deg; --i: 3;">Spending story</span>
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx: 260px; --cy: 40px; --cr: 1deg; --sx:-300px; --sy:1032px; --sr:-2deg; --i: 4;">AML check</span>
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx: 380px; --cy: 55px; --cr:-2deg; --sx: 300px; --sy:1032px; --sr: 2deg; --i: 5;">Trip to Berlin</span>
+
+          <!-- Row 2 — cloud y ~115 -->
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx:-340px; --cy:115px; --cr: 1deg; --sx: 300px; --sy:1068px; --sr:-1deg; --i: 6;">Card &amp; payments</span>
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx:-190px; --cy:130px; --cr:-2deg; --sx:-300px; --sy:1068px; --sr: 2deg; --i: 7;">Compliance forms</span>
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx: -40px; --cy:115px; --cr: 2deg; --sx:-300px; --sy:1104px; --sr:-1deg; --i: 8;">Mortgage paperwork</span>
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx: 130px; --cy:130px; --cr:-1deg; --sx: 300px; --sy:1104px; --sr: 1deg; --i: 9;">Financial education</span>
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx: 270px; --cy:115px; --cr: 1deg; --sx:-300px; --sy:1140px; --sr: 2deg; --i:10;">Statements</span>
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx: 380px; --cy:135px; --cr:-3deg; --sx: 300px; --sy:1140px; --sr:-2deg; --i:11;">Investment insights</span>
+
+          <!-- Row 3 — cloud y ~195 -->
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx:-320px; --cy:200px; --cr:-1deg; --sx: 300px; --sy:1176px; --sr: 1deg; --i:12;">Savings goals</span>
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx:-170px; --cy:215px; --cr: 2deg; --sx:-300px; --sy:1176px; --sr:-2deg; --i:13;">Account opening</span>
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx: -30px; --cy:195px; --cr: 1deg; --sx: 300px; --sy:1212px; --sr: 2deg; --i:14;">Personal advisor</span>
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx: 120px; --cy:215px; --cr:-2deg; --sx:-300px; --sy:1212px; --sr: 1deg; --i:15;">Customer service</span>
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx: 270px; --cy:195px; --cr: 1deg; --sx:-300px; --sy:1248px; --sr:-1deg; --i:16;">Card freeze</span>
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx: 390px; --cy:215px; --cr:-2deg; --sx: 300px; --sy:1248px; --sr:-1deg; --i:17;">Wedding fund</span>
+
+          <!-- Row 4 — cloud y ~275 -->
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx:-330px; --cy:280px; --cr: 2deg; --sx:-300px; --sy:1284px; --sr: 2deg; --i:18;">Password reset</span>
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx:-180px; --cy:295px; --cr:-3deg; --sx: 300px; --sy:1284px; --sr: 1deg; --i:19;">First home</span>
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx: -30px; --cy:280px; --cr: 2deg; --sx: 300px; --sy:1320px; --sr:-2deg; --i:20;">Café favorites</span>
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx: 130px; --cy:295px; --cr:-1deg; --sx:-300px; --sy:1320px; --sr: 1deg; --i:21;">Address change</span>
+          <span class="feature-tile tile-bank" data-reveal-at="28" style="--cx: 270px; --cy:280px; --cr: 1deg; --sx: 300px; --sy:1356px; --sr: 2deg; --i:22;">Carbon footprint</span>
+          <span class="feature-tile tile-ai"   data-reveal-at="28" style="--cx: 390px; --cy:295px; --cr:-2deg; --sx:-300px; --sy:1356px; --sr:-1deg; --i:23;">Direct debit</span>
+        </div>
+
+        <!-- Invisible anchor : at step 34 the camera zooms out enough to include the tile columns below -->
+        <span class="split-frame-anchor" data-bloc="split-trigger" data-reveal-at="30" aria-hidden="true"></span>
+
+        <!-- Step 33 : Left tile — AI's house (DIA-like chat, providers only, caption below) -->
+        <div class="phone-tile is-ai-side" data-bloc="phone-ai" data-reveal-at="29">
+          <div class="phone-mockup is-ai">
+            <div class="phone-screen">
+              <div class="ph-statusbar dark">9:41 <span class="ph-icons">5G •••</span></div>
+              <div class="ph-ai-header ph-ai-header--logo-only">
+                <span class="ph-ai-dot"></span>
+              </div>
+              <div class="ph-ai-providers">
+              <span class="ai-provider claude" title="Claude · Anthropic">
+                <svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" xmlns="http://www.w3.org/2000/svg" aria-label="Claude"><title>Claude</title><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z"/></svg>
+              </span>
+              <span class="ai-provider chatgpt" title="ChatGPT · OpenAI">
+                <svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" xmlns="http://www.w3.org/2000/svg" aria-label="ChatGPT"><title>ChatGPT</title><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"/></svg>
+              </span>
+              <span class="ai-provider gemini" title="Gemini · Google">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Gemini">
+                  <defs><linearGradient id="gemini-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4285F4"/><stop offset="50%" stop-color="#6c63ff"/><stop offset="100%" stop-color="#9168C0"/></linearGradient></defs>
+                  <title>Gemini</title>
+                  <path d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z" fill="url(#gemini-grad)"/>
+                </svg>
+              </span>
+            </div>
+            <div class="ph-ai-chat">
+              <div class="chat-bubble user">Submit my KYC form.</div>
+              <div class="chat-bubble ai">Done. 30 s.</div>
+              <div class="chat-bubble user">File last year's tax.</div>
+              <div class="chat-bubble ai">Drafted — review ?</div>
+              <div class="chat-bubble user">Renew my mortgage docs.</div>
+            </div>
+            <div class="ph-ai-input">
+              <span class="ph-input-text">Ask anything…</span>
+              <span class="ph-input-mic"></span>
+            </div>
+          </div>
+          </div>
+          <p class="phone-foot"><strong>AI's house.</strong> <em>The forms. The boring. Plug-and-play.</em><br/>Everyone ends up with the same one.</p>
+        </div>
+
+        <!-- Step 33 : Right tile — Your house (polished Danske bank), caption below the phone -->
+        <div class="phone-tile is-bank-side" data-bloc="phone-bank" data-reveal-at="29">
+          <div class="phone-mockup is-bank">
+            <div class="phone-screen">
+              <div class="ph-statusbar">9:41 <span class="ph-icons">5G •••</span></div>
+              <div class="ph-bank-header">
+                <span class="ph-bank-greet">Good morning, Sofie<small>26 · Copenhagen</small></span>
+                <span class="ph-bank-avatar">S</span>
+              </div>
+              <div class="ph-bank-card">
+                <div class="ph-card-label">Danske · current</div>
+                <div class="ph-card-balance">21,605.70<span>DKK</span></div>
+                <div class="ph-card-foot">
+                  <span class="ph-card-chip"></span>
+                  <span class="ph-card-name">SOFIE LARSEN</span>
+                </div>
+              </div>
+              <div class="ph-bank-insight">
+                <div class="ph-insight-title">Your week of spending</div>
+                <div class="ph-insight-bars">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+              <div class="ph-bank-goal">
+                <span class="ph-goal-icon">B</span>
+                <div class="ph-goal-body">
+                  <span class="ph-goal-text">Trip to Berlin</span>
+                  <span class="ph-goal-sub">4 weeks · 2 350 / 3 000 DKK</span>
+                </div>
+                <span class="ph-goal-progress">78%</span>
+              </div>
+              <div class="ph-bank-tabs">
+                <span class="active">Home</span><span>Card</span><span>Story</span><span>Goals</span>
+              </div>
+            </div>
+          </div>
+          <p class="phone-foot"><strong>Your house.</strong> <em>The experience. The story. Yours alone.</em><br/>AI can't copy this.</p>
+        </div>
+      </div>
+
+      <!-- Step 31 : THE PUNCH — closes Ch.1 once the migration has settled under the phones. -->
+      <p class="step-aside-q-strong" data-bloc="sa-punch" data-reveal-at="31" style="margin: 80px auto 0; text-align: center; max-width: 680px;">
+        Don't think <em>"AI-native."</em><br/>
+        Think <strong>digital-native first.</strong><br/>
+        <span style="font-size: 0.85em; opacity: 0.85;">AI goes <em>inside.</em></span>
+      </p>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────
+         ACT 4 — CHAPTER 2 · BECOME (digital-native organisation)
+         Full TGV Europe story + readiness/duo lessons.
+         ─────────────────────────────────────────────────────────── -->
+    <section class="zone-marker" data-step="4" data-zone="ch2-become" style="--x:7900px; --y:200px;">
+      <!-- Step 32 = "How to become…" (question). Step 33 = "How we became…" (answer that overwrites it). -->
+      <div class="ch2-title-swap">
+        <div data-bloc="ch2-title-q" data-reveal-at="32" data-hide-at="33" class="ch2-title-state">
+          <span class="chapter-label">Chapter 2 · Become</span>
+          <h2 class="zone-title">How <em>to</em> become digital-native ?</h2>
+        </div>
+        <div data-bloc="ch2-title-a" data-reveal-at="33" class="ch2-title-state">
+          <span class="chapter-label">Chapter 2 · Become</span>
+          <h2 class="zone-title">How we <em>became</em> digital-native.</h2>
+        </div>
+      </div>
+      <p class="zone-sub" data-reveal-at="32" style="text-align:center; margin: 10px auto 0; max-width: 56ch;">Not a framework. A duo. Then everything followed.</p>
+
+      
+        <div class="v02-triangle">
+          <article class="sticky sticky-mint triangle-left" data-bloc="ch2-tge-senior" data-reveal-at="34">
+            <p class="card-label">Him</p>
+            <p class="punch">A senior — 15 yrs in the house.</p>
+            <p class="detail">Shipped every IS project in his career. Knew every gear.</p>
+            <p class="detail" style="margin-top:6px;">The board told him : <em>relaunch innovation.</em></p>
+            <p class="detail" style="margin-top:8px;">He didn't go hunting for an AI expert. He went hunting for a <strong>great listener</strong>.</p>
+            <p class="detail" style="margin-top:8px;"><em>"Nothing was possible" — he knew exactly why.</em></p>
+          </article>
+
+          <article class="sticky sticky-yellow triangle-right" data-bloc="ch2-tge-junior" data-reveal-at="35">
+            <p class="card-label">Me</p>
+            <p class="punch">A junior — fresh in the house, mid on tech.</p>
+            <p class="detail">Junior <em>in</em> the company : didn't know the rouages.</p>
+            <p class="detail" style="margin-top:6px;">Mid-junior <em>on</em> tech : enough experience from outside to ship.</p>
+            <p class="detail" style="margin-top:8px;">From <em>elsewhere</em>. No nostalgia. No "this is how we do things".</p>
+            <p class="detail" style="margin-top:8px;"><em>"Everything was possible" — I didn't know yet why it shouldn't be.</em></p>
+          </article>
+
+          <article class="sticky sticky-carmillon triangle-apex" data-bloc="ch2-tge-duo" data-reveal-at="36">
+            <p class="punch">Two visions. One room.</p>
+            <p class="detail">→ His gears + my fresh eyes. His "no" + my "why not". His memory + my naivety.</p>
+            <p class="detail" style="margin-top:8px;">We thought. We structured. We <strong>shipped</strong>. Together.</p>
+            <p class="detail" style="margin-top:10px;"><em>A strategy built honest. Advanced fast.</em></p>
+          </article>
+        </div>
+
+        <div class="v02-stack" style="margin-top: 26px;">
+
+        <article class="sticky sticky-pink" data-bloc="ch2-tge-spotlight" data-reveal-at="37">
+          <p class="punch">He let me take the spotlight.</p>
+          <p class="detail">He could have wanted all the light. He didn't.</p>
+          <p class="detail" style="margin-top:8px;">Our big boss got it : <strong>managerial quality = pushing young forward</strong> — not standing in front.</p>
+          <p class="detail" style="margin-top:8px;"><em>That was his greatest quality. (We'll come back to it in closing.)</em></p>
         </article>
 
-        <article class="sticky sticky-pink" data-bloc="ch1-outside" data-reveal-at="11">
-          <p class="punch">Outside — your customers became natives too.</p>
-          <p class="detail">A 22-year-old gets a denial letter in the voice of 1985. They don't argue. They leave. <em>Quietly.</em> On TikTok.</p>
-          <p class="detail" style="margin-top:8px;">Retail = 50% of your activity. Mortgages, deposits. Today's 22-year-olds are your 2035 borrowers.</p>
-          <p class="detail" style="margin-top:8px;"><strong>Two segmentations. Same readiness gap.</strong></p>
+        <article class="sticky sticky-blue" data-bloc="ch2-tge-team" data-reveal-at="38">
+          <p class="punch">Two profiles. One native team.</p>
+          <p class="detail">→ One <strong>purely digital-native</strong>. Truly native.</p>
+          <p class="detail" style="margin-top:6px;">→ One <strong>digital-native for your company</strong>. Native, relative to where you stand.</p>
+          <p class="detail" style="margin-top:10px;"><strong>Both together = the native team.</strong> That's how it works. Pretty well.</p>
         </article>
 
-        <div data-bloc="ch1-stamp" data-reveal-at="12" style="margin-top: 14px;">
+
+        <div data-bloc="ch1-stamp" data-reveal-at="39" style="margin-top: 14px;">
           <span class="v02-stamp-big">
             Readiness <em>≠</em> deployment.
           </span>
@@ -1064,38 +1971,79 @@
     </section>
 
     <!-- ───────────────────────────────────────────────────────────
-         ACT 4 — CHAPTER 2 · ATTRACT  (reveals 12..14)
+         ACT 5 — CHAPTER 3 · KEEP  (how to keep the young ones — the flip is yours to write)
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="4" data-zone="ch2" style="--x:7900px; --y:200px;">
-      <div data-reveal-at="13">
-        <span class="chapter-label">Chapter 2 · Attract</span>
-        <h2 class="zone-title">Who attracted you ? Who keeps you ?</h2>
-        <p class="zone-sub">Atypical profiles — how you bring them, how you keep them.</p>
+    <section class="zone-marker" data-step="5" data-zone="ch3" style="--x:9900px; --y:200px;">
+      <div data-reveal-at="40">
+        <span class="chapter-label">Chapter 3 · Keep</span>
+        <h2 class="zone-title">How we <em>keep</em> them.</h2>
+        <p class="zone-sub">Five reasons they leave. The flip is yours to write.</p>
       </div>
 
-      <div class="v02-stack" style="margin-top: 22px;">
-        <article class="sticky sticky-yellow" data-bloc="ch2-flip" data-reveal-at="13">
+      <div class="ch2-grid" style="margin-top: 22px;">
+        <article class="sticky sticky-yellow" data-bloc="ch2-flip" data-reveal-at="41">
           <p class="punch">Flip the question — for yourselves first.</p>
           <p class="detail">Each of you : think of the one person who decided you'd stay or go in your career. Was it HR ? No. It was someone you <em>respected</em> in the room.</p>
-          <p class="detail" style="margin-top:8px;"><strong>Now : who in this room makes an Alex want to stay ?</strong></p>
+          <p class="detail" style="margin-top:8px;"><strong>Lawick question :</strong> who in this room <em>made</em> an Alex want to stay ?</p>
         </article>
 
-        <article class="sticky sticky-mint" data-bloc="ch2-reasons" data-reveal-at="14">
-          <p class="punch">5 reasons GenZ stays in a 150-year-old institution.</p>
-          <p class="detail">
-            <strong>1.</strong> Ownership — sign without three approvals.<br/>
-            <strong>2.</strong> Velocity — 6 hours, not 6 weeks.<br/>
-            <strong>3.</strong> Mission you can say in one sentence.<br/>
-            <strong>4.</strong> Permission to fail visibly.<br/>
-            <strong>5.</strong> People who already look like the future.
-          </p>
-          <p class="detail" style="margin-top:8px;"><em>Reason 5 is the silent one. It's also the one that matters most.</em></p>
+        <article class="sticky sticky-pink" data-bloc="ch2-careers" data-reveal-at="42">
+          <p class="punch">Stop selling a 15-year career.</p>
+          <p class="detail">Sell a <strong>trajectory</strong>. A sprint with proof. A 3-year leap you can name.</p>
+          <p class="detail" style="margin-top:8px;">Banking experience + financial education = a real mission. <em>You already have the substance — say it.</em></p>
+          <p class="detail" style="margin-top:8px;"><em>3 years ago I lived this. "Career path" → silence in the room. "Trajectory" → people leaned in.</em></p>
         </article>
 
-        <article class="sticky sticky-blue" data-bloc="ch2-alex" data-reveal-at="15">
+        <article class="sticky sticky-mint" data-bloc="ch2-reasons" data-reveal-at="43">
+          <p class="punch">5 reasons a 22-year-old leaves a 150-yr company.</p>
+          <p class="detail">→ <strong>No ownership.</strong> Decisions belong upstairs.</p>
+          <p class="detail" style="margin-top:6px;">→ <strong>No velocity.</strong> 6 months to ship a debit card story.</p>
+          <p class="detail" style="margin-top:6px;">→ <strong>No mission lived.</strong> Purpose lives in the keynote, not the corridor.</p>
+          <p class="detail" style="margin-top:6px;">→ <strong>No permission.</strong> Every move needs three approvals.</p>
+          <p class="detail" style="margin-top:6px;">→ <strong>No future in the room.</strong> Nobody at the table looks like 2035.</p>
+          <p class="detail" style="margin-top:10px;"><em>Now invert each line. That's the job.</em></p>
+        </article>
+
+        <article class="sticky sticky-yellow" data-bloc="ch2-simplicity" data-reveal-at="44">
+          <p class="punch">Simplicity is the recruiter.</p>
+          <p class="detail"><strong>One click. Fast. Friction-free.</strong> Inside, outside.</p>
+          <p class="detail" style="margin-top:8px;">If your internal tools take 4 days to provision, a 24-yo who opens an account in 90 seconds on a fintech reads the signal.</p>
+          <p class="detail" style="margin-top:8px;"><em>True story : 6 months waiting for a debit card from a 150-year-old bank. One of the worst experiences of my year. The talent leaves on that one detail alone.</em></p>
+        </article>
+
+        <article class="sticky sticky-blue" data-bloc="ch2-alex" data-reveal-at="45">
           <p class="punch">The Alex test.</p>
           <p class="detail">Photograph your ELT tomorrow. Show it to a 24-year-old engineer in Lyngby. Ask : <em>"is this where you want to spend 5 years ?"</em></p>
           <p class="detail" style="margin-top:8px;"><strong>Their face tells you everything your engagement survey doesn't.</strong></p>
+        </article>
+
+        <article class="sticky sticky-mint" data-bloc="ch2-onramps" data-reveal-at="46">
+          <p class="punch">On-ramps — pure rec, in agility.</p>
+          <p class="detail">→ <strong>Hackathons.</strong> Build the profile in 48 hrs, not 6 rounds.</p>
+          <p class="detail" style="margin-top:6px;">→ <strong>Tech events.</strong> The best profiles are already in a room — pick them there.</p>
+          <p class="detail" style="margin-top:6px;">→ <strong>School projects.</strong> Reverse the funnel — give them a real problem before they're hired.</p>
+          <p class="detail" style="margin-top:6px;">→ <strong>In-house labs.</strong> Make staying interesting before they ask why.</p>
+          <p class="detail" style="margin-top:10px;"><em>HR pipelines won't land Alex. Agility will.</em></p>
+        </article>
+
+        <article class="sticky sticky-blue" data-bloc="ch3-senior-protects" data-reveal-at="47">
+          <p class="punch">Senior takes the heat. Junior keeps the focus.</p>
+          <p class="detail">My boss carries every complex process in his head — so I can stay on pure innovation.</p>
+          <p class="detail" style="margin-top:8px;">We didn't change the company. We changed <em>our direction</em>.</p>
+          <p class="detail" style="margin-top:8px;"><strong>First step. Small territory. Works.</strong></p>
+        </article>
+
+        <article class="sticky sticky-carmillon" data-bloc="ch2-attract-duos">
+          <p class="punch" data-reveal-at="48">About the shadow board<span style="opacity:0.55;">…</span></p>
+          <p class="detail" data-reveal-at="49" style="margin-top:10px;"><strong>STOP it.</strong> <em>Great for press releases. Bad for juniors.</em></p>
+          <p class="detail" data-reveal-at="50" style="margin-top:8px;"><strong>Assume the duo</strong> on the org chart.</p>
+        </article>
+
+        <article class="sticky sticky-yellow" data-bloc="ch3-duos-everywhere" data-reveal-at="51">
+          <p class="punch">Duo goes everywhere !</p>
+          <p class="detail">Project managers. Transformation leads. Two profiles, anywhere it matters.</p>
+          <p class="detail" style="margin-top:10px;">Today I speak about <strong>digital-native duos</strong>. They knew the rest of the business better than me.</p>
+          <p class="detail" style="margin-top:8px;"><em>Maybe tomorrow — <strong>inter-generational duos</strong> on every other strategic stake too.</em></p>
         </article>
       </div>
     </section>
@@ -1103,35 +2051,32 @@
     <!-- ───────────────────────────────────────────────────────────
          ACT 5 — THREE MOVES  (reveal 15)
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="5" data-zone="moves" style="--x:9900px; --y:200px;">
-      <div data-reveal-at="16">
-        <span class="chapter-label">One answer to both chapters</span>
-        <h2 class="zone-title">Three moves. All real. All already done somewhere.</h2>
+    <section class="zone-marker" data-step="6" data-zone="moves" style="--x:11900px; --y:200px;">
+      <div data-reveal-at="52">
+        <span class="chapter-label">Three moves</span>
+        <h2 class="zone-title">Be smart about AI. Focus on digital experiences of tomorrow.</h2>
       </div>
 
       <div class="v02-2x2" style="margin-top: 22px;">
-        <article class="sticky sticky-pink" data-bloc="move-1" data-reveal-at="16">
-          <p class="punch">Reverse mentoring at the top.</p>
-          <p class="detail">Each ELT member gets a coach under 30. 2h / month. Not training — conversation.</p>
-          <p class="detail" style="margin-top:8px;"><em>Orange : 500 duos. <strong>5.8× ROI.</strong> +85% AI adoption among executives.</em></p>
+
+        <article class="sticky sticky-mint" data-bloc="move-2" data-reveal-at="53">
+          <p class="punch">Every senior leader — name a pair.</p>
+          <p class="detail">Not just the C-suite. Every leader who steers a real strategic stake.</p>
+          <p class="detail" style="margin-top:8px;">→ <strong>Public.</strong> Named on the org chart. Not "shadow", not "advisor".</p>
+          <p class="detail" style="margin-top:6px;">→ <strong>Real.</strong> The young one gets to ship — and to dissent.</p>
+          <p class="detail" style="margin-top:10px;"><em>The pair is the unit. Not the senior, not the junior — the pair.</em></p>
         </article>
 
-        <article class="sticky sticky-mint" data-bloc="move-2" data-reveal-at="16">
-          <p class="punch">A shadow board of digital natives.</p>
-          <p class="detail">15–20 employees under 30 — yours, not consultants. One job : <em>challenge</em> the ELT each quarter.</p>
-          <p class="detail" style="margin-top:8px;"><em>Havas : "COMEX of Digital Natives" — 35 with official mandate to push back.</em></p>
-        </article>
-
-        <article class="sticky sticky-blue" data-bloc="move-3" data-reveal-at="16">
+        <article class="sticky sticky-blue" data-bloc="move-3" data-reveal-at="54">
           <p class="punch">Indivisible duos on every transformation.</p>
           <p class="detail">Two names at the top. Senior + digital native. Same accountability, same recognition.</p>
-          <p class="detail" style="margin-top:8px;"><em>McKinsey : <strong>+27%</strong> profitability, <strong>+19 pts</strong> innovation revenue.</em></p>
         </article>
 
-        <article class="sticky sticky-yellow" data-bloc="move-4" data-reveal-at="16">
+        <article class="sticky sticky-yellow" data-bloc="move-4" data-reveal-at="55">
           <p class="punch">Make this place a magnet.</p>
-          <p class="detail">If "HR will figure it out" is your answer to chapter 2 — they're already at Qonto.</p>
-          <p class="detail" style="margin-top:8px;"><strong>Decision-makers who <em>are</em> like the talent you want = the only real recruiter.</strong></p>
+          <p class="detail"><strong>Quick change. Go fast.</strong> That's how you get first-league profiles — and keep them long.</p>
+          <p class="detail" style="margin-top:10px;">Tomorrow's world : <strong>no place left to hide.</strong> Either you're a magnet or you're a leak.</p>
+          <p class="detail" style="margin-top:8px;"><em>Offer them a lot. They'll return the exchange.</em></p>
         </article>
       </div>
     </section>
@@ -1139,38 +2084,45 @@
     <!-- ───────────────────────────────────────────────────────────
          ACT 6 — CLOSING  (reveals 16..18)
          ─────────────────────────────────────────────────────────── -->
-    <section class="zone-marker" data-step="6" data-zone="closing" style="--x:11900px; --y:300px;">
-      <div data-bloc="closing-line" data-reveal-at="17">
+    <section class="zone-marker" data-step="7" data-zone="closing" style="--x:13900px; --y:300px;">
+      <div data-bloc="closing-line" data-reveal-at="56">
         <p class="v02-handpunch">
           I came to tell you <em>who</em> to put next&nbsp;to&nbsp;you.
         </p>
       </div>
 
-      <p class="v02-subline" data-reveal-at="17" style="margin-top:24px;">
+      <p class="v02-subline" data-reveal-at="56" style="margin-top:24px;">
         The four other rooms today sell you what to <em>deploy</em>. The first is buyable. The second — who decides — is the only thing actually yours.
       </p>
 
-      <article class="sticky sticky-mint" data-bloc="closing-day3" data-reveal-at="18"
+      <article class="sticky sticky-yellow" data-bloc="closing-mgmt" data-reveal-at="57"
+               style="margin-top: 28px; max-width: 460px;">
+        <p class="punch">Move forward — by two.</p>
+        <p class="detail">Rework <em>management itself</em> to push the duo. Not a project. A reflex.</p>
+        <p class="detail" style="margin-top:8px;"><strong>Every leader. Every transformation. Every hire.</strong></p>
+      </article>
+
+      <article class="sticky sticky-mint" data-bloc="closing-day3" data-reveal-at="58"
                style="margin-top: 32px; max-width: 380px;">
         <p class="punch">Day 3 — seed planted.</p>
         <p class="detail">Wednesday you'll debate : <em>"Gen Z perspective on Danske as a workplace."</em> You already know what I think.</p>
       </article>
 
-      <span class="v02-aside" data-reveal-at="18"
+      <span class="v02-aside" data-reveal-at="58"
             style="left: 440px; top: 380px; transform: rotate(-3deg); color: var(--ink-soft); max-width: 30ch;">
-        <span class="arrow-glyph">↗</span> PS · INSEAD asked me about a 190-year-old rail network. Same answer for a 150-year-old bank.
+        <span class="arrow-glyph">↗</span> PS · INSEAD asked me how we did it in a 180-yr-old rail network. Same answer for a 115-yr-old bank.
       </span>
 
-      <div data-reveal-at="19" style="margin-top: 36px;">
+      <div data-reveal-at="59" style="margin-top: 36px;">
         <span class="v02-tak" aria-label="Tak — thank you in Danish">Tak.</span>
       </div>
 
-      <span class="v02-sign" data-reveal-at="19" style="margin-top:32px;">
+      <span class="v02-sign" data-reveal-at="59" style="margin-top:32px;">
         <strong>— Alexandre Cormeraie</strong><br/>
         from the workshop · 2026
       </span>
 
-      <span class="v02-aside" data-reveal-at="19" style="left: 460px; top: 60px; transform: rotate(-3deg);">
+      <span class="v02-aside" data-reveal-at="59" style="left: 460px; top: 60px; transform: rotate(-3deg);">
         <span class="arrow-glyph">←</span> "tak" means thank you in danish.
       </span>
     </section>
@@ -1185,30 +2137,7 @@
   <button id="step-prev" aria-label="Previous step" title="Previous (←)">‹</button>
   <span><span class="num" id="step-current">0</span> / <span id="step-total">20</span></span>
   <button id="step-next" aria-label="Next step" title="Next (→ or space)">›</button>
-  <button class="faq-btn" id="faq-btn" title="Reserve answers — only if someone asks you about accountability or the human role (press 'i')">IF&nbsp;ASKED</button>
-  <span class="hint">←/→ space · i · p</span>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════════
-     FAQ TRAY — reserve answers to the 2 other INSEAD questions
-     ═══════════════════════════════════════════════════════════════════ -->
-<div class="faq-tray" id="faq-tray" aria-hidden="true">
-  <span class="faq-tray-label">If someone asks you — here are the answers</span>
-
-  <article class="sticky sticky-yellow">
-    <p class="punch" style="font-size:1.05rem;">"Who's <em>accountable</em> when AI predicts ?"</p>
-    <p class="detail" style="margin-top:8px;">The model executes. The operator follows. The timetable describes. <strong>Accountability sits with whoever defined what "acceptable" is</strong> — acceptable delay, error rate, customer impact. Often years before the model existed.</p>
-    <p class="detail" style="margin-top:8px;"><em>That someone is in this room. Not in the model.</em></p>
-  </article>
-
-  <article class="sticky sticky-pink">
-    <p class="punch" style="font-size:1.05rem;">"What's left for <em>humans</em> ?"</p>
-    <p class="detail" style="margin-top:8px;"><strong>Three things AI can't take :</strong></p>
-    <p class="detail" style="margin-top:6px;">1 · Defining what "good" means when there is no precedent.<br/>2 · Holding accountability when things go wrong publicly.<br/>3 · Deciding what NOT to automate — and why.</p>
-    <p class="detail" style="margin-top:8px;"><em>All three about being someone humans hold to account.</em></p>
-  </article>
-
-  <button class="faq-close" id="faq-close" aria-label="Close reserve panel">×</button>
+  <span class="hint">←/→ swipe</span>
 </div>
 
 <script src="vision-02.js"></script>
